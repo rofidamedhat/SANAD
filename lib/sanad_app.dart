@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sanad/core/routing/routes.dart';
+
+import 'core/routing/app_router.dart';
 
 class SanadApp extends StatelessWidget {
   const SanadApp({super.key});
@@ -8,13 +11,25 @@ class SanadApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //عشان الابللكشين يكون مناسب مع كل احجام الشاشات
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(414, 850),
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
+        theme: ThemeData(
+    fontFamily: 'Tajawal', // اسم الفونت العربي
+    textTheme: const TextTheme(
+    bodyMedium: TextStyle(fontFamily: 'Tajawal'),
+    ),
+        ),
+        builder: (context, child) {
+          return Directionality(
+            textDirection: TextDirection.rtl, // مهم للكتابة من اليمين لليسار
+            child: child!,
+          );
+        },
         debugShowCheckedModeBanner: false,
-        // initialRoute: isLoginUser ? Routes.homeScreen : Routes.loginScreen,
-        // onGenerateRoute: appRouter.generateRoute,
+        initialRoute: Routes.onboardingScreen,
+         onGenerateRoute: AppRouter().generateRoute,
       ),
     );
   }

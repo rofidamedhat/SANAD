@@ -18,141 +18,45 @@ import 'package:sanad/core/themeing/colors.dart';
 // - الألوان واخدينها من AppColors عشان نمشي على نفس ثيم الأبلكيشن.
 //
 class TextStyles {
-  static TextStyle font24BlackBold = TextStyle(
-    fontSize: 24.sp,
-    fontWeight: FontWeightHelper.bold,
-    color: Colors.black,
-  );
-
-  static TextStyle font32BlueBold = TextStyle(
-    fontSize: 32.sp,
-    fontWeight: FontWeightHelper.bold,
-    color: AppColors.mainBlue,
-  );
-
-  static TextStyle font13BlueSemiBold = TextStyle(
-    fontSize: 13.sp,
+  static TextStyle font20SemiBold = TextStyle(
+    fontSize: 20.sp,
     fontWeight: FontWeightHelper.semiBold,
-    color: AppColors.mainBlue,
+    color: AppColors.baseWhite,
   );
 
-  static TextStyle font13DarkBlueMedium = TextStyle(
-    fontSize: 13.sp,
-    fontWeight: FontWeightHelper.medium,
-    color: AppColors.darkBlue,
-  );
-
-  static TextStyle font13DarkBlueRegular = TextStyle(
-    fontSize: 13.sp,
-    fontWeight: FontWeightHelper.regular,
-    color: AppColors.darkBlue,
-  );
-
-  static TextStyle font24BlueBold = TextStyle(
-    fontSize: 24.sp,
-    fontWeight: FontWeightHelper.bold,
-    color: AppColors.mainBlue,
-  );
-
-  static TextStyle font16WhiteSemiBold = TextStyle(
-    fontSize: 16.sp,
+  static TextStyle font48SemiBold = TextStyle(
+    fontSize: 48.sp,
     fontWeight: FontWeightHelper.semiBold,
-    color: Colors.white,
+    color: AppColors.baseWhite,
   );
 
-  static TextStyle font13GrayRegular = TextStyle(
-    fontSize: 13.sp,
+  static TextStyle font20Regular = TextStyle(
+    fontSize: 20.sp,
     fontWeight: FontWeightHelper.regular,
-    color: AppColors.gray,
+    color: AppColors.baseBlack,
   );
 
-  static TextStyle font12GrayRegular = TextStyle(
-    fontSize: 12.sp,
-    fontWeight: FontWeightHelper.regular,
-    color: AppColors.gray,
-  );
-
-  static TextStyle font12GrayMedium = TextStyle(
-    fontSize: 12.sp,
-    fontWeight: FontWeightHelper.medium,
-    color: AppColors.gray,
-  );
-
-  static TextStyle font12DarkBlueRegular = TextStyle(
-    fontSize: 12.sp,
-    fontWeight: FontWeightHelper.regular,
-    color: AppColors.darkBlue,
-  );
-
-  static TextStyle font12BlueRegular = TextStyle(
-    fontSize: 12.sp,
-    fontWeight: FontWeightHelper.regular,
-    color: AppColors.mainBlue,
-  );
-
-  static TextStyle font13BlueRegular = TextStyle(
-    fontSize: 13.sp,
-    fontWeight: FontWeightHelper.regular,
-    color: AppColors.mainBlue,
-  );
-
-  static TextStyle font14GrayRegular = TextStyle(
-    fontSize: 14.sp,
-    fontWeight: FontWeightHelper.regular,
-    color: AppColors.gray,
-  );
-
-  static TextStyle font14LightGrayRegular = TextStyle(
-    fontSize: 14.sp,
-    fontWeight: FontWeightHelper.regular,
-    color: AppColors.lightGray,
-  );
-
-  static TextStyle font14DarkBlueMedium = TextStyle(
-    fontSize: 14.sp,
-    fontWeight: FontWeightHelper.medium,
-    color: AppColors.darkBlue,
-  );
-
-  static TextStyle font14DarkBlueBold = TextStyle(
-    fontSize: 14.sp,
+  static TextStyle font20Bold = TextStyle(
+    fontSize: 20.sp,
     fontWeight: FontWeightHelper.bold,
-    color: AppColors.darkBlue,
+    color: AppColors.baseOrange,
   );
 
-  static TextStyle font16WhiteMedium = TextStyle(
-    fontSize: 16.sp,
-    fontWeight: FontWeightHelper.medium,
-    color: Colors.white,
-  );
-
-  static TextStyle font14BlueSemiBold = TextStyle(
-    fontSize: 14.sp,
+  static TextStyle font40SemiBold = TextStyle(
+    fontSize: 40.sp,
     fontWeight: FontWeightHelper.semiBold,
-    color: AppColors.mainBlue,
+    color: AppColors.baseWhite,
   );
 
-  static TextStyle font15DarkBlueMedium = TextStyle(
-    fontSize: 15.sp,
-    fontWeight: FontWeightHelper.medium,
-    color: AppColors.darkBlue,
+  static TextStyle font21Regular = TextStyle(
+    fontSize: 21.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: AppColors.lightGreen,
   );
 
-  static TextStyle font18DarkBlueBold = TextStyle(
-    fontSize: 18.sp,
-    fontWeight: FontWeightHelper.bold,
-    color: AppColors.darkBlue,
-  );
-
-  static TextStyle font18DarkBlueSemiBold = TextStyle(
-    fontSize: 18.sp,
+  static TextStyle font36SemiBold = TextStyle(
+    fontSize: 36.sp,
     fontWeight: FontWeightHelper.semiBold,
-    color: AppColors.darkBlue,
-  );
-
-  static TextStyle font18WhiteMedium = TextStyle(
-    fontSize: 18.sp,
-    fontWeight: FontWeightHelper.medium,
-    color: Colors.white,
+    color: AppColors.baseWhite,
   );
 }
