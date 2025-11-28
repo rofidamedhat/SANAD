@@ -21,7 +21,7 @@ class OnboardingScreen extends StatelessWidget {
        crossAxisAlignment: CrossAxisAlignment.center,
        children: [
          Expanded(
-           flex: 3,
+           flex: 6,
              child:AppBarAndImage()),
         AppTextButton(
             buttonText: "تسجيل الدخول",
@@ -34,9 +34,9 @@ class OnboardingScreen extends StatelessWidget {
           buttonHeight: 55,
           buttonWidth: 234,
         ),
-        verticalSpace(30),
+        verticalSpace(40),
          DontHaveAccountText(),
-         verticalSpace(10)
+         verticalSpace(20)
        ],
      ),
     );
