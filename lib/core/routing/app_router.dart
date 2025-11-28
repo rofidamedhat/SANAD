@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/routing/routes.dart';
+import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
+import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
 
@@ -21,11 +25,17 @@ class AppRouter {
     //هستخدمه عشان انقل من سكرين لسكرين
     switch (settings.name) {
       case Routes.onboardingScreen:
-      return MaterialPageRoute(builder: (_) => OnboardingScreen ());
+        return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case Routes.signUpScreen:
-        return MaterialPageRoute(builder: (_) => SignupScreen ());
+        return MaterialPageRoute(builder: (_) => SignupScreen());
+      case Routes.homeVolunteer:
+        return MaterialPageRoute(builder: (_) => HomeVolunteerScreen());
       case Routes.loginScreen:
-        return MaterialPageRoute(builder: (_) => LoginScreen ());
+        return MaterialPageRoute(builder: (_) =>
+            BlocProvider(
+              create: (context) => getIt<LoginCubit>(),
+              child: LoginScreen(),
+            ));
 
       default:
         return null;

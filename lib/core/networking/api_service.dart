@@ -16,21 +16,22 @@
 //
 // باختصار: أي مكان محتاج يتكلم مع السيرفر، يشوف هنا الأول. 
 // -----------------------------------------------------------
-// part 'api_service.g.dart';
+import 'package:dio/dio.dart';
 
-// @RestApi(baseUrl: ApiConstants.baseUrl)
-// abstract class ApiService {
-//   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
+import '../../feature/login/data/model/login_request_body.dart';
+import '../../feature/login/data/model/login_response_body.dart';
+import 'api_constants.dart';
+import 'package:retrofit/retrofit.dart';
+part 'api_service.g.dart';
 
-//   @POST(ApiConstants.login)
-//   Future<LoginResponseBody> login(@Body() LoginRequestBody loginRequestBody);
+@RestApi(baseUrl: ApiConstants.baseUrl)
+abstract class ApiService {
+  factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
-//   @POST(ApiConstants.signup)
-//   Future<SignUpResponse> signUp(@Body() SignUpRequest signUpRequest);
+  @POST(ApiConstants.login)
+  Future<LoginResponseBody> login(@Body() LoginRequestBody loginRequestBody);
 
-//   //home
-//   @GET(ApiConstants.home)
-//   Future<DoctorSpecializationModel> getSpecialization();
-// }
+
+}
 
 //dart pub run build_runner build
