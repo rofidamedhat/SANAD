@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/core/extensions/navigation.dart';
-
 import '../../../../core/routing/routes.dart';
 import '../../../../core/themeing/colors.dart';
 import '../../../../core/themeing/text_styles.dart';
-import '../../logic/login_cubit.dart';
 
-class LoginButtonListen extends StatelessWidget {
-  const LoginButtonListen({super.key});
+class SignupButtonListen extends StatelessWidget {
+  const SignupButtonListen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit,LoginState>(
+    return BlocListener<SignupCubit,SignupState>(
         listener:(context,state){
-          if(state is LoginLoading){
+          if(state is SignupLoading){
             print("loading");
             showDialog(
               context: context,
@@ -25,18 +24,15 @@ class LoginButtonListen extends StatelessWidget {
               ),
             );
           }
-          else if(state is LoginSuccessfully){
+          else if(state is SignupSuccessfully){
             //TODO:context.pop() to exit from showDialog
 
             context.pop();
-            print(state.loginResponseBody.role);
-            state.loginResponseBody.role=="Volunteer"?
-            context.pushReplacementNamed(Routes.homeVolunteer):
-            context.pushReplacementNamed(Routes.homeDeafUser);
+            context.pushReplacementNamed(Routes.loginScreen);
           }
-          else if (state is LoginWithError){
+          else if (state is SignupWithError){
             print("Error...");
-            setupErrorState(context,state.apiErrorMessage.message!);
+            setupErrorState(context,state.message.message!);
           }
         },
         child:SizedBox.shrink()

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sanad/core/constants.dart';
 import 'package:sanad/core/extensions/navigation.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/routing/routes.dart';
@@ -24,10 +25,12 @@ class OnboardingScreen extends StatelessWidget {
            flex: 5,
              child:AppBarAndImage()),
         AppTextButton(
-            buttonText: "تسجيل الدخول",
-            textStyle: TextStyles.font20SemiBold,
+            buttonText: "ابدأ الرحله",
+            textStyle: TextStyles.font20BaseWhiteSemiBold,
             onPressed: (){
-              context.pushNamed(Routes.loginScreen);
+              context.pushNamed(!isLoginUser?Routes.loginScreen
+                  :isVolunteer?Routes.homeVolunteer
+                  :Routes.homeDeafUser);
             },
           backgroundColor: AppColors.mainGreen,
           borderRadius: 50,

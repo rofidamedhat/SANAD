@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/routing/routes.dart';
+import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
 import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
+import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
 
 import '../../feature/onboarding/onboarding_screen.dart';
@@ -26,10 +28,20 @@ class AppRouter {
     switch (settings.name) {
       case Routes.onboardingScreen:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
+
       case Routes.signUpScreen:
-        return MaterialPageRoute(builder: (_) => SignupScreen());
+        return MaterialPageRoute(builder: (_) =>
+            BlocProvider(
+              create: (context) => getIt<SignupCubit>(),
+              child: SignupScreen(),
+            ));
+
       case Routes.homeVolunteer:
         return MaterialPageRoute(builder: (_) => HomeVolunteerScreen());
+
+      case Routes.homeDeafUser:
+        return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
+
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) =>
             BlocProvider(

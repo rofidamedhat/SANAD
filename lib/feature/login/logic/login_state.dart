@@ -16,7 +16,7 @@ class LoginSuccessfully extends LoginState{
 
 class LoginWithError extends LoginState{
 
-  String apiErrorMessage;
+  ApiErrorModel apiErrorMessage;
 
   LoginWithError({required this.apiErrorMessage});
 }

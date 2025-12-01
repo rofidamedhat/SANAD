@@ -46,6 +46,7 @@ dependencies:
   build_runner: ^2.10.4
   retrofit: ^4.9.1
   retrofit_generator: ^10.0.2
+  flutter_svg: ^2.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -72,6 +73,7 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/icons/
 
   fonts:
     - family: Tajawal

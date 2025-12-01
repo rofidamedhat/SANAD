@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:sanad/core/helper/shared_pref_helper.dart';
+import 'package:sanad/core/networking/api_error_handler.dart';
 import 'package:sanad/core/networking/api_error_model.dart';
 import 'package:sanad/core/networking/dio_factory.dart';
 import 'package:sanad/feature/login/data/model/login_request_body.dart';
@@ -24,21 +25,21 @@ class LoginCubit extends Cubit<LoginState> {
     emit( LoginLoading());
     try{
    loginResponse = await loginRepo.login(loginRequestBody);
-
     if(loginResponse!.isAuthenticated==true){
-      await SharedPrefHelper.setData("token", loginResponse!.token);
-      DioFactory.setTokenIntoHeaderAfterLogin(loginResponse!.token);
+      await SharedPrefHelper.setData("token", loginResponse!.token!);
+      await SharedPrefHelper.setData("role", loginResponse!.role!);
+      DioFactory.setTokenIntoHeaderAfterLogin(loginResponse!.token!);
       
       emit(LoginSuccessfully(loginResponseBody: loginResponse!));
     }
     else{
       print("Error from response ${loginResponse!.message}");
-      emit(LoginWithError(apiErrorMessage: loginResponse!.message));
+      emit(LoginWithError(apiErrorMessage:ApiErrorHandler.handle(loginResponse)));
     }
     }catch(error,stackTrace){
       print("Error from cubit is $error");
       print(stackTrace);
-      emit(LoginWithError(apiErrorMessage: loginResponse!.message));
+      emit(LoginWithError(apiErrorMessage: ApiErrorHandler.handle(error)));
     }
   }
 }

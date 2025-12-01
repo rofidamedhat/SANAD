@@ -23,11 +23,11 @@ class HelloHeroContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("مستعد للانطلاق",
-          style: TextStyles.font40SemiBold,
+          style: TextStyles.font40BaseWhiteSemiBold,
           ),
           verticalSpace(15),
           Text("يا بطل ؟!",
-            style: TextStyles.font40SemiBold,
+            style: TextStyles.font40BaseWhiteSemiBold,
           ),
         ],
       ),

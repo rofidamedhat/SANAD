@@ -17,9 +17,11 @@
 // باختصار: أي مكان محتاج يتكلم مع السيرفر، يشوف هنا الأول. 
 // -----------------------------------------------------------
 import 'package:dio/dio.dart';
+import 'package:sanad/feature/signup/data/model/signup_request_body.dart';
 
 import '../../feature/login/data/model/login_request_body.dart';
 import '../../feature/login/data/model/login_response_body.dart';
+import '../../feature/signup/data/model/signup_response_body.dart';
 import 'api_constants.dart';
 import 'package:retrofit/retrofit.dart';
 part 'api_service.g.dart';
@@ -31,7 +33,8 @@ abstract class ApiService {
   @POST(ApiConstants.login)
   Future<LoginResponseBody> login(@Body() LoginRequestBody loginRequestBody);
 
-
+  @POST(ApiConstants.signup)
+  Future<SignupResponseBody> signup(@Body() SignupRequestBody signupRequestBody);
 }
 
 //dart pub run build_runner build

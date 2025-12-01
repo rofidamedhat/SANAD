@@ -5,9 +5,9 @@ part 'login_response_body.g.dart';
 @JsonSerializable()
 class LoginResponseBody {
   final String message;
-  final String token;
-  final bool isAuthenticated;
-  final String role;
+  final String? token;
+  final bool? isAuthenticated;
+  final String? role;
   LoginResponseBody({
       required this.token,
       required this.isAuthenticated, required this.role,

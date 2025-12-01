@@ -13,10 +13,23 @@ void main() async {
 }
 Future<void> isCheckedLogged()async{
   String? token=await SharedPrefHelper.getString("token");
+  print("token is $token");
   if(token == null || token.isEmpty){
     isLoginUser= false;
   }
   else{
+    isVolunteerChecked();
     isLoginUser=true;
+  }
+}
+
+Future<void>isVolunteerChecked()async{
+  String? role=await SharedPrefHelper.getString("role");
+  print("role is $role");
+  if(role=="Volunteer"){
+    isVolunteer=true;
+  }
+  else{
+    isVolunteer=false;
   }
 }
