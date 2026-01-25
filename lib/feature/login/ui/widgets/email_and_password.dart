@@ -1,0 +1,106 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sanad/core/helper/spaces.dart';
+import 'package:sanad/core/themeing/text_styles.dart';
+import 'package:sanad/feature/login/logic/login_cubit.dart';
+
+import '../../../../core/helper/app_regex.dart';
+import '../../../../core/themeing/colors.dart';
+import '../../../../core/widgets/app_text_form_field.dart';
+
+class EmailAndPassword extends StatefulWidget {
+  const EmailAndPassword({super.key});
+
+  @override
+  State<EmailAndPassword> createState() => _EmailAndPasswordState();
+}
+
+class _EmailAndPasswordState extends State<EmailAndPassword> {
+  @override
+  late TextEditingController email;
+  late TextEditingController password;
+  //late  GlobalKey<FormState> formKey;
+  bool isObscure=true;
+  void initState(){
+    super.initState();
+    email=context.read<LoginCubit>().emailController;
+    password= context.read<LoginCubit>().passwordController;
+   // formKey=context.read<LoginCubit>().formKey;
+  }
+  Widget build(BuildContext context) {
+    print("FORM BUILD IS RUNNING");
+    return Form(
+      key: context.read<LoginCubit>().formKey,
+        child:Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 20.w,vertical: 5.h),
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              AppTextFormField(hintText: "البريد الالكتروني",
+                  validator: (value){
+                    if(value!.isEmpty || ! AppRegex.isEmailValid(value) || value == null){
+                      return "من فضلك ادخل بريد الكترونى صحيح";
+                    }
+                  },
+              controller: email,
+                hintStyle: TextStyles.font21Regular,
+                focusedBorder: OutlineInputBorder(
+                  borderSide:  BorderSide(
+                    color: AppColors.mainGreen,
+                    width: 1.3,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide:  BorderSide(
+                     color: AppColors.baseWhite,
+                    width: 1.3,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+              ),
+              verticalSpace(30),
+              AppTextFormField(hintText: "كلمة المرور ",
+                  controller: password,
+                  validator: (value){
+                    if(value!.isEmpty || ! AppRegex.isPasswordValid(value) || value == null){
+                      return "يجب ان تحتوى كلمة المرور على حروف وارقام ورموز ";
+                    }
+                  },
+                hintStyle: TextStyles.font21Regular,
+                focusedBorder: OutlineInputBorder(
+                  borderSide:  BorderSide(
+                    color: AppColors.mainGreen,
+                    width: 1.3,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide:  BorderSide(
+                    color: AppColors.baseWhite,
+                    width: 1.3,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    isObscure = !isObscure;
+                    setState(() {});
+                  },
+                  child: Icon(
+                    isObscure
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                    size: 22,
+                    color: AppColors.mainGreen,
+                  ),
+                ),
+                isObscureText: isObscure,
+              )
+            ],
+          ),
+        )
+    );
+  }
+}

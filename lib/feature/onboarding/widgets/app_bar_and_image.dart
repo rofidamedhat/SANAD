@@ -14,7 +14,7 @@ class AppBarAndImage extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Container(
-            height: 450.h,
+            height: 420.h,
             width: double.infinity,
             decoration: BoxDecoration(
               color: AppColors.mainGreen,
@@ -40,7 +40,7 @@ class AppBarAndImage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 350.h,
+            top: 320.h,
             right: 50.w,
             left: 50.w,
             child: Image.asset(onboardingImage,

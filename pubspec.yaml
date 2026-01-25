@@ -37,10 +37,15 @@ dependencies:
   flutter_screenutil: ^5.9.3
   shared_preferences: ^2.5.3
   dio: ^5.9.0
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.1
   pretty_dio_logger: ^1.4.0
   json_annotation: ^4.9.0
   get_it: ^9.1.0
-
+  json_serializable: ^6.11.2
+  build_runner: ^2.10.4
+  retrofit: ^4.9.1
+  retrofit_generator: ^10.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

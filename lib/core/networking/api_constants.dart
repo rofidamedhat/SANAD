@@ -15,8 +15,8 @@
 // ---------------------------------
 
 class ApiConstants {
-  static const String baseUrl = "https://vcare.integration25.com/api/";
-  static const String login = "auth/login";
+  static const String baseUrl = "https://sanadapllication2025api.runasp.net/api/";
+  static const String login = "Auth/login";
   static const String signup = "auth/register";
   static const String home = "specialization/index";
 }

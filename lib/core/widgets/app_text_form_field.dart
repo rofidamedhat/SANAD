@@ -60,20 +60,20 @@ class AppTextFormField extends StatelessWidget {
             ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 1.3),
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 1.3),
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
-       // hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
+        hintStyle: hintStyle ?? TextStyles.font20Regular,
         hintText: hintText,
         suffixIcon: suffixIcon,
-       // fillColor: backgroundColor ?? AppColors.moreLightGray,
+        fillColor: backgroundColor ?? AppColors.baseWhite,
         filled: true,
       ),
       obscureText: isObscureText ?? false,
-      //style: TextStyles.font14DarkBlueMedium,
+      style: TextStyles.font20Regular,
       validator: (value) {
         return validator(value);
       },
