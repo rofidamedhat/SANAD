@@ -6,7 +6,7 @@ import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/core/widgets/app_text_button.dart';
 import 'package:sanad/core/widgets/app_text_form_field.dart';
-import 'package:sanad/feature/login/ui/widgets/email_and_password.dart';
+import 'package:sanad/feature/login/ui/widgets/email_and_password_validate.dart';
 import 'package:sanad/feature/login/ui/widgets/hello_hero_container.dart';
 import 'package:sanad/feature/login/ui/widgets/login_button_listen.dart';
 import 'package:sanad/feature/onboarding/widgets/dont_have_account_text.dart';
@@ -31,11 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             HelloHeroContainer(),
             verticalSpace(100),
-           EmailAndPassword(),
+           EmailAndPasswordValidator(),
             verticalSpace(40),
            AppTextButton(
                buttonText: "ابدأ الرحلة",
-               textStyle: TextStyles.font20SemiBold,
+               textStyle: TextStyles.font20BaseWhiteSemiBold,
                onPressed: (){
                  if (context
                      .read<LoginCubit>()

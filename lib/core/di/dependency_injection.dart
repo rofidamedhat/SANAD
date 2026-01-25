@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
+import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 
 import '../../feature/login/data/repos/login_repo.dart';
 import '../../feature/login/logic/login_cubit.dart';
@@ -30,8 +32,8 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
   // // signup
-  // getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo(getIt()));
-  // getIt.registerFactory<SignUpCubit>(() => SignUpCubit(getIt()));
+  getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
+  getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
   // // home
   // getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   // getIt.registerFactory<HomeCubit>(

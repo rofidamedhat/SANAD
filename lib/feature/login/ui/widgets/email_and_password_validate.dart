@@ -9,14 +9,14 @@ import '../../../../core/helper/app_regex.dart';
 import '../../../../core/themeing/colors.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
 
-class EmailAndPassword extends StatefulWidget {
-  const EmailAndPassword({super.key});
+class EmailAndPasswordValidator extends StatefulWidget {
+  const EmailAndPasswordValidator({super.key});
 
   @override
-  State<EmailAndPassword> createState() => _EmailAndPasswordState();
+  State<EmailAndPasswordValidator> createState() => _EmailAndPasswordValidatorState();
 }
 
-class _EmailAndPasswordState extends State<EmailAndPassword> {
+class _EmailAndPasswordValidatorState extends State<EmailAndPasswordValidator> {
   @override
   late TextEditingController email;
   late TextEditingController password;
@@ -44,7 +44,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                     }
                   },
               controller: email,
-                hintStyle: TextStyles.font21Regular,
+                hintStyle: TextStyles.font21LightGreenRegular,
                 focusedBorder: OutlineInputBorder(
                   borderSide:  BorderSide(
                     color: AppColors.mainGreen,
@@ -68,7 +68,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                       return "يجب ان تحتوى كلمة المرور على حروف وارقام ورموز ";
                     }
                   },
-                hintStyle: TextStyles.font21Regular,
+                hintStyle: TextStyles.font21LightGreenRegular,
                 focusedBorder: OutlineInputBorder(
                   borderSide:  BorderSide(
                     color: AppColors.mainGreen,

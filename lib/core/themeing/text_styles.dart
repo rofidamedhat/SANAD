@@ -18,49 +18,49 @@ import 'package:sanad/core/themeing/colors.dart';
 // - الألوان واخدينها من AppColors عشان نمشي على نفس ثيم الأبلكيشن.
 //
 class TextStyles {
-  static TextStyle font20SemiBold = TextStyle(
+  static TextStyle font20BaseWhiteSemiBold = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: AppColors.baseWhite,
   );
 
-  static TextStyle font48SemiBold = TextStyle(
+  static TextStyle font48BaseWhiteSemiBold = TextStyle(
     fontSize: 48.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: AppColors.baseWhite,
   );
 
-  static TextStyle font20Regular = TextStyle(
+  static TextStyle font20BaseBlackRegular = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.regular,
     color: AppColors.baseBlack,
   );
 
-  static TextStyle font24Regular = TextStyle(
+  static TextStyle font24BaseWhiteRegular = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.regular,
     color: AppColors.baseWhite,
   );
 
-  static TextStyle font20Bold = TextStyle(
+  static TextStyle font20BaseOrangeBold = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.bold,
     color: AppColors.baseOrange,
   );
 
-  static TextStyle font40SemiBold = TextStyle(
+  static TextStyle font40BaseWhiteSemiBold = TextStyle(
     fontSize: 40.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: AppColors.baseWhite,
   );
 
-  static TextStyle font21Regular = TextStyle(
+  static TextStyle font21LightGreenRegular = TextStyle(
     fontSize: 21.sp,
     fontWeight: FontWeightHelper.regular,
     color: AppColors.lightGreen,
   );
 
-  static TextStyle font36SemiBold = TextStyle(
+  static TextStyle font36BaseWhiteSemiBold = TextStyle(
     fontSize: 36.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: AppColors.baseWhite,

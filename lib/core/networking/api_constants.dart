@@ -17,7 +17,7 @@
 class ApiConstants {
   static const String baseUrl = "https://sanadapllication2025api.runasp.net/api/";
   static const String login = "Auth/login";
-  static const String signup = "auth/register";
+  static const String signup = "Auth/register";
   static const String home = "specialization/index";
 }
 
