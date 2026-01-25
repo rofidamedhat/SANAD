@@ -15,7 +15,7 @@ class Routes {
   // context.pushNamed(Routes.loginScreen);
   // ---------------------------------------------------------
   static const String splashScreen = '/splashScreen';
-
+  static const String onboardingScreen = '/onboardingScreen';
   static const String loginScreen = '/loginScreen';
   static const String homeScreen = '/homeScreen';
   static const String signUpScreen = '/signUpScreen';
