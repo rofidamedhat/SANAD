@@ -17,7 +17,7 @@ class AppBarAndImage extends StatelessWidget {
             height: 420.h,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: AppColors.mainGreen,
+              color: AppColors.green69,
               borderRadius:BorderRadius.only(
                 bottomLeft: Radius.circular(40),
                 bottomRight: Radius.circular(40),
@@ -28,13 +28,13 @@ class AppBarAndImage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("مرحبا بك في",
-                  style: TextStyles.font48BaseWhiteSemiBold,
+                  style: TextStyles.font48WhiteSemiBold,
                 ),
                 Text("Sanad",
-                  style: TextStyles.font48BaseWhiteSemiBold,
+                  style: TextStyles.font48WhiteSemiBold,
                 ),
                 Text("سند",
-                  style: TextStyles.font48BaseWhiteSemiBold,
+                  style: TextStyles.font48WhiteSemiBold,
                 ),
               ],
             ),

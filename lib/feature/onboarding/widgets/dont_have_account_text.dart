@@ -12,14 +12,14 @@ class DontHaveAccountText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text("ليس لديك حساب ؟  ",
-        style: TextStyles.font20BaseBlackRegular,
+        style: TextStyles.font20Black05Regular,
         ),
         GestureDetector(
           onTap: (){
             context.pushNamed(Routes.signUpScreen);
           },
           child: Text("اضافة حساب",
-            style: TextStyles.font20BaseOrangeBold,
+            style: TextStyles.font20Orange62Bold,
           ),
         ),
       ],

@@ -10,53 +10,52 @@ class VolunteerAndDeafUserRadioButton extends StatefulWidget {
   const VolunteerAndDeafUserRadioButton({super.key});
 
   @override
-  State<VolunteerAndDeafUserRadioButton> createState() => _VolunteerAndDeafUserRadioButtonState();
+  State<VolunteerAndDeafUserRadioButton> createState() =>
+      _VolunteerAndDeafUserRadioButtonState();
 }
 
-class _VolunteerAndDeafUserRadioButtonState extends State<VolunteerAndDeafUserRadioButton> {
+class _VolunteerAndDeafUserRadioButtonState
+    extends State<VolunteerAndDeafUserRadioButton> {
   @override
-  String selectedOption=" ";
-  void initState(){
+  void initState() {
     super.initState();
-   // selectedOption=context.read<SignupCubit>().role;
+    // selectedOption=context.read<SignupCubit>().role;
   }
+
+  String selectedOption = " ";
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 10.h),
-    child: Column(
-      children: [
-        RadioListTile(
-          title: Text("متطوع",
-          style: TextStyles.font20BaseBlackRegular,
-          ),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+      child: Column(
+        children: [
+          RadioListTile(
+            title: Text("متطوع", style: TextStyles.font20Black05Regular),
             value: "Volunteer",
             groupValue: selectedOption,
-            onChanged: (value){
+            onChanged: (value) {
               setState(() {
-                selectedOption=value!;
-                context.read<SignupCubit>().role=selectedOption;
+                selectedOption = value!;
+                context.read<SignupCubit>().role = selectedOption;
                 print(context.read<SignupCubit>().role);
               });
             },
-            activeColor: AppColors.mainGreen,
-        ),
-        RadioListTile(
-          title: Text("ذوى همم",
-            style: TextStyles.font20BaseBlackRegular,
+            activeColor: AppColors.green69,
           ),
-          value: "DeafUser",
-          groupValue: selectedOption,
-          onChanged: (value){
-            setState(() {
-              selectedOption=value!;
-              context.read<SignupCubit>().role=selectedOption;
-              print(context.read<SignupCubit>().role);
-            });
-          },
-          activeColor: AppColors.mainGreen,
-        ),
-      ],
-    ),
+          RadioListTile(
+            title: Text("ذوى همم", style: TextStyles.font20Black05Regular),
+            value: "DeafUser",
+            groupValue: selectedOption,
+            onChanged: (value) {
+              setState(() {
+                selectedOption = value!;
+                context.read<SignupCubit>().role = selectedOption;
+                print(context.read<SignupCubit>().role);
+              });
+            },
+            activeColor: AppColors.green69,
+          ),
+        ],
+      ),
     );
   }
 }

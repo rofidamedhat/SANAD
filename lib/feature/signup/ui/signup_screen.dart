@@ -32,7 +32,7 @@ class SignupScreen extends StatelessWidget {
             verticalSpace(40),
             AppTextButton(
                 buttonText: "ابدأ الرحلة"
-                , textStyle: TextStyles.font24BaseWhiteRegular,
+                , textStyle: TextStyles.font24WhiteRegular,
                 onPressed: (){
                if(context.read<SignupCubit>().formKey.currentState!.validate()){
                  context.read<SignupCubit>().signup();
@@ -41,7 +41,7 @@ class SignupScreen extends StatelessWidget {
               borderRadius:50,
               buttonWidth: 234.w,
               buttonHeight: 55.h,
-              backgroundColor: AppColors.mainGreen,
+              backgroundColor: AppColors.green69,
             ),
             SignupButtonListen(),
           ],

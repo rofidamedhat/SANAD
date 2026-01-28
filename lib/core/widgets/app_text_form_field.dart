@@ -66,14 +66,14 @@ class AppTextFormField extends StatelessWidget {
           borderSide: const BorderSide(color: Colors.red, width: 1.3),
           borderRadius: BorderRadius.circular(30.0),
         ),
-        hintStyle: hintStyle ?? TextStyles.font20BaseBlackRegular,
+        hintStyle: hintStyle ?? TextStyles.font20Black05Regular,
         hintText: hintText,
         suffixIcon: suffixIcon,
-        fillColor: backgroundColor ?? AppColors.baseWhite,
+        fillColor: backgroundColor ?? AppColors.white,
         filled: true,
       ),
       obscureText: isObscureText ?? false,
-      style: TextStyles.font20BaseBlackRegular,
+      style: TextStyles.font20Black05Regular,
       validator: (value) {
         return validator(value);
       },

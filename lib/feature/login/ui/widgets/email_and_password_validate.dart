@@ -13,94 +13,87 @@ class EmailAndPasswordValidator extends StatefulWidget {
   const EmailAndPasswordValidator({super.key});
 
   @override
-  State<EmailAndPasswordValidator> createState() => _EmailAndPasswordValidatorState();
+  State<EmailAndPasswordValidator> createState() =>
+      _EmailAndPasswordValidatorState();
 }
 
 class _EmailAndPasswordValidatorState extends State<EmailAndPasswordValidator> {
   @override
+  void initState() {
+    super.initState();
+    email = context.read<LoginCubit>().emailController;
+    password = context.read<LoginCubit>().passwordController;
+    // formKey=context.read<LoginCubit>().formKey;
+  }
+
   late TextEditingController email;
   late TextEditingController password;
   //late  GlobalKey<FormState> formKey;
-  bool isObscure=true;
-  void initState(){
-    super.initState();
-    email=context.read<LoginCubit>().emailController;
-    password= context.read<LoginCubit>().passwordController;
-   // formKey=context.read<LoginCubit>().formKey;
-  }
+  bool isObscure = true;
+  @override
   Widget build(BuildContext context) {
     print("FORM BUILD IS RUNNING");
     return Form(
       key: context.read<LoginCubit>().formKey,
-        child:Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 20.w,vertical: 5.h),
-          child: Column(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              AppTextFormField(hintText: "البريد الالكتروني",
-                  validator: (value){
-                    if(value!.isEmpty || ! AppRegex.isEmailValid(value) || value == null){
-                      return "من فضلك ادخل بريد الكترونى صحيح";
-                    }
-                  },
+          children: [
+            AppTextFormField(
+              hintText: "البريد الالكتروني",
+              validator: (value) {
+                if (value!.isEmpty || !AppRegex.isEmailValid(value)) {
+                  return "من فضلك ادخل بريد الكترونى صحيح";
+                }
+              },
               controller: email,
-                hintStyle: TextStyles.font21LightGreenRegular,
-                focusedBorder: OutlineInputBorder(
-                  borderSide:  BorderSide(
-                    color: AppColors.mainGreen,
-                    width: 1.3,
-                  ),
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide:  BorderSide(
-                     color: AppColors.baseWhite,
-                    width: 1.3,
-                  ),
-                  borderRadius: BorderRadius.circular(30.0),
+              hintStyle: TextStyles.font21GreenA4Regular,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.green69, width: 1.3),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.white, width: 1.3),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+            verticalSpace(30),
+            AppTextFormField(
+              hintText: "كلمة المرور ",
+              controller: password,
+              validator: (value) {
+                if (value!.isEmpty || !AppRegex.isPasswordValid(value)) {
+                  return "يجب ان تحتوى كلمة المرور على حروف وارقام ورموز ";
+                }
+              },
+              hintStyle: TextStyles.font21GreenA4Regular,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.green69, width: 1.3),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.white, width: 1.3),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              suffixIcon: GestureDetector(
+                onTap: () {
+                  isObscure = !isObscure;
+                  setState(() {});
+                },
+                child: Icon(
+                  isObscure
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  size: 22,
+                  color: AppColors.green69,
                 ),
               ),
-              verticalSpace(30),
-              AppTextFormField(hintText: "كلمة المرور ",
-                  controller: password,
-                  validator: (value){
-                    if(value!.isEmpty || ! AppRegex.isPasswordValid(value) || value == null){
-                      return "يجب ان تحتوى كلمة المرور على حروف وارقام ورموز ";
-                    }
-                  },
-                hintStyle: TextStyles.font21LightGreenRegular,
-                focusedBorder: OutlineInputBorder(
-                  borderSide:  BorderSide(
-                    color: AppColors.mainGreen,
-                    width: 1.3,
-                  ),
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide:  BorderSide(
-                    color: AppColors.baseWhite,
-                    width: 1.3,
-                  ),
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    isObscure = !isObscure;
-                    setState(() {});
-                  },
-                  child: Icon(
-                    isObscure
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    size: 22,
-                    color: AppColors.mainGreen,
-                  ),
-                ),
-                isObscureText: isObscure,
-              )
-            ],
-          ),
-        )
+              isObscureText: isObscure,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

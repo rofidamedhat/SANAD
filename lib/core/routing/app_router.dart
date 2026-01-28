@@ -4,6 +4,7 @@ import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/routing/routes.dart';
 import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
+import 'package:sanad/feature/learn_sign_lang/ui/learn_sign_lang_screen.dart';
 import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
@@ -30,24 +31,28 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
 
       case Routes.signUpScreen:
-        return MaterialPageRoute(builder: (_) =>
-            BlocProvider(
-              create: (context) => getIt<SignupCubit>(),
-              child: SignupScreen(),
-            ));
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<SignupCubit>(),
+            child: SignupScreen(),
+          ),
+        );
 
       case Routes.homeVolunteer:
         return MaterialPageRoute(builder: (_) => HomeVolunteerScreen());
 
       case Routes.homeDeafUser:
         return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
+      case Routes.learnSignLangScreen:
+        return MaterialPageRoute(builder: (_) => LearnSignLangScreen());
 
       case Routes.loginScreen:
-        return MaterialPageRoute(builder: (_) =>
-            BlocProvider(
-              create: (context) => getIt<LoginCubit>(),
-              child: LoginScreen(),
-            ));
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: LoginScreen(),
+          ),
+        );
 
       default:
         return null;

@@ -12,97 +12,85 @@ class NameAndEmailAndPasswordValidator extends StatefulWidget {
   const NameAndEmailAndPasswordValidator({super.key});
 
   @override
-  State<NameAndEmailAndPasswordValidator> createState() => _NameAndEmailAndPasswordValidatorState();
+  State<NameAndEmailAndPasswordValidator> createState() =>
+      _NameAndEmailAndPasswordValidatorState();
 }
 
-class _NameAndEmailAndPasswordValidatorState extends State<NameAndEmailAndPasswordValidator> {
+class _NameAndEmailAndPasswordValidatorState
+    extends State<NameAndEmailAndPasswordValidator> {
+  late TextEditingController name;
+  late GlobalKey<FormState> formKey;
+  late TextEditingController email;
+  late TextEditingController password;
+  bool isObscure = true;
   @override
- late TextEditingController name;
- late GlobalKey<FormState> formKey;
- late TextEditingController email;
- late TextEditingController password;
-  bool isObscure=true;
- void initState(){
-   super.initState();
-   name=context.read<SignupCubit>().name;
-   email=context.read<SignupCubit>().email;
-   password=context.read<SignupCubit>().password;
-   formKey=context.read<SignupCubit>().formKey;
- }
+  void initState() {
+    super.initState();
+    name = context.read<SignupCubit>().name;
+    email = context.read<SignupCubit>().email;
+    password = context.read<SignupCubit>().password;
+    formKey = context.read<SignupCubit>().formKey;
+  }
+
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
       child: Column(
         children: [
-          AppTextFormField(hintText: "الاسم ",
+          AppTextFormField(
+            hintText: "الاسم ",
             controller: name,
-            validator: (value){
-              if(value==null || value.isEmpty){
+            validator: (value) {
+              if (value == null || value.isEmpty) {
                 return "يرجى ادخال اسم المستخدم";
               }
             },
-            hintStyle: TextStyles.font21LightGreenRegular,
+            hintStyle: TextStyles.font21GreenA4Regular,
             focusedBorder: OutlineInputBorder(
-              borderSide:  BorderSide(
-                color: AppColors.mainGreen,
-                width: 1.3,
-              ),
+              borderSide: BorderSide(color: AppColors.green69, width: 1.3),
               borderRadius: BorderRadius.circular(30.0),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide:  BorderSide(
-                color: AppColors.baseWhite,
-                width: 1.3,
-              ),
+              borderSide: BorderSide(color: AppColors.white, width: 1.3),
               borderRadius: BorderRadius.circular(30.0),
             ),
           ),
           verticalSpace(40),
-          AppTextFormField(hintText: "البريد الالكتروني",
+          AppTextFormField(
+            hintText: "البريد الالكتروني",
             controller: email,
-            validator: (value){
-              if(value!.isEmpty || ! AppRegex.isEmailValid(value) || value == null){
+            validator: (value) {
+              if (value!.isEmpty || !AppRegex.isEmailValid(value)) {
                 return "من فضلك ادخل بريد الكترونى صحيح";
               }
             },
             //controller: email,
-            hintStyle: TextStyles.font21LightGreenRegular,
+            hintStyle: TextStyles.font21GreenA4Regular,
             focusedBorder: OutlineInputBorder(
-              borderSide:  BorderSide(
-                color: AppColors.mainGreen,
-                width: 1.3,
-              ),
+              borderSide: BorderSide(color: AppColors.green69, width: 1.3),
               borderRadius: BorderRadius.circular(30.0),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide:  BorderSide(
-                color: AppColors.baseWhite,
-                width: 1.3,
-              ),
+              borderSide: BorderSide(color: AppColors.white, width: 1.3),
               borderRadius: BorderRadius.circular(30.0),
             ),
           ),
           verticalSpace(40),
-          AppTextFormField(hintText: "كلمة المرور ",
+          AppTextFormField(
+            hintText: "كلمة المرور ",
             controller: password,
-            validator: (value){
-              if(value!.isEmpty || ! AppRegex.isPasswordValid(value) || value == null){
+            validator: (value) {
+              if (value!.isEmpty || !AppRegex.isPasswordValid(value)) {
                 return "يجب ان تحتوى كلمة المرور على حروف وارقام ورموز ";
               }
             },
-            hintStyle: TextStyles.font21LightGreenRegular,
+            hintStyle: TextStyles.font21GreenA4Regular,
             focusedBorder: OutlineInputBorder(
-              borderSide:  BorderSide(
-                color: AppColors.mainGreen,
-                width: 1.3,
-              ),
+              borderSide: BorderSide(color: AppColors.green69, width: 1.3),
               borderRadius: BorderRadius.circular(30.0),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide:  BorderSide(
-                color: AppColors.baseWhite,
-                width: 1.3,
-              ),
+              borderSide: BorderSide(color: AppColors.white, width: 1.3),
               borderRadius: BorderRadius.circular(30.0),
             ),
             suffixIcon: GestureDetector(
@@ -115,11 +103,11 @@ class _NameAndEmailAndPasswordValidatorState extends State<NameAndEmailAndPasswo
                     ? Icons.visibility_off_outlined
                     : Icons.visibility_outlined,
                 size: 22,
-                color: AppColors.mainGreen,
+                color: AppColors.green69,
               ),
             ),
             isObscureText: isObscure,
-          )
+          ),
         ],
       ),
     );

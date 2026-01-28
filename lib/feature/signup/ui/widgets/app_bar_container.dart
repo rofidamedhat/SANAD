@@ -14,7 +14,7 @@ class AppBarContainer extends StatelessWidget {
       width: double.infinity,
       height: 210,
       decoration: BoxDecoration(
-        color: AppColors.mainGreen,
+        color: AppColors.green69,
         borderRadius:BorderRadius.only(
           bottomLeft: Radius.circular(40),
           bottomRight: Radius.circular(40),
@@ -24,7 +24,7 @@ class AppBarContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("لدينا بطل جديد ",
-          style:TextStyles.font36BaseWhiteSemiBold ,
+          style:TextStyles.font36WhiteSemiBold ,
           ),
           SvgPicture.asset(signupIcon,
           )

@@ -5,7 +5,6 @@ import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/core/widgets/app_text_button.dart';
-import 'package:sanad/core/widgets/app_text_form_field.dart';
 import 'package:sanad/feature/login/ui/widgets/email_and_password_validate.dart';
 import 'package:sanad/feature/login/ui/widgets/hello_hero_container.dart';
 import 'package:sanad/feature/login/ui/widgets/login_button_listen.dart';
@@ -35,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
             verticalSpace(40),
            AppTextButton(
                buttonText: "ابدأ الرحلة",
-               textStyle: TextStyles.font20BaseWhiteSemiBold,
+               textStyle: TextStyles.font20WhiteSemiBold,
                onPressed: (){
                  if (context
                      .read<LoginCubit>()
@@ -59,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
              borderRadius:50,
              buttonWidth: 234.w,
              buttonHeight: 55.h,
-             backgroundColor: AppColors.mainGreen,
+             backgroundColor: AppColors.green69,
            ),
             verticalSpace(15),
             DontHaveAccountText(),

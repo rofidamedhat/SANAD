@@ -18,51 +18,81 @@ import 'package:sanad/core/themeing/colors.dart';
 // - الألوان واخدينها من AppColors عشان نمشي على نفس ثيم الأبلكيشن.
 //
 class TextStyles {
-  static TextStyle font20BaseWhiteSemiBold = TextStyle(
+  static TextStyle font20WhiteSemiBold = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.semiBold,
-    color: AppColors.baseWhite,
+    color: AppColors.white,
+  );
+  static TextStyle font22Black05Reguler = TextStyle(
+    fontSize: 22.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: AppColors.black05,
+  );
+  static TextStyle font22greySemiBold = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: Colors.grey,
   );
 
-  static TextStyle font48BaseWhiteSemiBold = TextStyle(
+  static TextStyle font48WhiteSemiBold = TextStyle(
     fontSize: 48.sp,
     fontWeight: FontWeightHelper.semiBold,
-    color: AppColors.baseWhite,
+    color: AppColors.white,
   );
 
-  static TextStyle font20BaseBlackRegular = TextStyle(
+  static TextStyle font20Black05Regular = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.regular,
-    color: AppColors.baseBlack,
+    color: AppColors.black05,
+  );
+  static TextStyle font18Black05Bold = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: AppColors.black05,
+  );
+  static TextStyle font14WhiteSemiBold = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: AppColors.white,
+  );
+  static TextStyle font22Black05Bold = TextStyle(
+    fontSize: 22.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: AppColors.black05,
+  );
+  static TextStyle font26green69Bold = TextStyle(
+    fontSize: 26.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: AppColors.green69,
   );
 
-  static TextStyle font24BaseWhiteRegular = TextStyle(
+  static TextStyle font24WhiteRegular = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.regular,
-    color: AppColors.baseWhite,
+    color: AppColors.white,
   );
 
-  static TextStyle font20BaseOrangeBold = TextStyle(
+  static TextStyle font20Orange62Bold = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.bold,
-    color: AppColors.baseOrange,
+    color: AppColors.orange62,
   );
 
-  static TextStyle font40BaseWhiteSemiBold = TextStyle(
+  static TextStyle font40WhiteSemiBold = TextStyle(
     fontSize: 40.sp,
     fontWeight: FontWeightHelper.semiBold,
-    color: AppColors.baseWhite,
+    color: AppColors.white,
   );
 
-  static TextStyle font21LightGreenRegular = TextStyle(
+  static TextStyle font21GreenA4Regular = TextStyle(
     fontSize: 21.sp,
     fontWeight: FontWeightHelper.regular,
-    color: AppColors.lightGreen,
+    color: AppColors.greenA4,
   );
 
-  static TextStyle font36BaseWhiteSemiBold = TextStyle(
+  static TextStyle font36WhiteSemiBold = TextStyle(
     fontSize: 36.sp,
     fontWeight: FontWeightHelper.semiBold,
-    color: AppColors.baseWhite,
+    color: AppColors.white,
   );
 }

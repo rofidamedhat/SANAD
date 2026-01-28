@@ -13,7 +13,7 @@ class HelloHeroContainer extends StatelessWidget {
       height: 450,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.mainGreen,
+        color: AppColors.green69,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(40),
           bottomRight: Radius.circular(40),
@@ -23,11 +23,11 @@ class HelloHeroContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("مستعد للانطلاق",
-          style: TextStyles.font40BaseWhiteSemiBold,
+          style: TextStyles.font40WhiteSemiBold,
           ),
           verticalSpace(15),
           Text("يا بطل ؟!",
-            style: TextStyles.font40BaseWhiteSemiBold,
+            style: TextStyles.font40WhiteSemiBold,
           ),
         ],
       ),

@@ -20,4 +20,5 @@ class Routes {
   static const String homeVolunteer = '/homeVolunteer';
   static const String homeDeafUser = '/homeDeafUser';
   static const String signUpScreen = '/signUpScreen';
+  static const String learnSignLangScreen = '/learnSignLangScreen';
 }

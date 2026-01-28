@@ -19,7 +19,7 @@ class SignupButtonListen extends StatelessWidget {
               context: context,
               builder: (context) => Center(
                 child: CircularProgressIndicator(
-                  color: AppColors.mainGreen,
+                  color: AppColors.green69,
                 ),
               ),
             );
@@ -50,7 +50,7 @@ class SignupButtonListen extends StatelessWidget {
         ),
         content: Text(
           error,
-          style: TextStyles.font20BaseBlackRegular,
+          style: TextStyles.font20Black05Regular,
         ),
         actions: [
           TextButton(
@@ -59,7 +59,7 @@ class SignupButtonListen extends StatelessWidget {
             },
             child: Text(
               'Got it',
-              style: TextStyles.font20BaseBlackRegular,
+              style: TextStyles.font20Black05Regular,
             ),
           ),
         ],

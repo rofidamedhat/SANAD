@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sanad/core/routing/routes.dart';
+import 'package:sanad/core/themeing/colors.dart';
 
 import 'core/routing/app_router.dart';
 
@@ -16,10 +17,15 @@ class SanadApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         theme: ThemeData(
-    fontFamily: 'Tajawal', // اسم الفونت العربي
-    textTheme: const TextTheme(
-    bodyMedium: TextStyle(fontFamily: 'Tajawal'),
-    ),
+          scaffoldBackgroundColor: AppColors.white,
+          appBarTheme: AppBarTheme(
+            backgroundColor: AppColors.white,
+            elevation: 0,
+          ),
+          fontFamily: 'Tajawal', // اسم الفونت العربي
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(fontFamily: 'Tajawal'),
+          ),
         ),
         builder: (context, child) {
           return Directionality(
@@ -28,8 +34,8 @@ class SanadApp extends StatelessWidget {
           );
         },
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.onboardingScreen,
-         onGenerateRoute: AppRouter().generateRoute,
+        initialRoute: Routes.learnSignLangScreen,
+        onGenerateRoute: AppRouter().generateRoute,
       ),
     );
   }

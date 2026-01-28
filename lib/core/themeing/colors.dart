@@ -15,10 +15,14 @@ import 'package:flutter/material.dart';
 //   والنصوص حسب الحاجة.
 // --
 class AppColors {
-  static const Color baseWhite = Color(0xFFFFFFFF);
-  static const Color mainGreen = Color(0xFF2B6F69);
-  static const Color baseBlack = Color(0xFF050505);
-  static const Color baseOrange = Color(0xFFFFA762);
-  static const Color lightGreen = Color(0xFF5FAAA4);
-
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color whitef5 = Color(0xFFf5f5f5);
+  static const Color green69 = Color(0xFF2B6F69);
+  static const Color black05 = Color(0xFF050505);
+  static const Color orange62 = Color(0xFFFFA762);
+  static const Color greenA4 = Color(0xFF5FAAA4);
+  static const Color greenC2 = Color(0xFF9FD6C2);
+  static const Color blueE0 = Color(0xFFAED7E0);
+  static const Color beigeD2 = Color(0xFFF1E9D2);
+  static const Color orangeA6 = Color(0xFFF4C6A6);
 }
