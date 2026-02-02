@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
+import 'package:sanad/feature/learn_sign_lang/ui/widget/learning_list.dart';
 
 class LearnSignLangScreen extends StatelessWidget {
   const LearnSignLangScreen({super.key});
@@ -12,7 +13,10 @@ class LearnSignLangScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.arrow_back, color: AppColors.greenA4, size: 30),
+        ),
         iconTheme: const IconThemeData(color: AppColors.green69),
       ),
       body: Container(
@@ -30,46 +34,15 @@ class LearnSignLangScreen extends StatelessWidget {
               Icons.favorite,
               color: const Color.fromARGB(255, 134, 187, 183),
             ),
-            // Expanded(
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(20),
-            //     child: GridView.count(
-            //       crossAxisCount: 2,
-            //       crossAxisSpacing: 16,
-            //       mainAxisSpacing: 16,
-            //       children: [
-            //         CategoryCard(
-            //           title: 'الحروف الأبجدية',
-            //           subtitle: 'ابني من الأساسيات',
-            //           imagePath: 'assets/images/alphabet.png',
-            //           backgroundColor: AppColors.greenC2,
-            //           onTap: () {},
-            //         ),
-            //         CategoryCard(
-            //           title: 'الأرقام',
-            //           subtitle: 'تعلم العد بالإشارة',
-            //           imagePath: 'assets/images/numbers.png',
-            //           backgroundColor: AppColors.blueE0,
-            //           onTap: () {},
-            //         ),
-            //         CategoryCard(
-            //           title: 'أشهر الكلمات',
-            //           subtitle: 'كلمات يومية',
-            //           imagePath: 'assets/images/words.png',
-            //           backgroundColor: AppColors.beigeD2,
-            //           onTap: () {},
-            //         ),
-            //         CategoryCard(
-            //           title: 'فيديوهات شرح',
-            //           subtitle: 'تعلم بالمشاهدة',
-            //           imagePath: 'assets/images/videos.png',
-            //           backgroundColor: AppColors.orangeA6,
-            //           onTap: () {},
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 30,
+                ),
+                child: LearningList(),
+              ),
+            ),
           ],
         ),
       ),

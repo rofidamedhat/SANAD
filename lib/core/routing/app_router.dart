@@ -4,6 +4,9 @@ import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/routing/routes.dart';
 import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
+import 'package:sanad/feature/learn_alphabet/ui/learn_alphabet_screen.dart';
+import 'package:sanad/feature/learn_famous_words/ui/learn_famous_words_screen.dart';
+import 'package:sanad/feature/learn_numbers/ui/learn_number_screen.dart';
 import 'package:sanad/feature/learn_sign_lang/ui/learn_sign_lang_screen.dart';
 import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
@@ -45,6 +48,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
       case Routes.learnSignLangScreen:
         return MaterialPageRoute(builder: (_) => LearnSignLangScreen());
+      case Routes.learnAlphabetScreen:
+        return MaterialPageRoute(builder: (_) => LearnAlphabetScreen());
+      case Routes.learnNumberScreen:
+        return MaterialPageRoute(builder: (_) => LearnNumberScreen());
+      case Routes.learnFamousWordsScreen:
+        return MaterialPageRoute(builder: (_) => LearnFamousWordsScreen());
 
       case Routes.loginScreen:
         return MaterialPageRoute(

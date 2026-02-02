@@ -34,7 +34,7 @@ class SanadApp extends StatelessWidget {
           );
         },
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.learnSignLangScreen,
+        initialRoute: Routes.homeDeafUser,
         onGenerateRoute: AppRouter().generateRoute,
       ),
     );

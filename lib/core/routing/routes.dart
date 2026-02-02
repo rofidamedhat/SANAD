@@ -21,4 +21,7 @@ class Routes {
   static const String homeDeafUser = '/homeDeafUser';
   static const String signUpScreen = '/signUpScreen';
   static const String learnSignLangScreen = '/learnSignLangScreen';
+  static const String learnAlphabetScreen = '/learnAlphabetScreen';
+  static const String learnNumberScreen = '/learnNumberScreen';
+  static const String learnFamousWordsScreen = '/learnFamousWordsScreen';
 }
