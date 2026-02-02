@@ -1,21 +1,28 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sanad/core/constants.dart';
 import 'package:sanad/core/routing/routes.dart';
 import 'package:sanad/core/themeing/colors.dart';
 
 import 'core/routing/app_router.dart';
 
 class SanadApp extends StatelessWidget {
-  const SanadApp({super.key});
+  final AppRouter appRouter;
+
+  const SanadApp({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {
+    log(isLoginUser.toString());
     //عشان الابللكشين يكون مناسب مع كل احجام الشاشات
     return ScreenUtilInit(
       designSize: const Size(414, 850),
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
+        title: 'Sanad',
         theme: ThemeData(
           scaffoldBackgroundColor: AppColors.white,
           appBarTheme: AppBarTheme(
@@ -34,8 +41,9 @@ class SanadApp extends StatelessWidget {
           );
         },
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.homeDeafUser,
-        onGenerateRoute: AppRouter().generateRoute,
+      
+        initialRoute: isLoginUser ? Routes.navigationScreen : Routes.loginScreen,
+        onGenerateRoute: appRouter.generateRoute,
       ),
     );
   }

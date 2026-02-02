@@ -10,6 +10,7 @@ import 'package:sanad/feature/learn_numbers/ui/learn_number_screen.dart';
 import 'package:sanad/feature/learn_sign_lang/ui/learn_sign_lang_screen.dart';
 import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
+import 'package:sanad/feature/navigations/navigation_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
 
@@ -54,6 +55,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => LearnNumberScreen());
       case Routes.learnFamousWordsScreen:
         return MaterialPageRoute(builder: (_) => LearnFamousWordsScreen());
+      case Routes.navigationScreen:
+        return MaterialPageRoute(builder: (_) => NavigationScreen());
 
       case Routes.loginScreen:
         return MaterialPageRoute(

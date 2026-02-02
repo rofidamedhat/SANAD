@@ -3,7 +3,6 @@ import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/feature/home_deaf_user/ui/widget/deaf_services_list.dart';
 import 'package:sanad/feature/home_deaf_user/ui/widget/deaf_welcome_container.dart';
-import 'package:sanad/feature/home_volunteer/ui/widget/home_bottom_nav_bar.dart';
 
 import '../../../core/themeing/colors.dart';
 
@@ -35,7 +34,7 @@ class HomeDeafUserScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: HomeBottomNavBar(),
+      // bottomNavigationBar: HomeBottomNavBar(),
     );
   }
 }

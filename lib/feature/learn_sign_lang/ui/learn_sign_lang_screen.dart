@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sanad/core/extensions/navigation.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
@@ -14,7 +15,7 @@ class LearnSignLangScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () =>context.pop(),
           icon: Icon(Icons.arrow_back, color: AppColors.greenA4, size: 30),
         ),
         iconTheme: const IconThemeData(color: AppColors.green69),
