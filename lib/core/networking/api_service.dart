@@ -17,6 +17,7 @@
 // باختصار: أي مكان محتاج يتكلم مع السيرفر، يشوف هنا الأول. 
 // -----------------------------------------------------------
 import 'package:dio/dio.dart';
+import 'package:sanad/feature/convert_text_to_speech/data/model/audio_response_body.dart';
 import 'package:sanad/feature/signup/data/model/signup_request_body.dart';
 
 import '../../feature/login/data/model/login_request_body.dart';
@@ -35,6 +36,9 @@ abstract class ApiService {
 
   @POST(ApiConstants.signup)
   Future<SignupResponseBody> signup(@Body() SignupRequestBody signupRequestBody);
-}
 
+
+@POST(ApiConstants.translateText)
+Future<AudioResponseBody> translateText(@Body() String text);
+}
 //dart pub run build_runner build

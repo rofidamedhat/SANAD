@@ -47,6 +47,7 @@ dependencies:
   retrofit: ^4.9.1
   retrofit_generator: ^10.0.2
   flutter_svg: ^2.2.0
+  audioplayers: ^6.5.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

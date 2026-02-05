@@ -1,20 +1,20 @@
-// part of 'translate_audio_and_text_cubit.dart';
-//
-// @immutable
-// sealed class TranslateAudioAndTextState {}
-//
-// final class TranslateAudioAndTextInitial extends TranslateAudioAndTextState {}
-//
-// //TranslateAudioState
-//
-// class TranslateAudioLoading extends TranslateAudioAndTextState{}
-// class TranslateAudioSuccessfully extends TranslateAudioAndTextState{
-//
-//   AudioResponseBody audioResponseBody;
-//   TranslateAudioSuccessfully({required this.audioResponseBody});
-// }
-//
-// class TranslateAudioWithError extends TranslateAudioAndTextState{
-//   ApiErrorModel apiErrorMessage;
-//   TranslateAudioWithError({required this.apiErrorMessage});
-// }
+part of 'translate_audio_and_text_cubit.dart';
+
+@immutable
+sealed class TranslateAudioAndTextState {}
+
+final class TranslateAudioAndTextInitial extends TranslateAudioAndTextState {}
+
+//TranslateTextState
+class TranslateTextLoading extends TranslateAudioAndTextState{}
+class TranslateTextWithError extends TranslateAudioAndTextState{
+
+  ApiErrorModel apiErrorModel;
+  TranslateTextWithError({required this.apiErrorModel});
+}
+
+class TranslateTextWithSuccessfully extends TranslateAudioAndTextState{
+
+  AudioResponseBody audioResponseBody;
+  TranslateTextWithSuccessfully({required this.audioResponseBody});
+}

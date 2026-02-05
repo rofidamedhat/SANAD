@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sanad/feature/convert_text_to_speech/data/repo/translate_text_repo.dart';
+import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 
@@ -34,6 +36,10 @@ Future<void> setupGetIt() async {
   // // signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
+
+  // Translate text
+  getIt.registerLazySingleton<TranslateTextRepo>(() => TranslateTextRepo(getIt()));
+  getIt.registerFactory<TranslateAudioAndTextCubit>(() => TranslateAudioAndTextCubit(getIt()));
   // // home
   // getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   // getIt.registerFactory<HomeCubit>(
