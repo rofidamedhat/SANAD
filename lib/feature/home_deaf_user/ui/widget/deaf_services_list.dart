@@ -50,7 +50,9 @@ class DeafServicesList extends StatelessWidget {
           title: 'تحويل النص \nوالصوت ',
           icon: Icons.audio_file_outlined,
           iconColor: Colors.orange,
-          onTap: () {},
+          onTap: () {
+            context.pushNamed(Routes.convertTextToSpeechScreen);
+          },
         ),
 
         ServiceCard(
