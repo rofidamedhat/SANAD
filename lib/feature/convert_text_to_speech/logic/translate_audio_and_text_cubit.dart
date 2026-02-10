@@ -12,24 +12,45 @@ class TranslateAudioAndTextCubit extends Cubit<TranslateAudioAndTextState> {
   TranslateTextRepo translateTextRepo;
   TranslateAudioAndTextCubit(this.translateTextRepo) : super(TranslateAudioAndTextInitial());
   
-  AudioResponseBody? audioResponseBody;
+  AudioResponseBody? audioResponseBodyFromText;
+  AudioResponseBody? audioResponseBodyToText;
+  String text="";
   
   void translateText(String text)async{
     emit(TranslateTextLoading());
     
     try{
-      audioResponseBody=await translateTextRepo.translateText(text);
-      if(audioResponseBody!.statusCode==200){
-        emit(TranslateTextWithSuccessfully(audioResponseBody: audioResponseBody!));
+      audioResponseBodyFromText=await translateTextRepo.translateText(text);
+      if(audioResponseBodyFromText!.statusCode==200){
+        emit(TranslateTextWithSuccessfully(audioResponseBody: audioResponseBodyFromText!));
       }
       else{
-        print("Error from response ${audioResponseBody!.message}");
-        emit(TranslateTextWithError(apiErrorModel: ApiErrorHandler.handle(audioResponseBody)));
+        print("Error from response ${audioResponseBodyFromText!.message}");
+        emit(TranslateTextWithError(apiErrorModel: ApiErrorHandler.handle(audioResponseBodyFromText)));
       }
     }catch(error,stackTrace){
       print("Error from cubit $error");
       print("stack trace from cubit ${stackTrace}");
       emit(TranslateTextWithError(apiErrorModel: ApiErrorHandler.handle(error)));
+    }
+  }
+
+  void translateToText(String audioPath)async{
+
+    emit(TranslateAudioLoading());
+    try{
+      audioResponseBodyToText=await translateTextRepo.translateAudio(audioPath);
+      if(audioResponseBodyToText!.statusCode==200){
+        emit(TranslateAudioSuccessfully(audioResponseBody: audioResponseBodyToText!));
+      }
+      else{
+        print("error from object is ${audioResponseBodyToText!.message}");
+        emit(TranslateAudioWithError(apiErrorModel: ApiErrorHandler.handle(audioResponseBodyToText)));
+      }
+    }catch(error,stackTrace){
+      print("Error from translate to text is $error");
+      print("stack trace from translate to text is $stackTrace");
+      emit(TranslateAudioWithError(apiErrorModel: ApiErrorHandler.handle(error)));
     }
   }
 }

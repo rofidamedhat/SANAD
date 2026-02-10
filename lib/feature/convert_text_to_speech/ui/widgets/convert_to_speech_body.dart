@@ -11,6 +11,7 @@ import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_t
 import 'package:sanad/feature/convert_text_to_speech/ui/widgets/sound_button_listen.dart';
 import 'package:sanad/feature/convert_text_to_speech/ui/widgets/text_to_speech_input_field.dart';
 
+import '../../../../core/constants.dart';
 import '../../../../core/helper/spaces.dart';
 import '../../../../core/themeing/colors.dart';
 
@@ -93,33 +94,6 @@ class _ConvertToSpeechBodyState extends State<ConvertToSpeechBody> {
         ),
         SoundButtonListen()
       ],
-    );
-  }
-  void setupErrorState(BuildContext context, String error) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font20Black05Regular,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'حسنا',
-              style: TextStyles.font20Black05Regular,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -18,3 +18,19 @@ class TranslateTextWithSuccessfully extends TranslateAudioAndTextState{
   AudioResponseBody audioResponseBody;
   TranslateTextWithSuccessfully({required this.audioResponseBody});
 }
+
+//TranslateAudioState
+
+class TranslateAudioLoading extends TranslateAudioAndTextState{}
+class TranslateAudioWithError extends TranslateAudioAndTextState{
+
+  ApiErrorModel apiErrorModel;
+  TranslateAudioWithError({required this.apiErrorModel});
+}
+
+class TranslateAudioSuccessfully extends TranslateAudioAndTextState{
+
+  AudioResponseBody audioResponseBody;
+
+  TranslateAudioSuccessfully({required this.audioResponseBody});
+}

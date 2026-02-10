@@ -40,5 +40,13 @@ abstract class ApiService {
 
 @POST(ApiConstants.translateText)
 Future<AudioResponseBody> translateText(@Body() String text);
+
+@POST(ApiConstants.translateAudio)
+@MultiPart()
+  Future<AudioResponseBody> uploadAudio(
+      @Part(name: "File") MultipartFile audio,
+      );
 }
+
+
 //dart pub run build_runner build

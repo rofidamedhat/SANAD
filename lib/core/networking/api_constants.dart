@@ -20,6 +20,7 @@ class ApiConstants {
   static const String signup = "Auth/register";
   static const String home = "specialization/index";
   static const String translateText = "text-to-speech";
+  static const String translateAudio = "speech/transcribe";
 }
 
 class ApiErrors {
