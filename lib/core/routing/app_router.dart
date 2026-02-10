@@ -14,6 +14,7 @@ import 'package:sanad/feature/navigations/navigation_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
 
+import '../../feature/convert_text_to_speech/ui/convert_text_to_speech_screen.dart';
 import '../../feature/onboarding/onboarding_screen.dart';
 
 // -----------------------------------------------------------------------------
@@ -44,7 +45,8 @@ class AppRouter {
 
       case Routes.homeVolunteer:
         return MaterialPageRoute(builder: (_) => HomeVolunteerScreen());
-
+      case Routes.convertTextToSpeechScreen:
+        return MaterialPageRoute(builder: (_) => ConvertTextToSpeechScreen());
       case Routes.homeDeafUser:
         return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
       case Routes.learnSignLangScreen:
