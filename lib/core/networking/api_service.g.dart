@@ -88,6 +88,19 @@ class _ApiService implements ApiService {
           .compose(
             _dio.options,
             'text-to-speech',
+  Future<LearnAlphabetModel> getLetters(int pageNumber, int pageSize) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNumber': pageNumber,
+      r'pageSize': pageSize,
+    };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<LearnAlphabetModel>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'Letters',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -97,6 +110,9 @@ class _ApiService implements ApiService {
     late AudioResponseBody _value;
     try {
       _value = AudioResponseBody.fromJson(_result.data!);
+    late LearnAlphabetModel _value;
+    try {
+      _value = LearnAlphabetModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, _result);
       rethrow;
@@ -121,6 +137,49 @@ class _ApiService implements ApiService {
           .compose(
             _dio.options,
             'speech/transcribe',
+  Future<LearnNumbersModel> getNumbers(int pageNumber, int pageSize) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNumber': pageNumber,
+      r'pageSize': pageSize,
+    };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<LearnNumbersModel>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'Numbers',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LearnNumbersModel _value;
+    try {
+      _value = LearnNumbersModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<LearnWordsModel> getWords(int pageNumber, int pageSize) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNumber': pageNumber,
+      r'pageSize': pageSize,
+    };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<LearnWordsModel>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'Words',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -130,6 +189,9 @@ class _ApiService implements ApiService {
     late AudioResponseBody _value;
     try {
       _value = AudioResponseBody.fromJson(_result.data!);
+    late LearnWordsModel _value;
+    try {
+      _value = LearnWordsModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, _result);
       rethrow;

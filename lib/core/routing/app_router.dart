@@ -5,8 +5,10 @@ import 'package:sanad/core/routing/routes.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
+import 'package:sanad/feature/learn_alphabet/logic/cubit/learn_alphabet_cubit.dart';
 import 'package:sanad/feature/learn_alphabet/ui/learn_alphabet_screen.dart';
-import 'package:sanad/feature/learn_famous_words/ui/learn_famous_words_screen.dart';
+import 'package:sanad/feature/learn_famous_words/ui/learn_words_screen.dart';
+import 'package:sanad/feature/learn_numbers/logic/cubit/learn_number_cubit.dart';
 import 'package:sanad/feature/learn_numbers/ui/learn_number_screen.dart';
 import 'package:sanad/feature/learn_sign_lang/ui/learn_sign_lang_screen.dart';
 import 'package:sanad/feature/login/logic/login_cubit.dart';
@@ -57,10 +59,22 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
       case Routes.learnSignLangScreen:
         return MaterialPageRoute(builder: (_) => LearnSignLangScreen());
+
       case Routes.learnAlphabetScreen:
-        return MaterialPageRoute(builder: (_) => LearnAlphabetScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LearnAlphabetCubit>(),
+            child: LearnAlphabetScreen(),
+          ),
+        );
+
       case Routes.learnNumberScreen:
-        return MaterialPageRoute(builder: (_) => LearnNumberScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LearnNumberCubit>(),
+            child: LearnNumberScreen(),
+          ),
+        );
       case Routes.learnFamousWordsScreen:
         return MaterialPageRoute(builder: (_) => LearnFamousWordsScreen());
       case Routes.navigationScreen:

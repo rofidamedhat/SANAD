@@ -31,14 +31,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
         child: IndexedStack(
           index: selectedIndex,
           children: [
-            const HomeVolunteerScreen(),
+           const HomeVolunteerScreen(),
             Center(child: Text('المحادثات')),
             Center(child: Text('حسابي')),
           ],
         ),
       ),
       bottomNavigationBar: Container(
-        // color: AppColors.green69,
         height: 92.h,
         padding: EdgeInsetsDirectional.only(top: 18.h, bottom: 26.h),
         alignment: Alignment.center,

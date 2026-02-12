@@ -21,6 +21,9 @@ class ApiConstants {
   static const String home = "specialization/index";
   static const String translateText = "text-to-speech";
   static const String translateAudio = "speech/transcribe";
+  static const String learingLeatters = "Letters";
+  static const String learingNumbers = "Numbers";
+  static const String learingWords = "Words";
 }
 
 class ApiErrors {

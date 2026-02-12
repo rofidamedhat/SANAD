@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SignLearningCard extends StatelessWidget {
   final String label;
@@ -44,6 +45,18 @@ class SignLearningCard extends StatelessWidget {
                       imageUrl!,
                       width: double.infinity,
                       fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: Container(
+                            color: Colors.white,
+                            width: double.infinity,
+                            height: double.infinity,
+                          ),
+                        );
+                      },
                     )
                   : Container(
                       color: const Color(0xFFF2F5F4),
