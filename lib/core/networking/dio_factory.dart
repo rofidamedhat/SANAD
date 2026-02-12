@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:sanad/core/constants.dart';
 import 'package:sanad/core/helper/shared_pref_helper.dart';
 
 // -----------------------------------------------------------------------------
