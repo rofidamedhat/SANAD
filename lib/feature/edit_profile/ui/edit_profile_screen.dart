@@ -1,150 +1,113 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sanad/feature/profile/logic/profile_cubit.dart';
+import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/themeing/colors.dart';
-import 'package:sanad/core/themeing/text_styles.dart';
-import '../../../core/helper/spaces.dart';
-import '../../../core/widgets/app_text_button.dart';
-import 'package:sanad/feature/edit_profile/ui/widget/edit_profile_header_clipper.dart'; // الهيدر الجديد
+import '../logic/edit_profile_cubit.dart';
+import 'widget/edit_profile_header.dart';
+import 'widget/edit_profile_form.dart';
 
-class EditProfileScreen extends StatefulWidget {
+class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => EditProfileCubit(getIt())..loadInitialData(),
+      child: const _EditProfileView(),
+    );
+  }
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class _EditProfileView extends StatefulWidget {
+  const _EditProfileView();
+  @override
+  State<_EditProfileView> createState() => _EditProfileViewState();
+}
+
+class _EditProfileViewState extends State<_EditProfileView> {
   final ImagePicker _picker = ImagePicker();
   File? _croppedImage;
-
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _roleController = TextEditingController();
-
-  final double textFieldHeight = 60;
+  late TextEditingController _nameController, _emailController, _roleController;
 
   @override
   void initState() {
     super.initState();
-    final cubit = context.read<ProfileCubit>();
-    _nameController.text = cubit.name;
-    _emailController.text = cubit.email;
-    _roleController.text = cubit.role;
+    final cubit = context.read<EditProfileCubit>();
+    _nameController = TextEditingController(text: cubit.name);
+    _emailController = TextEditingController(text: cubit.email);
+    _roleController = TextEditingController(text: cubit.role);
   }
 
   Future<void> _pickAndCropImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile == null) return;
-
     final croppedFile = await ImageCropper().cropImage(
       sourcePath: pickedFile.path,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-      uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: 'تعديل الصورة',
-          toolbarColor: AppColors.green69,
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.square,
-          lockAspectRatio: true,
-        ),
-        IOSUiSettings(
-          title: 'تعديل الصورة',
-          aspectRatioLockEnabled: true,
-        ),
-      ],
     );
-
-    if (croppedFile != null) {
-      setState(() {
-        _croppedImage = File(croppedFile.path);
-      });
-    }
-  }
-
-  InputDecoration _inputDecoration(String label) {
-    return InputDecoration(
-      labelText: label,
-      filled: true,
-      fillColor: const Color.fromARGB(255, 167, 224, 202).withOpacity(0.2),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(50),
-        borderSide: BorderSide.none,
-      ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-    );
-  }
-
-  Widget _buildTextField(
-      {required TextEditingController controller, required String label}) {
-    return SizedBox(
-      height: textFieldHeight,
-      width: double.infinity,
-      child: TextField(
-        controller: controller,
-        decoration: _inputDecoration(label),
-        style: TextStyles.font21GreenA4Regular,
-      ),
-    );
+    if (croppedFile != null) setState(() => _croppedImage = File(croppedFile.path));
   }
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ProfileCubit>();
-
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            /// الهيدر زي البروفايل
-            EditProfileHeaderWidget(
-              image: _croppedImage,
-              onTap: _pickAndCropImage,
-            ),
-
-            SizedBox(height: 90.h), // مساحة تحت الهيدر للـ TextFields
-
-            // TextFields
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  _buildTextField(controller: _nameController, label: 'الاسم'),
-                  verticalSpace(20),
-                  _buildTextField(
-                      controller: _emailController, label: 'الإيميل'),
-                  verticalSpace(20),
-                  _buildTextField(
-                      controller: _roleController, label: 'الفئة'),
-                  verticalSpace(40),
-
-                  // زر تعديل الملف الشخصي
-                  AppTextButton(
-                    buttonText: " تعديل ",
-                    textStyle: TextStyles.font20WhiteSemiBold,
-                    onPressed: () {
-                      cubit.updateProfile(
-                        newName: _nameController.text,
-                        newEmail: _emailController.text,
-                        newRole: _roleController.text,
-                      );
-                      Navigator.pop(context);
-                    },
-                    backgroundColor: AppColors.green69,
-                    buttonHeight: 55.h,
-                    buttonWidth: double.infinity,
-                    borderRadius: 50,
-                  ),
-                ],
+      body: BlocConsumer<EditProfileCubit, EditProfileState>(
+        listener: (context, state) {
+          if (state is EditProfileSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text("تم تحديث الملف الشخصي بنجاح",
+              style: TextStyle(color: AppColors.black05),)
+              ,
+              backgroundColor: AppColors.gray,
+            ));
+            Navigator.pop(context);
+          }
+          if (state is EditProfileError) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(state.message),
+              backgroundColor: const Color.fromARGB(255, 250, 194, 190),
+            ));
+          }
+        },
+        builder: (context, state) {
+          final isLoading = state is EditProfileLoading;
+          return Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    EditProfileHeaderWidget(image: _croppedImage, onTap: _pickAndCropImage,cubit: context.read<EditProfileCubit>(),),
+                    const SizedBox(height: 120),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: EditProfileForm(
+                        nameController: _nameController,
+                        emailController: _emailController,
+                        roleController: _roleController,
+                        isLoading: isLoading,
+                        onSave: () => context.read<EditProfileCubit>().updateProfile(
+                          name: _nameController.text,
+                          email: _emailController.text,
+                          role: _roleController.text,
+                          image: _croppedImage,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
+              if (isLoading)
+                Container(
+                  color: Colors.black12,
+                  child: const Center(child: CircularProgressIndicator(color: AppColors.green69)),
+                ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -47,6 +47,8 @@ dependencies:
   retrofit: ^4.9.1
   retrofit_generator: ^10.0.2
   flutter_svg: ^2.2.0
+  image_picker: ^1.2.1
+  image_cropper: ^11.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

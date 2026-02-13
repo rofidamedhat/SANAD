@@ -8,7 +8,7 @@ import 'core/helper/shared_pref_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupGetIt();
+   setupGetIt();
   await isCheckedLogged();
   runApp(SanadApp(appRouter: AppRouter()));
 }

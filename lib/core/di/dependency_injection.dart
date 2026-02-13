@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sanad/feature/edit_profile/data/repo/edit_profile_repo.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
-
+import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
+import 'package:sanad/feature/profile/logic/profile_cubit.dart';
+import 'package:sanad/feature/profile/data/repo/profile_repo.dart';
 import '../../feature/login/data/repos/login_repo.dart';
 import '../../feature/login/logic/login_cubit.dart';
 import '../networking/api_service.dart';
@@ -34,6 +37,13 @@ Future<void> setupGetIt() async {
   // // signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
+  // edit profile
+  getIt.registerFactory<EditProfileCubit>(() => EditProfileCubit(getIt()));
+  getIt.registerFactory<EditProfileRepo>(() => EditProfileRepo(getIt()));
+  // profile
+  getIt.registerLazySingleton<ProfileRepository>( ()=> ProfileRepository(apiService: getIt()),);
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(repository: getIt()));
+
   // // home
   // getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   // getIt.registerFactory<HomeCubit>(

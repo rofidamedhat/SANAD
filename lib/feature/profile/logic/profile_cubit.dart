@@ -1,65 +1,58 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-import '../../../core/helper/shared_pref_helper.dart';
+import '../../../feature/profile/data/model/profile_response_body.dart';
+import '../../../feature/profile/data/repo/profile_repo.dart';
 
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit() : super(ProfileInitial());
+  final ProfileRepository repository;
 
+  ProfileCubit({required this.repository}) : super(ProfileInitial());
+
+  // بيانات البروفايل
   String name = '';
   String email = '';
-  String phone = '';
   String role = '';
-  File? profileImage; // صورة البروفايل
+  String profileImageUrl = '';
 
-  /// تحميل البيانات من SharedPref
+  /// تحميل البيانات من السيرفر
   Future<void> loadProfile() async {
-    name = await SharedPrefHelper.getString("name") ?? '';
-    email = await SharedPrefHelper.getString("email") ?? '';
-    phone = await SharedPrefHelper.getString("phone") ?? '';
-    role = await SharedPrefHelper.getString("role") ?? '';
-    // لو خزنت الصورة قبل كده ممكن تضيفها
-    emit(ProfileLoaded());
+    emit(ProfileLoading());
+
+    try {
+      final ProfileResponseBody response = await repository.getProfile();
+      
+      name = response.data.fullName;
+      email = response.data.email;
+      role = response.data.role;
+      profileImageUrl = response.data.profileImageUrl;
+
+      emit(ProfileLoaded());
+    } catch (e) {
+      emit(ProfileError(message: e.toString()));
+    }
   }
 
-  /// تحديث الصورة
-  void updateProfileImage(File newImage) {
-    profileImage = newImage;
-    emit(ProfileLoaded());
-  }
-
-  /// تحديث البيانات
-  Future<void> updateProfile({
+  /// تحديث البيانات محليًا بعد الرجوع من EditProfile
+  void updateProfileData({
     String? newName,
     String? newEmail,
-    String? newPhone,
     String? newRole,
-  }) async {
-    if (newName != null) {
-      name = newName;
-      await SharedPrefHelper.setString("name", newName);
-    }
-    if (newEmail != null) {
-      email = newEmail;
-      await SharedPrefHelper.setString("email", newEmail);
-    }
-    if (newPhone != null) {
-      phone = newPhone;
-      await SharedPrefHelper.setString("phone", newPhone);
-    }
-    if (newRole != null) {
-      role = newRole;
-      await SharedPrefHelper.setString("role", newRole);
-    }
+    String? newProfileImageUrl,
+  }) {
+    if (newName != null) name = newName;
+    if (newEmail != null) email = newEmail;
+    if (newRole != null) role = newRole;
+    if (newProfileImageUrl != null) profileImageUrl = newProfileImageUrl;
+
     emit(ProfileLoaded());
   }
 
-  /// تسجيل خروج
+  /// تسجيل الخروج
   Future<void> logout(BuildContext context) async {
-    await SharedPrefHelper.clearAll();
+    // لو فيه أي بيانات تخزّنها محليًا ممكن تمسح هنا
     Navigator.of(context)
         .pushNamedAndRemoveUntil("/login", (route) => false);
     emit(ProfileInitial());

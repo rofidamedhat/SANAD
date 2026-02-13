@@ -5,17 +5,26 @@ class ProfileHeaderClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     Path path = Path();
 
-    path.lineTo(0, size.height - 40);
+    // 1. نبدأ من الزاوية اللي فوق على الشمال (0,0)
+    path.moveTo(0, 0);
 
-    // نص دايرة في النص
+    // 2. ننزل بخط رأسي مستقيم لحد قبل نهاية الارتفاع بـ 50 بيكسل
+    // ده اللي بيخلي الجنب "مربع" مش مايل
+    double sideHeight = size.height -50;
+    path.lineTo(0, sideHeight);
+
+    // 3. نرسم الكيرف (القوس) في الضلع السفلي فقط
     path.quadraticBezierTo(
-      size.width / 2,
-      size.height + 80,
-      size.width,
-      size.height - 40,
+      size.width / 2, // نقطة التحكم في نص العرض
+      size.height ,    // بتنزل لآخر الارتفاع (رأس القوس)
+      size.width,     // نقطة النهاية على اليمين
+      sideHeight ,     // عند نفس مستوى بداية القوس
     );
 
+    // 4. نطلع بخط رأسي مستقيم للزاوية اللي فوق على اليمين
     path.lineTo(size.width, 0);
+
+    // 5. نقفل المسار (بيرجع لأول نقطة بدأنا منها تلقائياً)
     path.close();
 
     return path;

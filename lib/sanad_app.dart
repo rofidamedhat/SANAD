@@ -42,7 +42,7 @@ class SanadApp extends StatelessWidget {
         },
         debugShowCheckedModeBanner: false,
       
-        initialRoute: Routes.onboardingScreen,
+        initialRoute: isLoginUser ? Routes.navigationScreen : Routes.loginScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );

@@ -13,6 +13,12 @@ import 'package:sanad/feature/login/ui/login_screen.dart';
 import 'package:sanad/feature/navigations/navigation_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
+import 'package:sanad/feature/edit_profile/ui/edit_profile_screen.dart';
+import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
+
+import 'package:sanad/feature/profile/ui/profile_screen.dart';
+import 'package:sanad/feature/profile/logic/profile_cubit.dart';
+
 
 import '../../feature/convert_text_to_speech/ui/convert_text_to_speech_screen.dart';
 import '../../feature/onboarding/onboarding_screen.dart';
@@ -65,6 +71,24 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<LoginCubit>(),
             child: LoginScreen(),
+          ),
+        );
+
+      // إضافة البروفايل
+      case Routes.profile:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ProfileCubit>()..loadProfile(),
+            child: const ProfileScreen(),
+          ),
+        );
+
+      // إضافة الإيديت بروفايل
+      case Routes.editprofile:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: getIt<EditProfileCubit>(), // نفس الكيوبت المستخدم في ProfileScreen
+            child: const EditProfileScreen(),
           ),
         );
 

@@ -15,10 +15,17 @@
 // ---------------------------------
 
 class ApiConstants {
-  static const String baseUrl = "https://sanadapllication2025api.runasp.net/api/";
+  static const String baseUrl = "https://sanadapllication2025api.premiumasp.net/api/";
   static const String login = "Auth/login";
   static const String signup = "Auth/register";
   static const String home = "specialization/index";
+  static const String profile = "profile";
+  static const String editProfile = "profile";
+
+
+  
+
+
 }
 
 class ApiErrors {

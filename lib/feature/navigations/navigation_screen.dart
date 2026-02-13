@@ -5,6 +5,7 @@ import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
+import 'package:sanad/feature/profile/ui/profile_screen.dart';
 
 part 'widgets/_navigation_bar_item.dart';
 
@@ -33,7 +34,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           children: [
             const HomeVolunteerScreen(),
             Center(child: Text('المحادثات')),
-            Center(child: Text('حسابي')),
+            const ProfileScreen(),
           ],
         ),
       ),

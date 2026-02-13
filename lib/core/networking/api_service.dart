@@ -1,5 +1,4 @@
-
-//اسمعي البلاي ليست دي ي شروق قبل متحطي ايدك في اللوجيك  
+//اسمعي البلاي ليست دي ي شروق قبل متحطي ايدك في اللوجيك
 // https://www.youtube.com/playlist?list=PLwWuxCLlF_ud0orMMKU893fm1OvF4xSRk
 
 // -----------------------------------------------------------------------------
@@ -14,7 +13,7 @@
 // - ده Abstract Class، يعني بنعمله Generate بعدين عشان يتحوّل لكلاس جاهز يستخدم Dio.
 // - الأمر اللي تحت (`dart pub run build_runner build`) بيولّد الكود النهائي تلقائياً.
 //
-// باختصار: أي مكان محتاج يتكلم مع السيرفر، يشوف هنا الأول. 
+// باختصار: أي مكان محتاج يتكلم مع السيرفر، يشوف هنا الأول.
 // -----------------------------------------------------------
 import 'package:dio/dio.dart';
 import 'package:sanad/feature/signup/data/model/signup_request_body.dart';
@@ -22,6 +21,9 @@ import 'package:sanad/feature/signup/data/model/signup_request_body.dart';
 import '../../feature/login/data/model/login_request_body.dart';
 import '../../feature/login/data/model/login_response_body.dart';
 import '../../feature/signup/data/model/signup_response_body.dart';
+import '../../feature/profile/data/model/profile_response_body.dart';
+import '../../feature/edit_profile/data/model/edit_profile_response_body.dart';
+
 import 'api_constants.dart';
 import 'package:retrofit/retrofit.dart';
 part 'api_service.g.dart';
@@ -34,7 +36,22 @@ abstract class ApiService {
   Future<LoginResponseBody> login(@Body() LoginRequestBody loginRequestBody);
 
   @POST(ApiConstants.signup)
-  Future<SignupResponseBody> signup(@Body() SignupRequestBody signupRequestBody);
+  Future<SignupResponseBody> signup(
+    @Body() SignupRequestBody signupRequestBody,
+  );
+
+  @GET(ApiConstants.profile)
+  Future<ProfileResponseBody> profile();
+
+  @MultiPart()
+  @PUT("profile")
+  Future<EditProfileResponseBody> editProfile(
+    @Header("Authorization") String token,
+    @Part(name: "FullName") String fullName,
+    @Part(name: "Email") String email,
+    @Part(name: "Role") String role,
+    @Part(name: "ProfileImage") MultipartFile? profileImage,
+  );
 }
 
 //dart pub run build_runner build
