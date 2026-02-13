@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/routing/routes.dart';
+import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
 import 'package:sanad/feature/learn_alphabet/logic/cubit/learn_alphabet_cubit.dart';
@@ -39,16 +40,21 @@ class AppRouter {
 
       case Routes.signUpScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<SignupCubit>(),
-            child: SignupScreen(),
-          ),
+          builder: (_) =>
+              BlocProvider(
+                create: (context) => getIt<SignupCubit>(),
+                child: SignupScreen(),
+              ),
         );
 
       case Routes.homeVolunteer:
         return MaterialPageRoute(builder: (_) => HomeVolunteerScreen());
       case Routes.convertTextToSpeechScreen:
-        return MaterialPageRoute(builder: (_) => ConvertTextToSpeechScreen());
+        return MaterialPageRoute(builder: (_) =>
+            BlocProvider(
+              create: (context) => getIt<TranslateAudioAndTextCubit>(),
+              child: ConvertTextToSpeechScreen(),
+            ));
       case Routes.homeDeafUser:
         return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
       case Routes.learnSignLangScreen:
@@ -76,10 +82,11 @@ class AppRouter {
 
       case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<LoginCubit>(),
-            child: LoginScreen(),
-          ),
+          builder: (_) =>
+              BlocProvider(
+                create: (context) => getIt<LoginCubit>(),
+                child: LoginScreen(),
+              ),
         );
 
       default:

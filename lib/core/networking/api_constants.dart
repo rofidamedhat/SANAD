@@ -15,11 +15,12 @@
 // ---------------------------------
 
 class ApiConstants {
-  static const String baseUrl =
-      "https://sanadapllication2025api.premiumasp.net/api/";
+  static const String baseUrl = "https://sanadapllication2025api.premiumasp.net/api/";
   static const String login = "Auth/login";
   static const String signup = "Auth/register";
   static const String home = "specialization/index";
+  static const String translateText = "text-to-speech";
+  static const String translateAudio = "speech/transcribe";
   static const String learingLeatters = "Letters";
   static const String learingNumbers = "Numbers";
   static const String learingWords = "Words";

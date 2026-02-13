@@ -78,6 +78,16 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<AudioResponseBody> translateText(String text) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = text;
+    final _options = _setStreamType<AudioResponseBody>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'text-to-speech',
   Future<LearnAlphabetModel> getLetters(int pageNumber, int pageSize) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -97,6 +107,9 @@ class _ApiService implements ApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AudioResponseBody _value;
+    try {
+      _value = AudioResponseBody.fromJson(_result.data!);
     late LearnAlphabetModel _value;
     try {
       _value = LearnAlphabetModel.fromJson(_result.data!);
@@ -108,6 +121,22 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<AudioResponseBody> uploadAudio(MultipartFile audio) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.files.add(MapEntry('File', audio));
+    final _options = _setStreamType<AudioResponseBody>(
+      Options(
+            method: 'POST',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'multipart/form-data',
+          )
+          .compose(
+            _dio.options,
+            'speech/transcribe',
   Future<LearnNumbersModel> getNumbers(int pageNumber, int pageSize) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -157,6 +186,9 @@ class _ApiService implements ApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AudioResponseBody _value;
+    try {
+      _value = AudioResponseBody.fromJson(_result.data!);
     late LearnWordsModel _value;
     try {
       _value = LearnWordsModel.fromJson(_result.data!);

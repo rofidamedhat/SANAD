@@ -16,6 +16,7 @@
 // باختصار: أي مكان محتاج يتكلم مع السيرفر، يشوف هنا الأول.
 // -----------------------------------------------------------
 import 'package:dio/dio.dart';
+import 'package:sanad/feature/convert_text_to_speech/data/model/audio_response_body.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sanad/feature/learn_alphabet/data/models/learn_alphabet_model.dart';
 import 'package:sanad/feature/learn_famous_words/data/models/learn_words_model.dart';
@@ -37,9 +38,18 @@ abstract class ApiService {
   Future<LoginResponseBody> login(@Body() LoginRequestBody loginRequestBody);
 
   @POST(ApiConstants.signup)
-  Future<SignupResponseBody> signup(
-    @Body() SignupRequestBody signupRequestBody,
-  );
+  Future<SignupResponseBody> signup(@Body() SignupRequestBody signupRequestBody);
+
+
+@POST(ApiConstants.translateText)
+Future<AudioResponseBody> translateText(@Body() String text);
+
+@POST(ApiConstants.translateAudio)
+@MultiPart()
+  Future<AudioResponseBody> uploadAudio(
+      @Part(name: "File") MultipartFile audio,
+      );
+ 
 
   @GET(ApiConstants.learingLeatters)
   Future<LearnAlphabetModel> getLetters(
@@ -58,5 +68,6 @@ abstract class ApiService {
     @Query("pageSize") int pageSize,
   );
 }
+
 
 //dart pub run build_runner build

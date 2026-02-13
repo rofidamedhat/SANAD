@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sanad/feature/convert_text_to_speech/data/repo/translate_text_repo.dart';
+import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/learn_alphabet/data/repos/learn_alphabet_repo.dart';
 import 'package:sanad/feature/learn_alphabet/logic/cubit/learn_alphabet_cubit.dart';
 import 'package:sanad/feature/learn_famous_words/data/repo/learn_words_repo.dart';
@@ -40,6 +42,10 @@ Future<void> setupGetIt() async {
   // // signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
+
+  // Translate text
+  getIt.registerLazySingleton<TranslateTextRepo>(() => TranslateTextRepo(getIt()));
+  getIt.registerFactory<TranslateAudioAndTextCubit>(() => TranslateAudioAndTextCubit(getIt()));
   //LearnAlphabet
   getIt.registerLazySingleton<LearnAlphabetCubit>(
     () => LearnAlphabetCubit(getIt()),
