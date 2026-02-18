@@ -11,13 +11,11 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   ProfileCubit({required this.repository}) : super(ProfileInitial());
 
-  // بيانات البروفايل
   String name = '';
   String email = '';
   String role = '';
   String profileImageUrl = '';
 
-  /// تحميل البيانات من السيرفر
   Future<void> loadProfile() async {
     emit(ProfileLoading());
 
@@ -35,7 +33,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  /// تحديث البيانات محليًا بعد الرجوع من EditProfile
   void updateProfileData({
     String? newName,
     String? newEmail,
@@ -50,9 +47,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileLoaded());
   }
 
-  /// تسجيل الخروج
   Future<void> logout(BuildContext context) async {
-    // لو فيه أي بيانات تخزّنها محليًا ممكن تمسح هنا
     Navigator.of(context)
         .pushNamedAndRemoveUntil("/login", (route) => false);
     emit(ProfileInitial());

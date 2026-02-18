@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import '../logic/edit_profile_cubit.dart';
+import '../../profile/logic/profile_cubit.dart'; 
 import 'widget/edit_profile_header.dart';
 import 'widget/edit_profile_form.dart';
 
@@ -35,10 +36,11 @@ class _EditProfileViewState extends State<_EditProfileView> {
   @override
   void initState() {
     super.initState();
-    final cubit = context.read<EditProfileCubit>();
-    _nameController = TextEditingController(text: cubit.name);
-    _emailController = TextEditingController(text: cubit.email);
-    _roleController = TextEditingController(text: cubit.role);
+    final profileCubit = context.read<ProfileCubit>();
+    
+    _nameController = TextEditingController(text: profileCubit.name);
+    _emailController = TextEditingController(text: profileCubit.email);
+    _roleController = TextEditingController(text: profileCubit.role);
   }
 
   Future<void> _pickAndCropImage() async {
@@ -52,16 +54,25 @@ class _EditProfileViewState extends State<_EditProfileView> {
   }
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _roleController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: BlocConsumer<EditProfileCubit, EditProfileState>(
         listener: (context, state) {
           if (state is EditProfileSuccess) {
+            context.read<ProfileCubit>().loadProfile();
+            
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text("تم تحديث الملف الشخصي بنجاح",
-              style: TextStyle(color: AppColors.black05),)
-              ,
+              style: TextStyle(color: AppColors.black05)),
               backgroundColor: AppColors.gray,
             ));
             Navigator.pop(context);
@@ -80,7 +91,12 @@ class _EditProfileViewState extends State<_EditProfileView> {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                    EditProfileHeaderWidget(image: _croppedImage, onTap: _pickAndCropImage,cubit: context.read<EditProfileCubit>(),),
+                   EditProfileHeaderWidget(
+  image: _croppedImage,
+  onTap: _pickAndCropImage,
+  cubit: context.read<EditProfileCubit>(),
+  imageUrl: context.read<ProfileCubit>().profileImageUrl,
+),
                     const SizedBox(height: 120),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),

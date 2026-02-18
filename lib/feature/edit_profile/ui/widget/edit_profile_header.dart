@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
+import 'edit_profile_header_clipper.dart';
 
 class EditProfileHeaderWidget extends StatelessWidget {
   final File? image;
   final VoidCallback onTap;
   final EditProfileCubit cubit;
+  final String? imageUrl; 
 
   const EditProfileHeaderWidget({
     super.key,
     required this.image,
     required this.onTap,
     required this.cubit,
+    this.imageUrl, 
   });
 
   @override
@@ -22,9 +25,8 @@ class EditProfileHeaderWidget extends StatelessWidget {
       clipBehavior: Clip.none,
       alignment: Alignment.center,
       children: [
-        /// الهيدر الأبيض مع نص العنوان
         ClipPath(
-          clipper: _EditHeaderClipper(),
+          clipper: EditHeaderClipper(),
           child: Container(
             height: 180,
             width: double.infinity,
@@ -41,7 +43,6 @@ class EditProfileHeaderWidget extends StatelessWidget {
           ),
         ),
 
-        /// الصورة الشخصية مع زرار الكاميرا
         Positioned(
           bottom: -70,
           child: GestureDetector(
@@ -56,21 +57,20 @@ class EditProfileHeaderWidget extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: CircleAvatar(
-  radius: 65,
-  backgroundColor: AppColors.greenC2,
-  backgroundImage: image != null 
-      ? FileImage(image!) // لو اليوزر اختار صورة جديدة من الجاليري
-      : (cubit.profileImageUrl != null && cubit.profileImageUrl!.isNotEmpty&&cubit.profileImageUrl != "null"  )
-          ? NetworkImage("https://sanadapllication2025api.premiumasp.net${cubit.profileImageUrl}")
-          : null, // لو مفيش لا دي ولا دي
-  child: (image == null && (cubit.profileImageUrl == null || cubit.profileImageUrl!.isEmpty))
-      ? const Icon(
-          Icons.person,
-          size: 70,
-          color: AppColors.green69,
-        )
-      : null,
-
+                    radius: 65,
+                    backgroundColor: AppColors.greenC2,
+                    backgroundImage: image != null
+                        ? FileImage(image!)  
+                        : (imageUrl != null && imageUrl!.isNotEmpty && imageUrl != "null")
+                            ? NetworkImage("https://sanadapllication2025api.premiumasp.net$imageUrl") 
+                            : null,
+                    child: (image == null && (imageUrl == null || imageUrl!.isEmpty))
+                        ? const Icon(
+                            Icons.person,
+                            size: 70,
+                            color: AppColors.green69,
+                          )
+                        : null,
                   ),
                 ),
                 Container(
@@ -82,6 +82,7 @@ class EditProfileHeaderWidget extends StatelessWidget {
                       BoxShadow(
                         color: Colors.black.withOpacity(.2),
                         blurRadius: 6,
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
@@ -94,24 +95,4 @@ class EditProfileHeaderWidget extends StatelessWidget {
       ],
     );
   }
-}
-
-class _EditHeaderClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final curveDepth = size.height * 0.22;
-    Path path = Path();
-    path.lineTo(0, size.height - curveDepth);
-    path.quadraticBezierTo(
-      size.width / 2,
-      size.height + curveDepth,
-      size.width,
-      size.height - curveDepth,
-    );
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

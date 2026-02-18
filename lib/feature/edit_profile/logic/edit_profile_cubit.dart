@@ -17,21 +17,19 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   String email = '';
   String role = '';
 
-  File? profileImage;       // الصورة الجديدة اللي اختارها المستخدم
-  String? profileImageUrl;  // رابط الصورة من الريسبونس بعد التحديث
+  File? profileImage;       
+  String? profileImageUrl;  
 
-  /// تحميل البيانات أول ما الشاشة تفتح
   Future<void> loadInitialData() async {
     name = await SharedPrefHelper.getString("name") ?? '';
     email = await SharedPrefHelper.getString("email") ?? '';
     role = await SharedPrefHelper.getString("role") ?? '';
 
-    profileImageUrl = await SharedPrefHelper.getString("profileImageUrl"); // لو مخزنة مسبقاً
+    profileImageUrl = await SharedPrefHelper.getString("profileImageUrl"); 
 
     emit(EditProfileLoaded());
   }
 
- /// تحديث البيانات مع الصورة الاختيارية
   Future<void> updateProfile({
     required String name,
     required String email,
@@ -49,16 +47,15 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
       final EditProfileResponseBody response = await repo.editProfile(
         requestBody: requestBody,
-        image: image, // الاسم هنا متطابق مع الريبو
+        image: image, 
       );
 
-      // لو التحديث نجح، خزّن البيانات محليًا
       this.name = response.data.fullName;
       this.email = response.data.email;
       this.role = response.data.role;
 
       if (image != null) {
-        profileImage = image; // نفس الاسم زي الريبو
+        profileImage = image; 
       }
 
       await SharedPrefHelper.setData("name", this.name);

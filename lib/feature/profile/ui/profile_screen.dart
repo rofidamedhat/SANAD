@@ -21,21 +21,18 @@ class ProfileScreen extends StatelessWidget {
         builder: (context, state) {
           final cubit = context.read<ProfileCubit>();
 
-          // حالة التحميل - تظهر عند فتح الشاشة أو عند الـ Refresh
           if (state is ProfileLoading) {
             return const Scaffold(
               body: Center(child: CircularProgressIndicator(color: AppColors.green69)),
             );
           }
 
-          // حالة الخطأ
           if (state is ProfileError) {
             return Scaffold(
               body: Center(child: Text("حدث خطأ: ${state.message}")),
             );
           }
 
-          // حالة النجاح وعرض البيانات
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
@@ -59,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                     imageUrl: cubit.profileImageUrl,
                   ),
                   ProfileInfoSection(cubit: cubit),
-                  ProfileActionsSection(cubit: cubit), // الجزء ده اللي بيعمل الـ Navigation
+                  ProfileActionsSection(cubit: cubit), 
                 ],
               ),
             ),
