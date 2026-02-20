@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sanad/core/constants.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
+import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
 
 part 'widgets/_navigation_bar_item.dart';
@@ -31,7 +33,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         child: IndexedStack(
           index: selectedIndex,
           children: [
-           const HomeVolunteerScreen(),
+            isVolunteer ? HomeVolunteerScreen() : HomeDeafUserScreen(),
             Center(child: Text('المحادثات')),
             Center(child: Text('حسابي')),
           ],

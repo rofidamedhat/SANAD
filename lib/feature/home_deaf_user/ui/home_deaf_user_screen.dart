@@ -4,8 +4,6 @@ import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/feature/home_deaf_user/ui/widget/deaf_services_list.dart';
 import 'package:sanad/feature/home_deaf_user/ui/widget/deaf_welcome_container.dart';
 
-import '../../../core/themeing/colors.dart';
-
 class HomeDeafUserScreen extends StatelessWidget {
   const HomeDeafUserScreen({super.key});
 
@@ -15,10 +13,7 @@ class HomeDeafUserScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text("ابطال الصم وبكم", style: TextStyles.font22Black05Bold),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.arrow_back, color: AppColors.greenA4, size: 30),
-        ),
+        leading: SizedBox(),
       ),
       body: SafeArea(
         child: Container(

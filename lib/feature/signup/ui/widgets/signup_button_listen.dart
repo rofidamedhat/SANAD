@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/core/extensions/navigation.dart';
+import 'package:sanad/feature/signup/logic/signup_cubit.dart';
+
 import '../../../../core/constants.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/themeing/colors.dart';
-import '../../../../core/themeing/text_styles.dart';
 
 class SignupButtonListen extends StatelessWidget {
   const SignupButtonListen({super.key});
@@ -29,7 +29,7 @@ class SignupButtonListen extends StatelessWidget {
             //TODO:context.pop() to exit from showDialog
 
             context.pop();
-            context.pushReplacementNamed(Routes.loginScreen);
+            context.pushReplacementNamed(Routes.navigationScreen);
           }
           else if (state is SignupWithError){
             print("Error...");

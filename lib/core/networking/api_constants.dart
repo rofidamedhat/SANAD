@@ -15,6 +15,7 @@
 // ---------------------------------
 
 class ApiConstants {
+  //https://sanadapllication2025api.premiumasp.net/api/Videos
   static const String baseUrl = "https://sanadapllication2025api.premiumasp.net/api/";
   static const String login = "Auth/login";
   static const String signup = "Auth/register";
@@ -24,6 +25,7 @@ class ApiConstants {
   static const String learingLeatters = "Letters";
   static const String learingNumbers = "Numbers";
   static const String learingWords = "Words";
+  static const String learingVideos = "Videos";
 }
 
 class ApiErrors {

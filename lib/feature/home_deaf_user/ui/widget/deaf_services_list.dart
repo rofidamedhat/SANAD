@@ -15,12 +15,6 @@ class DeafServicesList extends StatelessWidget {
       childAspectRatio: 1.2,
       children: [
         ServiceCard(
-          title: 'المحادثة الجماعية',
-          icon: Icons.chat_bubble_outline,
-          iconColor: Colors.blue,
-          onTap: () {},
-        ),
-        ServiceCard(
           title: 'تعلم لغة الإشارة',
           icon: Icons.sign_language,
           iconColor: Colors.orange,
@@ -34,33 +28,39 @@ class DeafServicesList extends StatelessWidget {
           onTap: () {},
         ),
         ServiceCard(
-          title: 'المساعدة بالدعم',
-          icon: Icons.people_outline,
-          iconColor: Colors.green,
-          onTap: () {},
-        ),
-        ServiceCard(
-          title: 'تحويل النص \n والفيديو',
-          icon: Icons.video_file_outlined,
-          iconColor: Colors.blue,
-          onTap: () {},
-          // imagePath: 'assets/svgs/text_to_vid.svg',
-        ),
-        ServiceCard(
-          title: 'تحويل النص \nوالصوت ',
+          title: 'تحويل النص \nالي صوت ',
           icon: Icons.audio_file_outlined,
           iconColor: Colors.orange,
           onTap: () {
             context.pushNamed(Routes.convertTextToSpeechScreen);
           },
         ),
-
+        ServiceCard(
+          title: 'تحويل النص \n ل فيديو',
+          icon: Icons.video_file_outlined,
+          iconColor: Colors.blue,
+          onTap: () {},
+          // imagePath: 'assets/svgs/text_to_vid.svg',
+        ),
         ServiceCard(
           title: 'جدول مواعيد \n العلاج ',
           icon: Icons.medical_information,
           iconColor: Colors.blue,
           onTap: () {},
           // imagePath: "assets/svgs/mid_cal.svg",
+        ),
+        ServiceCard(
+          title: 'المساعدة بالدعم',
+          icon: Icons.people_outline,
+          iconColor: Colors.green,
+          onTap: () {},
+        ),
+
+        ServiceCard(
+          title: 'المحادثة الجماعية',
+          icon: Icons.chat_bubble_outline,
+          iconColor: Colors.blue,
+          onTap: () {},
         ),
       ],
     );
