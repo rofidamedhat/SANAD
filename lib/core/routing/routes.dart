@@ -24,6 +24,8 @@ class Routes {
   static const String learnAlphabetScreen = '/learnAlphabetScreen';
   static const String learnNumberScreen = '/learnNumberScreen';
   static const String learnFamousWordsScreen = '/learnFamousWordsScreen';
+  static const String learnVideosScreen = '/learnVideosScreen';
+
   static const String navigationScreen = '/navigationScreen';
   static const String convertTextToSpeechScreen = '/convertTextToSpeechScreen';
   static const String profile = '/profileScreen';

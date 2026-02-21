@@ -1,6 +1,6 @@
-import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+
 import '../../../feature/profile/data/model/profile_response_body.dart';
 import '../../../feature/profile/data/repo/profile_repo.dart';
 
@@ -9,7 +9,7 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepository repository;
 
-  ProfileCubit({required this.repository}) : super(ProfileInitial());
+  ProfileCubit(this.repository) : super(ProfileInitial());
 
   String name = '';
   String email = '';
@@ -21,7 +21,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     try {
       final ProfileResponseBody response = await repository.getProfile();
-      
+
       name = response.data.fullName;
       email = response.data.email;
       role = response.data.role;
@@ -48,8 +48,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> logout(BuildContext context) async {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil("/login", (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil("/login", (route) => false);
     emit(ProfileInitial());
   }
 }

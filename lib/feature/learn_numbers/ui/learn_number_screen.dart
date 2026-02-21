@@ -1,42 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:sanad/core/extensions/navigation.dart';
-import 'package:sanad/core/themeing/colors.dart';
-import 'package:sanad/core/widgets/sign_learning_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sanad/core/di/dependency_injection.dart';
+import 'package:sanad/core/widgets/custom_app_bar.dart';
+import 'package:sanad/core/widgets/gradiant_background.dart';
+import 'package:sanad/feature/learn_numbers/logic/cubit/learn_number_cubit.dart';
+import 'package:sanad/feature/learn_numbers/ui/widgets/numbers_grid_view.dart';
 
 class LearnNumberScreen extends StatelessWidget {
   const LearnNumberScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'الأرقام',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: Icon(Icons.arrow_back, color: AppColors.greenA4, size: 30),
-        ),
-        iconTheme: const IconThemeData(color: AppColors.green69),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: GridView.builder(
-            itemCount: 28,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
-              childAspectRatio: 0.75,
-            ),
-            itemBuilder: (context, index) {
-              return SignLearningCard(label: '1', imageUrl: null, color:AppColors.blueE0 ,);
-            },
+    return BlocProvider(
+      create: (context) => LearnNumberCubit(getIt())..getNumbers(),
+      child: Scaffold(
+        appBar: CustomAppBar(title: 'الأرقام'),
+        body: SafeArea(
+          child: GradientBackground(
+            colors: [Color(0xFFF2F9FA), Color(0xFFE0F0F3)],
+            child: NumbersGridView(),
           ),
         ),
       ),

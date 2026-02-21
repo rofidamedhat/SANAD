@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 import 'package:sanad/core/networking/api_error_handler.dart';
 import 'package:sanad/core/networking/api_error_model.dart';
 import 'package:sanad/feature/signup/data/model/signup_request_body.dart';

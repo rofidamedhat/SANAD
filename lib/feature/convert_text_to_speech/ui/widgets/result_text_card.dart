@@ -12,6 +12,7 @@ class ResultTextCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("text from result card is $text");
     return Container(
       width: double.infinity,
       height: 200,

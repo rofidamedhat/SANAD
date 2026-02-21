@@ -1,11 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sanad/feature/convert_text_to_speech/data/repo/translate_text_repo.dart';
+import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/edit_profile/data/repo/edit_profile_repo.dart';
+import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
+import 'package:sanad/feature/learn_alphabet/data/repos/learn_alphabet_repo.dart';
+import 'package:sanad/feature/learn_alphabet/logic/cubit/learn_alphabet_cubit.dart';
+import 'package:sanad/feature/learn_famous_words/data/repo/learn_words_repo.dart';
+import 'package:sanad/feature/learn_famous_words/logic/cubit/learn_words_cubit.dart';
+import 'package:sanad/feature/learn_numbers/data/repos/learn_number_repo.dart';
+import 'package:sanad/feature/learn_numbers/logic/cubit/learn_number_cubit.dart';
+import 'package:sanad/feature/learn_videos/data/repo/learn_videos_repo.dart';
+import 'package:sanad/feature/learn_videos/logic/cubit/learn_videos_cubit.dart';
+import 'package:sanad/feature/profile/data/repo/profile_repo.dart';
+import 'package:sanad/feature/profile/logic/profile_cubit.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
-import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
-import 'package:sanad/feature/profile/logic/profile_cubit.dart';
-import 'package:sanad/feature/profile/data/repo/profile_repo.dart';
+
 import '../../feature/login/data/repos/login_repo.dart';
 import '../../feature/login/logic/login_cubit.dart';
 import '../networking/api_service.dart';
@@ -41,9 +52,38 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<EditProfileCubit>(() => EditProfileCubit(getIt()));
   getIt.registerFactory<EditProfileRepo>(() => EditProfileRepo(getIt()));
   // profile
-  getIt.registerLazySingleton<ProfileRepository>( ()=> ProfileRepository(apiService: getIt()),);
-  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(repository: getIt()));
+  getIt.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepository(getIt()),
+  );
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
 
+  // Translate text
+  getIt.registerLazySingleton<TranslateTextRepo>(
+    () => TranslateTextRepo(getIt()),
+  );
+  getIt.registerFactory<TranslateAudioAndTextCubit>(
+    () => TranslateAudioAndTextCubit(getIt()),
+  );
+  //LearnAlphabet
+  getIt.registerLazySingleton<LearnAlphabetCubit>(
+    () => LearnAlphabetCubit(getIt()),
+  );
+  getIt.registerLazySingleton<LearnAlphabetRepo>(
+    () => LearnAlphabetRepo(getIt()),
+  );
+  //LearnNumbers
+  getIt.registerLazySingleton<LearnNumberCubit>(
+    () => LearnNumberCubit(getIt()),
+  );
+  getIt.registerLazySingleton<LearnNumberRepo>(() => LearnNumberRepo(getIt()));
+  //LearnFamousWords
+  getIt.registerLazySingleton<LearnWordsCubit>(() => LearnWordsCubit(getIt()));
+  getIt.registerLazySingleton<LearnWordsRepo>(() => LearnWordsRepo(getIt()));
+  // //LearnVideos
+  getIt.registerLazySingleton<LearnVideosCubit>(
+    () => LearnVideosCubit(getIt()),
+  );
+  getIt.registerLazySingleton<LearnVideosRepo>(() => LearnVideosRepo(getIt()));
   // // home
   // getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   // getIt.registerFactory<HomeCubit>(

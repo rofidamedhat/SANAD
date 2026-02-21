@@ -30,36 +30,33 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             HelloHeroContainer(),
             verticalSpace(100),
-           EmailAndPasswordValidator(),
+            EmailAndPasswordValidator(),
             verticalSpace(40),
-           AppTextButton(
-               buttonText: "ابدأ الرحلة",
-               textStyle: TextStyles.font20WhiteSemiBold,
-               onPressed: (){
-                 if (context
-                     .read<LoginCubit>()
-                     .formKey
-                     .currentState!
-                     .validate()) {
-                   context.read<LoginCubit>().login(
-                     LoginRequestBody(
-                       password: context
-                           .read<LoginCubit>()
-                           .passwordController
-                           .text,
-                       email: context
-                           .read<LoginCubit>()
-                           .emailController
-                           .text,
-                     ),
-                   );
-                 }
-               },
-             borderRadius:50,
-             buttonWidth: 234.w,
-             buttonHeight: 55.h,
-             backgroundColor: AppColors.green69,
-           ),
+            AppTextButton(
+              buttonText: "ابدأ الرحلة",
+              textStyle: TextStyles.font20WhiteSemiBold,
+              onPressed: () {
+                if (context
+                    .read<LoginCubit>()
+                    .formKey
+                    .currentState!
+                    .validate()) {
+                  context.read<LoginCubit>().login(
+                    LoginRequestBody(
+                      password: context
+                          .read<LoginCubit>()
+                          .passwordController
+                          .text,
+                      email: context.read<LoginCubit>().emailController.text,
+                    ),
+                  );
+                }
+              },
+              borderRadius: 50,
+              buttonWidth: 234.w,
+              buttonHeight: 55.h,
+              backgroundColor: AppColors.green69,
+            ),
             verticalSpace(15),
             DontHaveAccountText(),
             LoginButtonListen(),

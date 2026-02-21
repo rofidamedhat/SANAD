@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/feature/convert_text_to_speech/ui/widgets/convert_text_to_speech_and_reverse_list_view.dart';
@@ -9,6 +10,7 @@ import 'package:sanad/feature/convert_text_to_speech/ui/widgets/translate_text_a
 
 import '../../../core/helper/spaces.dart';
 import '../../../core/themeing/colors.dart';
+import '../logic/translate_audio_and_text_cubit.dart';
 
 class ConvertTextToSpeechScreen extends StatefulWidget {
   const ConvertTextToSpeechScreen({super.key});
@@ -21,6 +23,7 @@ class _ConvertTextToSpeechScreenState extends State<ConvertTextToSpeechScreen> {
   @override
   int selectedIndex=0;
   Widget build(BuildContext context) {
+    print('Cubit = ${context.read<TranslateAudioAndTextCubit>()}');
     return Scaffold(
       appBar:  PreferredSize(
           preferredSize: Size.fromHeight(180), child:TranslateTextAndSpeechAppBar() ),

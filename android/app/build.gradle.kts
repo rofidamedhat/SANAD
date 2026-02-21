@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.sanad"
-    compileSdk = 36
+    compileSdk = flutter.compileSdkVersion  
     ndkVersion = "27.3.13750724"
     
 
@@ -25,8 +25,10 @@ android {
         applicationId = "com.example.sanad"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        // minSdk = flutter.minSdkVersion
         targetSdk = 36
+        minSdk = 24
+        // targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }

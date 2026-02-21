@@ -32,6 +32,7 @@ class _NameAndEmailAndPasswordValidatorState
     formKey = context.read<SignupCubit>().formKey;
   }
 
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,

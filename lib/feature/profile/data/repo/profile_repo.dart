@@ -1,10 +1,10 @@
-import 'package:sanad/feature/profile/data/model/profile_response_body.dart';
 import 'package:sanad/core/networking/api_service.dart';
+import 'package:sanad/feature/profile/data/model/profile_response_body.dart';
 
 class ProfileRepository {
   final ApiService apiService;
 
-  ProfileRepository({required this.apiService});
+  ProfileRepository(this.apiService);
 
   Future<ProfileResponseBody> getProfile() async {
     try {

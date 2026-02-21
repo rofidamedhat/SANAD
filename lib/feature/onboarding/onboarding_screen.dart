@@ -15,30 +15,30 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     body: Column(
-       crossAxisAlignment: CrossAxisAlignment.center,
-       children: [
-         Expanded(
-           flex: 5,
-             child:AppBarAndImage()),
-        AppTextButton(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(flex: 5, child: AppBarAndImage()),
+          AppTextButton(
             buttonText: "ابدأ الرحله",
             textStyle: TextStyles.font20WhiteSemiBold,
-            onPressed: (){
-              context.pushNamed(!isLoginUser?Routes.loginScreen
-                  :isVolunteer?Routes.homeVolunteer
-                  :Routes.homeDeafUser);
+            onPressed: () {
+              context.pushNamed(
+                !isLoginUser ? Routes.loginScreen : Routes.navigationScreen,
+              );
+              // isVolunteer?Routes.homeVolunteer
+              // :Routes.homeDeafUser);
             },
-          backgroundColor: AppColors.green69,
-          borderRadius: 50,
-          buttonHeight: 55,
-          buttonWidth: 234,
-        ),
-        verticalSpace(20),
-         DontHaveAccountText(),
-         verticalSpace(20)
-       ],
-     ),
+            backgroundColor: AppColors.green69,
+            borderRadius: 50,
+            buttonHeight: 55,
+            buttonWidth: 234,
+          ),
+          verticalSpace(20),
+          DontHaveAccountText(),
+          verticalSpace(20),
+        ],
+      ),
     );
   }
 }
