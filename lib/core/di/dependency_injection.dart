@@ -8,6 +8,8 @@ import 'package:sanad/feature/learn_famous_words/data/repo/learn_words_repo.dart
 import 'package:sanad/feature/learn_famous_words/logic/cubit/learn_words_cubit.dart';
 import 'package:sanad/feature/learn_numbers/data/repos/learn_number_repo.dart';
 import 'package:sanad/feature/learn_numbers/logic/cubit/learn_number_cubit.dart';
+import 'package:sanad/feature/learn_videos/data/repo/learn_videos_repo.dart';
+import 'package:sanad/feature/learn_videos/logic/cubit/learn_videos_cubit.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 
@@ -61,7 +63,9 @@ Future<void> setupGetIt() async {
   //LearnFamousWords
   getIt.registerLazySingleton<LearnWordsCubit>(() => LearnWordsCubit(getIt()));
   getIt.registerLazySingleton<LearnWordsRepo>(() => LearnWordsRepo(getIt()));
-
+  // //LearnVideos
+  getIt.registerLazySingleton<LearnVideosCubit>(() => LearnVideosCubit(getIt()));
+  getIt.registerLazySingleton<LearnVideosRepo>(() => LearnVideosRepo(getIt()));
   // // home
   // getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   // getIt.registerFactory<HomeCubit>(

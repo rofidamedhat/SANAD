@@ -16,11 +16,12 @@
 // باختصار: أي مكان محتاج يتكلم مع السيرفر، يشوف هنا الأول.
 // -----------------------------------------------------------
 import 'package:dio/dio.dart';
-import 'package:sanad/feature/convert_text_to_speech/data/model/audio_response_body.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:sanad/feature/convert_text_to_speech/data/model/audio_response_body.dart';
 import 'package:sanad/feature/learn_alphabet/data/models/learn_alphabet_model.dart';
 import 'package:sanad/feature/learn_famous_words/data/models/learn_words_model.dart';
 import 'package:sanad/feature/learn_numbers/data/models/learn_numbers_model.dart';
+import 'package:sanad/feature/learn_videos/data/model/learn_videos_model.dart';
 import 'package:sanad/feature/signup/data/model/signup_request_body.dart';
 
 import '../../feature/login/data/model/login_request_body.dart';
@@ -38,18 +39,18 @@ abstract class ApiService {
   Future<LoginResponseBody> login(@Body() LoginRequestBody loginRequestBody);
 
   @POST(ApiConstants.signup)
-  Future<SignupResponseBody> signup(@Body() SignupRequestBody signupRequestBody);
+  Future<SignupResponseBody> signup(
+    @Body() SignupRequestBody signupRequestBody,
+  );
 
+  @POST(ApiConstants.translateText)
+  Future<AudioResponseBody> translateText(@Body() String text);
 
-@POST(ApiConstants.translateText)
-Future<AudioResponseBody> translateText(@Body() String text);
-
-@POST(ApiConstants.translateAudio)
-@MultiPart()
+  @POST(ApiConstants.translateAudio)
+  @MultiPart()
   Future<AudioResponseBody> uploadAudio(
-      @Part(name: "File") MultipartFile audio,
-      );
- 
+    @Part(name: "File") MultipartFile audio,
+  );
 
   @GET(ApiConstants.learingLeatters)
   Future<LearnAlphabetModel> getLetters(
@@ -67,7 +68,9 @@ Future<AudioResponseBody> translateText(@Body() String text);
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
-}
 
+  @GET(ApiConstants.learingVideos)
+  Future<LearnVideosModel> getVideos();
+}
 
 //dart pub run build_runner build

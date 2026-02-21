@@ -37,7 +37,7 @@ class LearningList extends StatelessWidget {
           subtitle: 'تعلم بالمشاهدة',
           imagePath: 'assets/images/videos.png',
           backgroundColor: AppColors.orangeA6,
-          onTap: () {},
+          onTap: () => context.pushNamed(Routes.learnVideosScreen),
         ),
       ],
     );

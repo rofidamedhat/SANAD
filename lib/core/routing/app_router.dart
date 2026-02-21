@@ -7,10 +7,13 @@ import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
 import 'package:sanad/feature/learn_alphabet/logic/cubit/learn_alphabet_cubit.dart';
 import 'package:sanad/feature/learn_alphabet/ui/learn_alphabet_screen.dart';
+import 'package:sanad/feature/learn_famous_words/logic/cubit/learn_words_cubit.dart';
 import 'package:sanad/feature/learn_famous_words/ui/learn_words_screen.dart';
 import 'package:sanad/feature/learn_numbers/logic/cubit/learn_number_cubit.dart';
 import 'package:sanad/feature/learn_numbers/ui/learn_number_screen.dart';
 import 'package:sanad/feature/learn_sign_lang/ui/learn_sign_lang_screen.dart';
+import 'package:sanad/feature/learn_videos/logic/cubit/learn_videos_cubit.dart';
+import 'package:sanad/feature/learn_videos/ui/learn_videos.dart';
 import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
 import 'package:sanad/feature/navigations/navigation_screen.dart';
@@ -40,21 +43,21 @@ class AppRouter {
 
       case Routes.signUpScreen:
         return MaterialPageRoute(
-          builder: (_) =>
-              BlocProvider(
-                create: (context) => getIt<SignupCubit>(),
-                child: SignupScreen(),
-              ),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<SignupCubit>(),
+            child: SignupScreen(),
+          ),
         );
 
       case Routes.homeVolunteer:
         return MaterialPageRoute(builder: (_) => HomeVolunteerScreen());
       case Routes.convertTextToSpeechScreen:
-        return MaterialPageRoute(builder: (_) =>
-            BlocProvider(
-              create: (context) => getIt<TranslateAudioAndTextCubit>(),
-              child: ConvertTextToSpeechScreen(),
-            ));
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<TranslateAudioAndTextCubit>(),
+            child: ConvertTextToSpeechScreen(),
+          ),
+        );
       case Routes.homeDeafUser:
         return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
       case Routes.learnSignLangScreen:
@@ -63,7 +66,7 @@ class AppRouter {
       case Routes.learnAlphabetScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<LearnAlphabetCubit>(),
+            create: (context) => getIt<LearnAlphabetCubit>()..getLetters(),
             child: LearnAlphabetScreen(),
           ),
         );
@@ -71,22 +74,35 @@ class AppRouter {
       case Routes.learnNumberScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<LearnNumberCubit>(),
+            create: (context) => getIt<LearnNumberCubit>()..getNumbers(),
             child: LearnNumberScreen(),
           ),
         );
       case Routes.learnFamousWordsScreen:
-        return MaterialPageRoute(builder: (_) => LearnFamousWordsScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<LearnWordsCubit>()..getWords(),
+            child: LearnFamousWordsScreen(),
+          ),
+        );
+
+      case Routes.learnVideosScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<LearnVideosCubit>()..getVideos(),
+            child: LearnVideosScreen(),
+          ),
+        );
+
       case Routes.navigationScreen:
         return MaterialPageRoute(builder: (_) => NavigationScreen());
 
       case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) =>
-              BlocProvider(
-                create: (context) => getIt<LoginCubit>(),
-                child: LoginScreen(),
-              ),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: LoginScreen(),
+          ),
         );
 
       default:
