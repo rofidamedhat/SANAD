@@ -29,6 +29,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       emit(ProfileLoaded());
     } catch (e) {
+      debugPrint("Profile Error: ${e.toString()}");
       emit(ProfileError(message: e.toString()));
     }
   }
@@ -48,8 +49,17 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> logout(BuildContext context) async {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil("/login", (route) => false);
+
+    name = '';
+    email = '';
+    role = '';
+    profileImageUrl = '';
+    
+
+    if (context.mounted) {
+      Navigator.of(context).pushNamedAndRemoveUntil("/login", (route) => false);
+    }
+    
     emit(ProfileInitial());
   }
 }
