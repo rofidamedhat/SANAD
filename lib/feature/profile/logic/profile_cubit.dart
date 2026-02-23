@@ -49,7 +49,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> logout(BuildContext context) async {
-
+  print("Logout clicked");
     name = '';
     email = '';
     role = '';
@@ -57,7 +57,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     
 
     if (context.mounted) {
-      Navigator.of(context).pushNamedAndRemoveUntil("/login", (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil("/loginScreen", (route) => false);
     }
     
     emit(ProfileInitial());
