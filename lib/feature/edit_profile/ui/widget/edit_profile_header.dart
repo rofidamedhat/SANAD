@@ -21,6 +21,8 @@ class EditProfileHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String fullImageUrl = "https://sanadapllication2025api.premiumasp.net${imageUrl ?? ''}";
+
     return Stack(
       clipBehavior: Clip.none,
       alignment: Alignment.center,
@@ -59,20 +61,37 @@ class EditProfileHeaderWidget extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 65,
                     backgroundColor: AppColors.greenC2,
-                    backgroundImage: image != null
-                        ? FileImage(image!)  
-                        : (imageUrl != null && imageUrl!.isNotEmpty && imageUrl != "null")
-                            ? NetworkImage("https://sanadapllication2025api.premiumasp.net$imageUrl") 
-                            : null,
-                    child: (image == null && (imageUrl == null || imageUrl!.isEmpty))
-                        ? const Icon(
-                            Icons.person,
-                            size: 70,
-                            color: AppColors.green69,
-                          )
-                        : null,
+                    child: ClipOval(
+                      child: image != null
+                          ? Image.file(
+                              image!,
+                              width: 130,
+                              height: 130,
+                              fit: BoxFit.cover,
+                            )
+                          : (imageUrl != null && imageUrl!.isNotEmpty && imageUrl != "null")
+                              ? Image.network(
+                                  fullImageUrl,
+                                  width: 130,
+                                  height: 130,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Icon(
+                                      Icons.person,
+                                      size: 70,
+                                      color: AppColors.green69,
+                                    );
+                                  },
+                                )
+                              : const Icon(
+                                  Icons.person,
+                                  size: 70,
+                                  color: AppColors.green69,
+                                ),
+                    ),
                   ),
                 ),
+                // زرار الكاميرا الصغير
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
