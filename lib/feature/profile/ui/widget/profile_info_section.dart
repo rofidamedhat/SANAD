@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import '../../logic/profile_cubit.dart';
 import 'profile_item.dart';
@@ -17,7 +18,7 @@ class ProfileInfoSection extends StatelessWidget {
       padding: const EdgeInsets.only(right: 20),
       child: Column(
         children: [
-          const SizedBox(height: 25),
+         verticalSpace(45),
       
           ProfileItem(
             title: "الاسم :",
@@ -26,7 +27,7 @@ class ProfileInfoSection extends StatelessWidget {
             color: AppColors.greenC2,
           ),
       
-          const SizedBox(height: 8),
+          verticalSpace(30),
       
           ProfileItem(
             title: "الايميل :",
@@ -34,8 +35,8 @@ class ProfileInfoSection extends StatelessWidget {
             icon: Icons.email,
             color: AppColors.greenC2,
           ),
-      
-          const SizedBox(height: 8),
+
+          verticalSpace(30),
       
           ProfileItem(
             title: "الفئة :",

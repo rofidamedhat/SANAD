@@ -6,6 +6,9 @@ import 'package:sanad/feature/signup/data/model/signup_request_body.dart';
 import 'package:sanad/feature/signup/data/model/signup_response_body.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
 
+import '../../../core/helper/shared_pref_helper.dart';
+import '../../../core/networking/dio_factory.dart';
+
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
@@ -34,6 +37,9 @@ class SignupCubit extends Cubit<SignupState> {
       );
       
       if(signupResponseBody!.isAuthenticated){
+        await SharedPrefHelper.setData("token", signupResponseBody!.token!);
+        await SharedPrefHelper.setData("role", signupResponseBody!.role!);
+        DioFactory.setTokenIntoHeaderAfterLogin(signupResponseBody!.token!);
         emit(SignupSuccessfully(signupResponseBody: signupResponseBody!));
       }
       else{

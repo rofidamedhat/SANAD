@@ -56,6 +56,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
               onTap: () {
                 setState(() {
                   selectedIndex = index;
+
                 });
               },
             );

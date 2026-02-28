@@ -42,19 +42,15 @@ class ProfileHeader extends StatelessWidget {
               child: CircleAvatar(
                 radius: 75,
                 backgroundColor: AppColors.greenC2,
-                backgroundImage: (imageUrl != null && 
-                                  imageUrl!.isNotEmpty && 
-                                  imageUrl != "null" && 
-                                  imageUrl != "default")
-                    ? NetworkImage("https://sanadapllication2025api.premiumasp.net$imageUrl")
-                    : null, 
-                child: (imageUrl == null || imageUrl!.isEmpty || imageUrl == "null" || imageUrl == "default")
-                    ? const Icon(
-                        Icons.person,
-                        size: 70,
-                        color: AppColors.green69,
-                      )
-                    : null,
+                backgroundImage: NetworkImage("https://sanadapllication2025api.premiumasp.net$imageUrl")
+
+                // child: (imageUrl == null || imageUrl!.isEmpty || imageUrl == "null" || imageUrl == "default")
+                //     ? const Icon(
+                //         Icons.person,
+                //         size: 70,
+                //         color: AppColors.green69,
+                //       )
+                //     : null,
               ),
             ),
             const SizedBox(height: 15),

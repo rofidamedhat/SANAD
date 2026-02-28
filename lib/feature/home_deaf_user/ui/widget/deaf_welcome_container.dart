@@ -42,7 +42,7 @@ class DeafWelcomeContainer extends StatelessWidget {
                   ),
                   child: Text(
                     'تواصل الآن',
-                    style: TextStyles.font22Black05Reguler,
+                    style: TextStyles.font22Black05Regular,
                   ),
                 ),
               ],

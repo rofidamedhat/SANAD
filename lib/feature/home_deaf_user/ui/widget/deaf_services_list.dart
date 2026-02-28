@@ -28,7 +28,7 @@ class DeafServicesList extends StatelessWidget {
           onTap: () {},
         ),
         ServiceCard(
-          title: 'تحويل النص \nالي صوت ',
+          title: 'تحويل النص \nالي صوت والعكس ',
           icon: Icons.audio_file_outlined,
           iconColor: Colors.orange,
           onTap: () {
@@ -36,7 +36,7 @@ class DeafServicesList extends StatelessWidget {
           },
         ),
         ServiceCard(
-          title: 'تحويل النص \n ل فيديو',
+          title: ' تحويل الفيديو \n ل نص',
           icon: Icons.video_file_outlined,
           iconColor: Colors.blue,
           onTap: () {},
@@ -50,18 +50,18 @@ class DeafServicesList extends StatelessWidget {
           // imagePath: "assets/svgs/mid_cal.svg",
         ),
         ServiceCard(
-          title: 'المساعدة بالدعم',
+          title: 'مشاركة الاسئلة',
           icon: Icons.people_outline,
           iconColor: Colors.green,
           onTap: () {},
         ),
 
-        ServiceCard(
-          title: 'المحادثة الجماعية',
-          icon: Icons.chat_bubble_outline,
-          iconColor: Colors.blue,
-          onTap: () {},
-        ),
+        // ServiceCard(
+        //   title: 'المحادثة الجماعية',
+        //   icon: Icons.chat_bubble_outline,
+        //   iconColor: Colors.blue,
+        //   onTap: () {},
+        // ),
       ],
     );
   }

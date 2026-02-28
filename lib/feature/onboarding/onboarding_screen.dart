@@ -24,7 +24,7 @@ class OnboardingScreen extends StatelessWidget {
             textStyle: TextStyles.font20WhiteSemiBold,
             onPressed: () {
               context.pushNamed(
-                !isLoginUser ? Routes.loginScreen : Routes.navigationScreen,
+                !isLoginUser ? Routes.onboardingDetailsScreen : Routes.navigationScreen,
               );
               // isVolunteer?Routes.homeVolunteer
               // :Routes.homeDeafUser);
