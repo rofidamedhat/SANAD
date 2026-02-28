@@ -1,11 +1,11 @@
 import 'dart:io';
+
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+
 import '../../../core/helper/shared_pref_helper.dart';
 import '../../edit_profile/data/model/edit_profile_request_body.dart';
-import '../../edit_profile/data/repo/edit_profile_repo.dart';
 import '../../edit_profile/data/model/edit_profile_response_body.dart';
+import '../../edit_profile/data/repo/edit_profile_repo.dart';
 
 part 'edit_profile_state.dart';
 

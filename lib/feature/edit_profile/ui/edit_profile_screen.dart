@@ -1,14 +1,16 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/themeing/colors.dart';
+
+import '../../profile/logic/profile_cubit.dart';
 import '../logic/edit_profile_cubit.dart';
-import '../../profile/logic/profile_cubit.dart'; 
-import 'widget/edit_profile_header.dart';
 import 'widget/edit_profile_form.dart';
+import 'widget/edit_profile_header.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -37,7 +39,7 @@ class _EditProfileViewState extends State<_EditProfileView> {
   void initState() {
     super.initState();
     final profileCubit = context.read<ProfileCubit>();
-    
+
     _nameController = TextEditingController(text: profileCubit.name);
     _emailController = TextEditingController(text: profileCubit.email);
     _roleController = TextEditingController(text: profileCubit.role);
@@ -50,7 +52,9 @@ class _EditProfileViewState extends State<_EditProfileView> {
       sourcePath: pickedFile.path,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
     );
-    if (croppedFile != null) setState(() => _croppedImage = File(croppedFile.path));
+    if (croppedFile != null) {
+      setState(() => _croppedImage = File(croppedFile.path));
+    }
   }
 
   @override
@@ -69,19 +73,25 @@ class _EditProfileViewState extends State<_EditProfileView> {
         listener: (context, state) {
           if (state is EditProfileSuccess) {
             context.read<ProfileCubit>().loadProfile();
-            
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text("تم تحديث الملف الشخصي بنجاح",
-              style: TextStyle(color: AppColors.black05)),
-              backgroundColor: AppColors.gray,
-            ));
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  "تم تحديث الملف الشخصي بنجاح",
+                  style: TextStyle(color: AppColors.black05),
+                ),
+                backgroundColor: AppColors.gray,
+              ),
+            );
             Navigator.pop(context);
           }
           if (state is EditProfileError) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(state.message),
-              backgroundColor: const Color.fromARGB(255, 250, 194, 190),
-            ));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: const Color.fromARGB(255, 250, 194, 190),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -91,12 +101,12 @@ class _EditProfileViewState extends State<_EditProfileView> {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                   EditProfileHeaderWidget(
-  image: _croppedImage,
-  onTap: _pickAndCropImage,
-  cubit: context.read<EditProfileCubit>(),
-  imageUrl: context.read<ProfileCubit>().profileImageUrl,
-),
+                    EditProfileHeaderWidget(
+                      image: _croppedImage,
+                      onTap: _pickAndCropImage,
+                      cubit: context.read<EditProfileCubit>(),
+                      imageUrl: context.read<ProfileCubit>().profileImageUrl,
+                    ),
                     const SizedBox(height: 120),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -105,12 +115,13 @@ class _EditProfileViewState extends State<_EditProfileView> {
                         emailController: _emailController,
                         roleController: _roleController,
                         isLoading: isLoading,
-                        onSave: () => context.read<EditProfileCubit>().updateProfile(
-                          name: _nameController.text,
-                          email: _emailController.text,
-                          role: _roleController.text,
-                          image: _croppedImage,
-                        ),
+                        onSave: () =>
+                            context.read<EditProfileCubit>().updateProfile(
+                              name: _nameController.text,
+                              email: _emailController.text,
+                              role: _roleController.text,
+                              image: _croppedImage,
+                            ),
                       ),
                     ),
                   ],
@@ -119,7 +130,9 @@ class _EditProfileViewState extends State<_EditProfileView> {
               if (isLoading)
                 Container(
                   color: Colors.black12,
-                  child: const Center(child: CircularProgressIndicator(color: AppColors.green69)),
+                  child: const Center(
+                    child: CircularProgressIndicator(color: AppColors.green69),
+                  ),
                 ),
             ],
           );
