@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sanad/core/helper/spaces.dart';
 
 import 'package:sanad/feature/profile/logic/profile_cubit.dart';
 import 'package:sanad/feature/profile/data/repo/profile_repo.dart';
@@ -32,7 +33,6 @@ class ProfileScreen extends StatelessWidget {
               body: Center(child: Text("حدث خطأ: ${state.message}")),
             );
           }
-
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
@@ -56,7 +56,8 @@ class ProfileScreen extends StatelessWidget {
                     imageUrl: cubit.profileImageUrl,
                   ),
                   ProfileInfoSection(cubit: cubit),
-                  ProfileActionsSection(cubit: cubit), 
+                  verticalSpace(50),
+                  ProfileActionsSection(cubit: cubit),
                 ],
               ),
             ),

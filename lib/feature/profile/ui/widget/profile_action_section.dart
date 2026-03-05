@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/colors.dart';
+import 'package:sanad/core/routing/routes.dart';
+import '../../logic/profile_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sanad/feature/edit_profile/ui/edit_profile_screen.dart';
 
 import '../../logic/profile_cubit.dart';
@@ -17,7 +20,7 @@ class ProfileActionsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 30),
+        verticalSpace(30),
 
 ElevatedButton(
   onPressed: () async {
@@ -39,11 +42,11 @@ ElevatedButton(
       borderRadius: BorderRadius.circular(50),
     ),
   ),
-  child: const Row(
+  child:  Row(
     mainAxisSize: MainAxisSize.min,
     children: [
       Icon(Icons.edit, color: Colors.white, size: 18),
-      SizedBox(width: 8),
+      horizontalSpace(10),
       Text(
         "تعديل الملف الشخصي",
         style: TextStyle(
@@ -56,7 +59,7 @@ ElevatedButton(
   ),
 ),
 
-        const SizedBox(height: 5),
+        verticalSpace(10),
 
         ElevatedButton(
           onPressed: () => cubit.logout(context),

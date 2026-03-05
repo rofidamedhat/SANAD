@@ -42,7 +42,7 @@ class VolunteerWelcomeContainer extends StatelessWidget {
                   ),
                   child: Text(
                     'كن عونًا الآن',
-                    style: TextStyles.font22Black05Reguler,
+                    style: TextStyles.font22Black05Regular,
                   ),
                 ),
               ],

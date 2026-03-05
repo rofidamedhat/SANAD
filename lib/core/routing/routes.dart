@@ -16,6 +16,7 @@ class Routes {
   // ---------------------------------------------------------
   static const String splashScreen = '/splashScreen';
   static const String onboardingScreen = '/onboardingScreen';
+  static const String onboardingDetailsScreen = '/onboardingDetailsScreen';
   static const String loginScreen = '/loginScreen';
   static const String homeVolunteer = '/homeVolunteer';
   static const String homeDeafUser = '/homeDeafUser';

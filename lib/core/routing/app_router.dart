@@ -17,6 +17,7 @@ import 'package:sanad/feature/learn_videos/ui/learn_videos.dart';
 import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
 import 'package:sanad/feature/navigations/navigation_screen.dart';
+import 'package:sanad/feature/onboarding/onboarding_details_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
 import 'package:sanad/feature/edit_profile/ui/edit_profile_screen.dart';
@@ -46,6 +47,9 @@ class AppRouter {
     switch (settings.name) {
       case Routes.onboardingScreen:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
+
+      case Routes.onboardingDetailsScreen:
+        return MaterialPageRoute(builder: (_) => OnboardingDetailsScreen());
 
       case Routes.signUpScreen:
         return MaterialPageRoute(

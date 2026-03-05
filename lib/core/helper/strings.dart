@@ -1,6 +1,10 @@
 const String pathImages="assets/images/";
 const String pathIcons="assets/icons/";
 const String onboardingImage="${pathImages}onboarding_image.png";
+const String onboardingDetailsImage1="${pathImages}onboarding_details_image1.png";
+const String onboardingDetailsImage2="${pathImages}onboarding_details_image2.png";
+const String onboardingDetailsImage3="${pathImages}onboarding_details_image3.png";
+const String onboardingDetailsImage4="${pathImages}onboarding_details_image4.png";
 const String signupIcon="${pathIcons}signup_icon.svg";
 const String soundIcon="${pathIcons}sound_icon.svg";
 const String micFillIcon="${pathIcons}mic_fill_icon.svg";
