@@ -13,6 +13,8 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String fullImageUrl = "https://sanadapllication2025api.premiumasp.net${imageUrl ?? ''}";
+
     return Stack(
       alignment: Alignment.topCenter,
       children: [
@@ -26,7 +28,6 @@ class ProfileHeader extends StatelessWidget {
               bottomRight: Radius.circular(55),
             ),
           ),
-         
         ),
 
         Column(
@@ -42,15 +43,31 @@ class ProfileHeader extends StatelessWidget {
               child: CircleAvatar(
                 radius: 75,
                 backgroundColor: AppColors.greenC2,
-                backgroundImage: NetworkImage("https://sanadapllication2025api.premiumasp.net$imageUrl")
-
-                // child: (imageUrl == null || imageUrl!.isEmpty || imageUrl == "null" || imageUrl == "default")
-                //     ? const Icon(
-                //         Icons.person,
-                //         size: 70,
-                //         color: AppColors.green69,
-                //       )
-                //     : null,
+                child: ClipOval(
+                  child: (imageUrl != null && 
+                          imageUrl!.isNotEmpty && 
+                          imageUrl != "null" && 
+                          imageUrl != "default")
+                      ? Image.network(
+                          fullImageUrl,
+                          width: 150,
+                          height: 150,
+                          fit: BoxFit.cover,
+                          // لو السيرفر رجع 404 أو الصورة باظت، هيعرض الأيكون ده:
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(
+                              Icons.person,
+                              size: 70,
+                              color: AppColors.green69,
+                            );
+                          },
+                        )
+                      : const Icon(
+                          Icons.person,
+                          size: 70,
+                          color: AppColors.green69,
+                        ),
+                ),
               ),
             ),
             const SizedBox(height: 15),

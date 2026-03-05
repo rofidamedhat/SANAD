@@ -54,6 +54,19 @@ class DioFactory {
 
   static void addDioInterceptor() {
     dio?.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          String? token = await SharedPrefHelper.getString("token");
+          print("Sending Request with Token: $token");
+          if (token != null && token.isNotEmpty) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+          return handler.next(options);
+        },
+      ),
+    );
+
+    dio?.interceptors.add(
       PrettyDioLogger(
         requestBody: true,
         requestHeader: true,

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sanad/core/constants.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 
@@ -37,7 +40,12 @@ class _VolunteerAndDeafUserRadioButtonState
               setState(() {
                 selectedOption = value!;
                 context.read<SignupCubit>().role = selectedOption;
-                print(context.read<SignupCubit>().role);
+                log(
+                  "from ratio ==================${context.read<SignupCubit>().role}",
+                );
+                context.read<SignupCubit>().role == "Volunteer"
+                    ? isVolunteer = true
+                    : isVolunteer = false;
               });
             },
             activeColor: AppColors.green69,
@@ -50,7 +58,12 @@ class _VolunteerAndDeafUserRadioButtonState
               setState(() {
                 selectedOption = value!;
                 context.read<SignupCubit>().role = selectedOption;
-                print(context.read<SignupCubit>().role);
+                log(
+                  "from ratio ==================${context.read<SignupCubit>().role}",
+                );
+                context.read<SignupCubit>().role == "Volunteer"
+                    ? isVolunteer = true
+                    : isVolunteer = false;
               });
             },
             activeColor: AppColors.green69,

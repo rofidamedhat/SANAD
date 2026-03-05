@@ -1,26 +1,35 @@
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
+
 import 'edit_profile_header_clipper.dart';
 
 class EditProfileHeaderWidget extends StatelessWidget {
   final File? image;
   final VoidCallback onTap;
   final EditProfileCubit cubit;
-  final String? imageUrl; 
+  final String? imageUrl;
 
   const EditProfileHeaderWidget({
     super.key,
     required this.image,
     required this.onTap,
     required this.cubit,
-    this.imageUrl, 
+    this.imageUrl,
   });
 
   @override
   Widget build(BuildContext context) {
+    final String fullImageUrl =
+        "https://sanadapllication2025api.premiumasp.net";
+    // "https://sanadapllication2025api.premiumasp.net${imageUrl ?? ''}";
+    log("image =================${image.toString()}");
+    log("imageUrl.toString() =================${imageUrl.toString()}");
+    log(" fullImageUrl =================$fullImageUrl");
     return Stack(
       clipBehavior: Clip.none,
       alignment: Alignment.center,
@@ -42,7 +51,6 @@ class EditProfileHeaderWidget extends StatelessWidget {
             ),
           ),
         ),
-
         Positioned(
           bottom: -70,
           child: GestureDetector(
@@ -59,20 +67,39 @@ class EditProfileHeaderWidget extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 65,
                     backgroundColor: AppColors.greenC2,
-                    backgroundImage: image != null
-                        ? FileImage(image!)  
-                        : (imageUrl != null && imageUrl!.isNotEmpty && imageUrl != "null")
-                            ? NetworkImage("https://sanadapllication2025api.premiumasp.net$imageUrl") 
-                            : null,
-                    child: (image == null && (imageUrl == null || imageUrl!.isEmpty))
-                        ? const Icon(
-                            Icons.person,
-                            size: 70,
-                            color: AppColors.green69,
-                          )
-                        : null,
+                    child: ClipOval(
+                      child: image != null
+                          ? Image.file(
+                              image!,
+                              width: 130,
+                              height: 130,
+                              fit: BoxFit.cover,
+                            )
+                          : (imageUrl != null &&
+                                imageUrl!.isNotEmpty &&
+                                imageUrl != "/images/profiles/default.png")
+                          ? Image.network(
+                              "$fullImageUrl$imageUrl",
+                              width: 130,
+                              height: 130,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Icon(
+                                  Icons.person,
+                                  size: 70,
+                                  color: AppColors.green69,
+                                );
+                              },
+                            )
+                          : const Icon(
+                              Icons.person,
+                              size: 70,
+                              color: AppColors.green69,
+                            ),
+                    ),
                   ),
                 ),
+                // زرار الكاميرا الصغير
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
@@ -86,7 +113,11 @@ class EditProfileHeaderWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Icon(Icons.camera_alt, color: Colors.white, size: 18),
+                  child: const Icon(
+                    Icons.camera_alt,
+                    color: Colors.white,
+                    size: 18,
+                  ),
                 ),
               ],
             ),

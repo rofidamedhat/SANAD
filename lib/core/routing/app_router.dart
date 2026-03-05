@@ -115,7 +115,6 @@ class AppRouter {
           ),
         );
 
-      // إضافة البروفايل
       case Routes.profile:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -124,11 +123,10 @@ class AppRouter {
           ),
         );
 
-      // إضافة الإيديت بروفايل
       case Routes.editprofile:
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
-            value: getIt<EditProfileCubit>(), // نفس الكيوبت المستخدم في ProfileScreen
+            value: getIt<EditProfileCubit>(),
             child: const EditProfileScreen(),
           ),
         );

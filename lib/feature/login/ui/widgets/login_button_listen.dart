@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sanad/core/extensions/navigation.dart';
+import 'package:sanad/main.dart';
 
 import '../../../../core/constants.dart';
 import '../../../../core/routing/routes.dart';
@@ -27,6 +28,7 @@ class LoginButtonListen extends StatelessWidget {
 
           context.pop();
           print(state.loginResponseBody.role);
+          isVolunteerChecked();
           context.pushReplacementNamed(Routes.navigationScreen);
           // state.loginResponseBody.role == "Volunteer"
           //     ? context.pushReplacementNamed(Routes.homeVolunteer)
