@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sanad/feature/add_question/data/repo/add_post_repo.dart';
+import 'package:sanad/feature/add_question/logic/add_post_cubit.dart';
 import 'package:sanad/feature/convert_text_to_speech/data/repo/translate_text_repo.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/edit_profile/data/repo/edit_profile_repo.dart';
@@ -45,6 +47,12 @@ Future<void> setupGetIt() async {
   // login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
+
+  //add Post
+
+  getIt.registerLazySingleton<AddPostRepo>(() => AddPostRepo(getIt()));
+  getIt.registerFactory<AddPostCubit>(() => AddPostCubit(getIt()));
+
   // // signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
