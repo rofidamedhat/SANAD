@@ -6,6 +6,8 @@ import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/helper/strings.dart';
 import 'package:sanad/core/widgets/app_text_button.dart';
 import 'package:sanad/feature/add_question/logic/add_post_cubit.dart';
+import 'package:sanad/feature/add_question/ui/widgets/add_question_app_bar.dart';
+import 'package:sanad/feature/add_question/ui/widgets/add_question_button.dart';
 import 'package:sanad/feature/add_question/ui/widgets/add_question_text_feild.dart';
 import 'package:sanad/feature/add_question/ui/widgets/publish_button_listen.dart';
 
@@ -25,18 +27,9 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        elevation: 0,
-        surfaceTintColor: Colors.transparent,
-        centerTitle: true,
-        title: Text("اضافة سؤال", style: TextStyles.font26green69Bold),
-        leading: IconButton(
-          onPressed: () {
-            context.pop();
-          },
-          icon: Icon(Icons.arrow_back, color: AppColors.greenA4, size: 40),
-        ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: AddQuestionAppBar(),
       ),
       body: SafeArea(
           child: Padding(
@@ -74,47 +67,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                     child: AddQuestionTextFeild(controller:controller),
                   ),
                   verticalSpace(50),
-                  AppTextButton(
-                      buttonText: "نشر",
-                      textStyle: TextStyles.font20WhiteMedium,
-                      onPressed: (){
-                      setState(() {
-                        if(controller.text.isEmpty){
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              icon: const Icon(
-                                Icons.error,
-                                color: Colors.red,
-                                size: 32,
-                              ),
-                              content: Text(
-                                "لا يمكن نشر رساله فارغة",
-                                style: TextStyles.font20Black05Regular,
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    context.pop();
-                                  },
-                                  child: Text(
-                                    'حسنا',
-                                    style: TextStyles.font20Black05Regular,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                        else{
-                          context.read<AddPostCubit>().addPost({
-                            "content":controller.text
-                          });
-                        }
-                      });
-                      },
-                      borderRadius: 25,
-                  ),
+                  AddQuestionButton(controller: controller),
                   verticalSpace(40),
                   PublishButtonListen()
                 ],
