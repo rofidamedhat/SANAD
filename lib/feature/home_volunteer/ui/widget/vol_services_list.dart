@@ -15,10 +15,12 @@ class VolServicesList extends StatelessWidget {
       childAspectRatio: 1.2,
       children: [
         ServiceCard(
-          title: 'المحادثة الجماعية',
+          title: 'مشاركة الاسألة',
           icon: Icons.chat_bubble_outline,
           iconColor: Colors.blue,
-          onTap: () {},
+          onTap: () {
+            context.pushNamed(Routes.shareQuestionsScreen);
+          },
         ),
         ServiceCard(
           title: 'تعلم لغة الإشارة',

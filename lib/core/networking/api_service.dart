@@ -17,6 +17,7 @@
 // -----------------------------------------------------------
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:sanad/feature/add_question/data/model/add_post_response_body.dart';
 import 'package:sanad/feature/convert_text_to_speech/data/model/audio_response_body.dart';
 import 'package:sanad/feature/learn_alphabet/data/models/learn_alphabet_model.dart';
 import 'package:sanad/feature/learn_famous_words/data/models/learn_words_model.dart';
@@ -59,6 +60,9 @@ abstract class ApiService {
   );
   @POST(ApiConstants.translateText)
   Future<AudioResponseBody> translateText(@Body() String text);
+
+  @POST(ApiConstants.addPost)
+  Future<AddPostResponseBody> addPost(@Body() Map<String,dynamic> content);
 
   @POST(ApiConstants.translateAudio)
   @MultiPart()
