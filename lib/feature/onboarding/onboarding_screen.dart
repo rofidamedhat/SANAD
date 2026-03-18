@@ -23,7 +23,7 @@ class OnboardingScreen extends StatelessWidget {
             buttonText: "ابدأ الرحله",
             textStyle: TextStyles.font20WhiteSemiBold,
             onPressed: () {
-              context.pushNamed(
+              context.pushReplacementNamed(
                 !isLoginUser ? Routes.onboardingDetailsScreen : Routes.navigationScreen,
               );
               // isVolunteer?Routes.homeVolunteer

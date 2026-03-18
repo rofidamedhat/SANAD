@@ -20,6 +20,7 @@ import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
 import 'package:sanad/feature/navigations/navigation_screen.dart';
 import 'package:sanad/feature/onboarding/onboarding_details_screen.dart';
+import 'package:sanad/feature/share_question/logic/get_post_cubit.dart';
 import 'package:sanad/feature/share_question/ui/share_questions_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
@@ -110,7 +111,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => NavigationScreen());
 
       case Routes.shareQuestionsScreen:
-        return MaterialPageRoute(builder: (_) => ShareQuestionsScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<GetPostCubit>(),
+            child: ShareQuestionsScreen(),
+          ),
+        );
 
       case Routes.addQuestionsScreen:
         return MaterialPageRoute(
