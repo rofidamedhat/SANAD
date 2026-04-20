@@ -29,6 +29,7 @@ import '../../feature/edit_profile/data/model/edit_profile_response_body.dart';
 import '../../feature/login/data/model/login_request_body.dart';
 import '../../feature/login/data/model/login_response_body.dart';
 import '../../feature/profile/data/model/profile_response_body.dart';
+import '../../feature/share_question/data/model/get_post_response_body.dart';
 import '../../feature/signup/data/model/signup_response_body.dart';
 import 'api_constants.dart';
 
@@ -48,6 +49,9 @@ abstract class ApiService {
 
   @GET(ApiConstants.profile)
   Future<ProfileResponseBody> profile();
+
+  @GET(ApiConstants.getPost)
+  Future<GetPostResponseBody> getPost();
 
   @MultiPart()
   @PUT("profile")

@@ -16,6 +16,8 @@ import 'package:sanad/feature/learn_videos/data/repo/learn_videos_repo.dart';
 import 'package:sanad/feature/learn_videos/logic/cubit/learn_videos_cubit.dart';
 import 'package:sanad/feature/profile/data/repo/profile_repo.dart';
 import 'package:sanad/feature/profile/logic/profile_cubit.dart';
+import 'package:sanad/feature/share_question/data/repo/get_post_repo.dart';
+import 'package:sanad/feature/share_question/logic/get_post_cubit.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 
@@ -52,6 +54,9 @@ Future<void> setupGetIt() async {
 
   getIt.registerLazySingleton<AddPostRepo>(() => AddPostRepo(getIt()));
   getIt.registerFactory<AddPostCubit>(() => AddPostCubit(getIt()));
+//get post
+  getIt.registerLazySingleton<GetPostRepo>(() => GetPostRepo(getIt()));
+  getIt.registerFactory<GetPostCubit>(() => GetPostCubit(getIt()));
 
   // // signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));

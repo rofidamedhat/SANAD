@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/widgets/app_text_button.dart';
+import 'package:sanad/feature/add_question/data/model/add_post_response_data.dart';
 
 import '../../../../core/themeing/text_styles.dart';
 
 class ShareQuestionsCardItemContent extends StatelessWidget {
-  const ShareQuestionsCardItemContent({super.key});
+  AddPostResponseData addPostResponseData;
+   ShareQuestionsCardItemContent({super.key,required this.addPostResponseData});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +17,17 @@ class ShareQuestionsCardItemContent extends StatelessWidget {
         Row(
           children: [
             CircleAvatar(
-              child: Image.asset('assets/images/volunteer_welcome_image.png',
-              fit: BoxFit.cover,
-              ),
+              backgroundImage: NetworkImage(addPostResponseData.profileImageUrl),
               radius: 30,
             ),
             horizontalSpace(15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("مريم سامي",
+                Text(addPostResponseData.userName,
                 style: TextStyles.font20BlackMedium,
                 ),
-                Text("منذ لحظات",
+                Text(addPostResponseData.createdAtText,
                   style: TextStyles.font15Gray85Regular,
                 ),
               ],
@@ -35,10 +35,12 @@ class ShareQuestionsCardItemContent extends StatelessWidget {
           ],
         ),
         verticalSpace(20),
-        Text("اتعامل ازاي مع التنمر اللي بقابله ؟",
+        Text(addPostResponseData.content,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 1,
         style: TextStyles.font15Black05Regular,
         ),
-        verticalSpace(25),
+        verticalSpace(50),
         Center(
           child: AppTextButton(
               buttonText: "تواصل الان",

@@ -23,6 +23,7 @@ class ApiConstants {
   static const String profile = "profile";
   static const String editProfile = "profile";
   static const String addPost = "Posts";
+  static const String getPost = "Posts";
 
   static const String translateText = "text-to-speech";
   static const String translateAudio = "speech/transcribe";
