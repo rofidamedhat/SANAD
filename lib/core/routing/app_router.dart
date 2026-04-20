@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/routing/routes.dart';
+import 'package:sanad/feature/add_question/logic/add_post_cubit.dart';
+import 'package:sanad/feature/add_question/ui/add_question_screen.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
@@ -18,6 +20,7 @@ import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
 import 'package:sanad/feature/navigations/navigation_screen.dart';
 import 'package:sanad/feature/onboarding/onboarding_details_screen.dart';
+import 'package:sanad/feature/share_question/ui/share_questions_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
 import 'package:sanad/feature/edit_profile/ui/edit_profile_screen.dart';
@@ -25,7 +28,6 @@ import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
 
 import 'package:sanad/feature/profile/ui/profile_screen.dart';
 import 'package:sanad/feature/profile/logic/profile_cubit.dart';
-
 
 import '../../feature/convert_text_to_speech/ui/convert_text_to_speech_screen.dart';
 import '../../feature/onboarding/onboarding_screen.dart';
@@ -106,6 +108,17 @@ class AppRouter {
 
       case Routes.navigationScreen:
         return MaterialPageRoute(builder: (_) => NavigationScreen());
+
+      case Routes.shareQuestionsScreen:
+        return MaterialPageRoute(builder: (_) => ShareQuestionsScreen());
+
+      case Routes.addQuestionsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<AddPostCubit>(),
+            child: AddQuestionScreen(),
+          ),
+        );
 
       case Routes.loginScreen:
         return MaterialPageRoute(

@@ -31,6 +31,8 @@ class Routes {
   static const String convertTextToSpeechScreen = '/convertTextToSpeechScreen';
   static const String profile = '/profileScreen';
   static const String editprofile = '/editprofileScreen';
+  static const String shareQuestionsScreen = '/shareQuestionsScreen';
+  static const String addQuestionsScreen = '/addQuestionsScreen';
 
 
 }

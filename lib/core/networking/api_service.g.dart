@@ -178,6 +178,34 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<AddPostResponseBody> addPost(Map<String, dynamic> content) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(content);
+    final _options = _setStreamType<AddPostResponseBody>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'Posts',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AddPostResponseBody _value;
+    try {
+      _value = AddPostResponseBody.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<AudioResponseBody> uploadAudio(MultipartFile audio) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

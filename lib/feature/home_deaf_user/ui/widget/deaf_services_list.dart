@@ -53,7 +53,9 @@ class DeafServicesList extends StatelessWidget {
           title: 'مشاركة الاسئلة',
           icon: Icons.people_outline,
           iconColor: Colors.green,
-          onTap: () {},
+          onTap: () {
+            context.pushNamed(Routes.shareQuestionsScreen);
+          },
         ),
 
         // ServiceCard(
