@@ -22,6 +22,8 @@ class ApiConstants {
   static const String home = "specialization/index";
   static const String profile = "profile";
   static const String editProfile = "profile";
+  static const String addMedicine = "medications"; 
+  static const String medicineSchedule = "medications/day";
 
   static const String translateText = "text-to-speech";
   static const String translateAudio = "speech/transcribe";

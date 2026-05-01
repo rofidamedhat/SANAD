@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.sanad"
-    compileSdk = flutter.compileSdkVersion  
+    compileSdk = 36  
     ndkVersion = "27.3.13750724"
     
 
