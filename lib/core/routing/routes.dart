@@ -31,11 +31,18 @@ class Routes {
   static const String convertTextToSpeechScreen = '/convertTextToSpeechScreen';
   static const String profile = '/profileScreen';
   static const String editprofile = '/editprofileScreen';
+<<<<<<< HEAD
   static const String shareQuestionsScreen = '/shareQuestionsScreen';
   static const String addQuestionsScreen = '/addQuestionsScreen';
   static const String chatsScreen = '/chatsScreen';
   static const String chatDetailsScreen = '/chatDetailsScreen';
   static const String postDetailsScreen = '/postDetailsScreen';
+=======
+  static const String medicineSchedule = '/medicineScheduleScreen';
+  static const String addMedicine = '/addMedicineScreen';
+
+
+>>>>>>> 2541754da2b9be250ad1e2becc13c7426df56a1f
 
 
 }

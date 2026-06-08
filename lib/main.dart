@@ -9,10 +9,17 @@ import 'package:sanad/sanad_app.dart';
 import 'core/constants.dart';
 import 'core/di/dependency_injection.dart';
 import 'core/helper/shared_pref_helper.dart';
+import 'package:intl/date_symbol_data_local.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+<<<<<<< HEAD
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+=======
+
+  await initializeDateFormatting('ar', null);
+
+>>>>>>> 2541754da2b9be250ad1e2becc13c7426df56a1f
   setupGetIt();
   await isCheckedLogged();
   runApp(SanadApp(appRouter: AppRouter()));
