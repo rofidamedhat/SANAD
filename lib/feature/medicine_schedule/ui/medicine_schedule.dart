@@ -88,19 +88,22 @@ Widget build(BuildContext context) {
                     if (medicines.isEmpty) {
                       return const Center(child: Text("لا يوجد أدوية اليوم"));
                     }
-                    return ListView.builder(
-                      itemCount: medicines.length,
-                      itemBuilder: (context, index) {
-                        final med = medicines[index];
-                        final colors = [AppColors.greenC2, AppColors.blueE0, AppColors.orangeA6];
-                        return MedicineCard(
-                          name: med.medicineName ?? "دواء",
-                          time: med.time ?? "",
-                          note: med.notes ?? "",
-                          cardColor: colors[index % colors.length],
-                        );
-                      },
-                    );
+
+return ListView.builder(
+  itemCount: medicines.length,
+  itemBuilder: (context, index) {
+    final med = medicines[index];
+    final colors = [AppColors.greenC2, AppColors.blueE0, AppColors.orangeA6];
+    return MedicineCard(
+      id: med.id ?? 0,                    
+      days: med.days ?? [],         
+      name: med.medicineName ?? "دواء",
+      time: med.time ?? "",
+      note: med.notes ?? "",
+      cardColor: colors[index % colors.length],
+    );
+  },
+);
                   }
 
                   if (state is ScheduleError) {

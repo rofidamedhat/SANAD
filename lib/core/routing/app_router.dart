@@ -33,6 +33,7 @@ import 'package:sanad/feature/medicine_schedule/ui/medicine_schedule.dart';
 import 'package:sanad/feature/medicine_schedule/logic/schedule_cubit.dart'; 
 import 'package:sanad/feature/add_medicine/ui/add_medicine_screen.dart';
 import 'package:sanad/feature/add_medicine/logic/add_medicine_cubit.dart';  
+import 'package:sanad/feature/delete_medicine/logic/delete_medicine_cubit.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -130,21 +131,29 @@ class AppRouter {
 
       case Routes.medicineSchedule:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<ScheduleCubit>(), 
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<ScheduleCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<DeleteMedicineCubit>(), 
+              ),
+            ],
             child: const MedicineScheduleScreen(),
           ),
         );
 
-      case Routes.medicineSchedule:
-        return MaterialPageRoute(builder: (_) => MedicineScheduleScreen());
-      case Routes.addMedicine:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<AddMedicineCubit>(),
-            child: const AddMedicineScreen(),
-          ),
-        );
+     case Routes.addMedicine:
+  return MaterialPageRoute(
+    builder: (_) => MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<AddMedicineCubit>()),
+        BlocProvider.value(value: getIt<ScheduleCubit>()), 
+      ],
+      child: const AddMedicineScreen(),
+    ),
+  );
 
       default:
         return null;

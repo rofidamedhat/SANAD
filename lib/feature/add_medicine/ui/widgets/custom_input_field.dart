@@ -34,7 +34,7 @@ class CustomInputField extends StatelessWidget {
           suffixIcon: Icon(icon, color: AppColors.green69),
           hintText: hintText,
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10), // عدلت الـ vertical عشان الكلام يبقى في النص بالظبط مع الـ height 45
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         ),
       ),
     );

@@ -33,6 +33,7 @@ MedicineScheduleData _$MedicineScheduleDataFromJson(
   medicineName: json['medicineName'] as String?,
   time: json['time'] as String?,
   notes: json['notes'] as String?,
+  days: (json['days'] as List<dynamic>?)?.map((e) => e as String).toList(),
 );
 
 Map<String, dynamic> _$MedicineScheduleDataToJson(
@@ -42,4 +43,5 @@ Map<String, dynamic> _$MedicineScheduleDataToJson(
   'medicineName': instance.medicineName,
   'time': instance.time,
   'notes': instance.notes,
+  'days': instance.days,
 };

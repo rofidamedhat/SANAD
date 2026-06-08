@@ -21,7 +21,7 @@ class AddMedicineCubit extends Cubit<AddMedicineState> {
        emit(AddMedicineError(error: "يرجى إكمال جميع البيانات واختيار الوقت والأيام"));
        return;
     }
-
+    print("الأيام اللي مبعوتة من الكيوبيت: ${selectedDays}");
     emit(AddMedicineLoading());
 
     try {

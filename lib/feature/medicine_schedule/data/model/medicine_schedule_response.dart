@@ -20,8 +20,9 @@ class MedicineScheduleData {
   final String? medicineName;
   final String? time;
   final String? notes;
+  final List<String>? days;
 
-  MedicineScheduleData({this.id, this.medicineName, this.time, this.notes});
+MedicineScheduleData({this.id, this.medicineName, this.time, this.notes, this.days});
 
   factory MedicineScheduleData.fromJson(Map<String, dynamic> json) => _$MedicineScheduleDataFromJson(json);
 }

@@ -1,8 +1,8 @@
 class AddMedicineRequestBody {
-  final String medicineName; 
+  final String medicineName;
   final String time;
   final String notes;
-  final List<String> medicineDays; 
+  final List<String> medicineDays;
 
   AddMedicineRequestBody({
     required this.medicineName,
@@ -12,9 +12,9 @@ class AddMedicineRequestBody {
   });
 
   Map<String, dynamic> toJson() => {
-        'medicineName': medicineName,
+        'medicineName': medicineName.trim(),
         'time': time,
-        'notes': notes,
-        'medicineDays': medicineDays,
+        'notes': notes.trim(),
+        'days': medicineDays.map((day) => day.trim()).toList(),
       };
 }

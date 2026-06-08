@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/feature/add_medicine/logic/add_medicine_cubit.dart';
+import 'package:sanad/feature/add_medicine/logic/add_medicine_state.dart';
+import 'package:sanad/feature/medicine_schedule/logic/schedule_cubit.dart'; 
 import 'add_medicine_header.dart';
 import 'custom_input_field.dart';
 import 'add_button.dart';
@@ -95,71 +98,91 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AddMedicineCubit>();
+return BlocListener<AddMedicineCubit, AddMedicineState>(
+  listener: (context, state) {
+    if (state is AddMedicineSuccess) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('تمت إضافة الدواء بنجاح', style: TextStyle(color: AppColors.black05)),
+          backgroundColor: AppColors.gray,
+        ),
+      );
+      Navigator.pop(context);
+      
+    } else if (state is AddMedicineError) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(state.error), 
+          backgroundColor: Colors.red
+        ),
+      );
+    }
+  },
+  child: SingleChildScrollView(
+    padding: const EdgeInsets.all(20),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const AddMedicineHeader(),
+        const SizedBox(height: 5),
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AddMedicineHeader(),
-          const SizedBox(height: 5),
+        Text("اسم الدواء :", style: TextStyles.font20green69Bold),
+        const SizedBox(height: 10),
+        CustomInputField(
+          icon: Icons.medication,
+          controller: cubit.nameController,
+        ),
 
-          Text("اسم الدواء :", style: TextStyles.font20green69Bold),
-          const SizedBox(height: 10),
-          CustomInputField(
-            icon: Icons.medication,
-            controller: cubit.nameController,
-          ),
+        const SizedBox(height: 20),
 
-          const SizedBox(height: 20),
-
-          Text("الوقت :", style: TextStyles.font20green69Bold),
-          const SizedBox(height: 10),
-          
-          GestureDetector(
-            onTap: () => _selectTime(context),
-            child: AbsorbPointer(
-              child: CustomInputField(
-                icon: Icons.access_time,
-                controller: cubit.timeController,
-                hintText: cubit.timeController.text.isEmpty 
-                    ? "اختر وقت الدواء" 
-                    : cubit.timeController.text,
-              ),
+        Text("الوقت :", style: TextStyles.font20green69Bold),
+        const SizedBox(height: 10),
+        
+        GestureDetector(
+          onTap: () => _selectTime(context),
+          child: AbsorbPointer(
+            child: CustomInputField(
+              icon: Icons.access_time,
+              controller: cubit.timeController,
+              hintText: cubit.timeController.text.isEmpty 
+                  ? "اختر وقت الدواء" 
+                  : cubit.timeController.text,
             ),
           ),
+        ),
 
-          const SizedBox(height: 20),
+        const SizedBox(height: 20),
 
-          Text("اي ملاحظة :", style: TextStyles.font20green69Bold),
-          const SizedBox(height: 10),
-          CustomInputField(
-            icon: Icons.edit,
-            controller: cubit.notesController,
-          ),
+        Text("اي ملاحظة :", style: TextStyles.font20green69Bold),
+        const SizedBox(height: 10),
+        CustomInputField(
+          icon: Icons.edit,
+          controller: cubit.notesController,
+        ),
 
-          const SizedBox(height: 20),
+        const SizedBox(height: 20),
 
-          Text("يوم الدواء :", style: TextStyles.font20green69Bold),
-          const SizedBox(height: 10),
+        Text("يوم الدواء :", style: TextStyles.font20green69Bold),
+        const SizedBox(height: 10),
 
-          GestureDetector(
-            onTap: _showDaysBottomSheet,
-            child: AbsorbPointer(
-              child: CustomInputField(
-                icon: Icons.calendar_today,
-                hintText: cubit.selectedDays.isEmpty
-                    ? "اختر أيام تناول الدواء"
-                    : cubit.selectedDays.join(" , "),
-              ),
+        GestureDetector(
+          onTap: _showDaysBottomSheet,
+          child: AbsorbPointer(
+            child: CustomInputField(
+              icon: Icons.calendar_today,
+              hintText: cubit.selectedDays.isEmpty
+                  ? "اختر أيام تناول الدواء"
+                  : cubit.selectedDays.join(" , "),
             ),
           ),
+        ),
 
-          const SizedBox(height: 30),
+        const SizedBox(height: 30),
 
-          const AddButton(),
-        ],
-      ),
-    );
+        const AddButton(),
+      ],
+    ),
+  ),
+);
   }
 }

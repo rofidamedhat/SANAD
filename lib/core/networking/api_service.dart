@@ -6,7 +6,6 @@ import 'package:sanad/feature/learn_famous_words/data/models/learn_words_model.d
 import 'package:sanad/feature/learn_numbers/data/models/learn_numbers_model.dart';
 import 'package:sanad/feature/learn_videos/data/model/learn_videos_model.dart';
 import 'package:sanad/feature/signup/data/model/signup_request_body.dart';
-
 import '../../feature/edit_profile/data/model/edit_profile_response_body.dart';
 import '../../feature/login/data/model/login_request_body.dart';
 import '../../feature/login/data/model/login_response_body.dart';
@@ -15,6 +14,9 @@ import '../../feature/signup/data/model/signup_response_body.dart';
 import '../../feature/add_medicine/data/model/add_medicine_request_body.dart';
 import '../../feature/add_medicine/data/model/add_medicine_response_body.dart';
 import 'package:sanad/feature/medicine_schedule/data/model/medicine_schedule_response.dart';
+import 'package:sanad/feature/delete_medicine/data/model/delete_medicine_request.dart';
+import 'package:sanad/feature/delete_medicine/data/model/delete_medicine_response.dart';
+
 
 
 import 'api_constants.dart';
@@ -85,4 +87,10 @@ abstract class ApiService {
   Future<MedicineScheduleResponse> getMedicineSchedule(
   @Query("day") String day
   );
+
+  @DELETE(ApiConstants.deleteMedicine) 
+Future<DeleteMedicineResponse> deleteMedicine({
+  @Body() required DeleteMedicineRequestBody body,
+});
+
 }

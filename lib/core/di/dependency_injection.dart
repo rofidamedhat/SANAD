@@ -20,6 +20,8 @@ import 'package:sanad/feature/add_medicine/logic/add_medicine_cubit.dart';
 import 'package:sanad/feature/add_medicine/data/repo/add_medicine_repo.dart'; 
 import 'package:sanad/feature/medicine_schedule/logic/schedule_cubit.dart'; 
 import 'package:sanad/feature/medicine_schedule/data/repo/schedule_repo.dart'; 
+import 'package:sanad/feature/delete_medicine/data/repo/delete_medicine_repo.dart';
+import 'package:sanad/feature/delete_medicine/logic/delete_medicine_cubit.dart';
 import '../../feature/login/data/repos/login_repo.dart';
 import '../../feature/login/logic/login_cubit.dart';
 import '../networking/api_service.dart';
@@ -76,4 +78,10 @@ Future<void> setupGetIt() async {
  // Schedule
   getIt.registerLazySingleton<ScheduleRepo>(() => ScheduleRepo(getIt()));
   getIt.registerFactory<ScheduleCubit>(() => ScheduleCubit(getIt()));
+
+// 1. تسجيل الـ Repository بتاع مسح الأدوية
+getIt.registerLazySingleton<DeleteMedicineRepo>(() => DeleteMedicineRepo(getIt()));
+
+// 2. تسجيل الـ Cubit بتاعه
+getIt.registerFactory<DeleteMedicineCubit>(() => DeleteMedicineCubit(getIt()));
 }
