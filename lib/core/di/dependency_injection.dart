@@ -27,33 +27,30 @@ import 'package:sanad/feature/share_question/data/repo/get_post_repo.dart';
 import 'package:sanad/feature/share_question/logic/get_post_logic/get_post_cubit.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
-
+import 'package:sanad/feature/add_medicine/logic/add_medicine_cubit.dart'; 
+import 'package:sanad/feature/add_medicine/data/repo/add_medicine_repo.dart'; 
+import 'package:sanad/feature/medicine_schedule/logic/schedule_cubit.dart'; 
+import 'package:sanad/feature/medicine_schedule/data/repo/schedule_repo.dart'; 
+import 'package:sanad/feature/delete_medicine/data/repo/delete_medicine_repo.dart';
+import 'package:sanad/feature/delete_medicine/logic/delete_medicine_cubit.dart';
 import '../../feature/login/data/repos/login_repo.dart';
 import '../../feature/login/logic/login_cubit.dart';
 import '../networking/api_service.dart';
 import '../networking/dio_factory.dart';
 
-// -----------------------------------------------------------------------------
-// الملف ده مسؤول عن ترتيب كل الحاجات اللي الأبلكيشن محتاجها قبل ما يبدأ.
-// يعني بنسجّل Services وRepositories وCubits هنا عشان نقدر نستخدمهم
-// في أي مكان من غير ما نعملهم كل مرة.
-//
-// باختصار:
-// - getIt ده زي "حافظة" لكل الحاجات اللي محتاجينها في الأبلكيشن.
-// - بدل ما نعمل instance جديد في كل صفحة، بنسجّلها هنا مرة واحدة.
-// - لما نحتاج حاجة، بنجيبها من getIt بسهولة.
-//
-// ملاحظات:
-// - الكود اللي جوا متعلّق لحد ما نجهّز الـ ApiService و Cubits.
-// ------------------
 final getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
-  // Dio & ApiService
+  // 1. Dio & ApiService (الأساس اللي الكل بيعتمد عليه)
   Dio dio = DioFactory.getDio();
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
 
-  // login
+  // 2. Add Medicine Feature
+  getIt.registerLazySingleton<AddMedicineRepo>(() => AddMedicineRepo(getIt()));
+  getIt.registerFactory<AddMedicineCubit>(() => AddMedicineCubit(getIt()));
+
+
+  // 3. login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
 
@@ -70,9 +67,12 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<PostDetailsCubit>(() => PostDetailsCubit(getIt()));
 
   // // signup
+  // 4. signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
-  // edit profile
+
+  // 5. edit profile
+  getIt.registerLazySingleton<EditProfileRepo>(() => EditProfileRepo(getIt()));
   getIt.registerFactory<EditProfileCubit>(() => EditProfileCubit(getIt()));
   getIt.registerFactory<EditProfileRepo>(() => EditProfileRepo(getIt()));
   // profile
@@ -95,14 +95,28 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<LearnNumberCubit>(
     () => LearnNumberCubit(getIt()),
   );
+
+  // 6. profile
+  getIt.registerLazySingleton<ProfileRepository>(() => ProfileRepository(getIt()));
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
+
+  // 7. Translate text
+  getIt.registerLazySingleton<TranslateTextRepo>(() => TranslateTextRepo(getIt()));
+  getIt.registerFactory<TranslateAudioAndTextCubit>(() => TranslateAudioAndTextCubit(getIt()));
+
+  // 8. Learn Alphabet
+  getIt.registerLazySingleton<LearnAlphabetRepo>(() => LearnAlphabetRepo(getIt()));
+  getIt.registerFactory<LearnAlphabetCubit>(() => LearnAlphabetCubit(getIt()));
+
+  // 9. Learn Numbers
   getIt.registerLazySingleton<LearnNumberRepo>(() => LearnNumberRepo(getIt()));
-  //LearnFamousWords
-  getIt.registerLazySingleton<LearnWordsCubit>(() => LearnWordsCubit(getIt()));
+  getIt.registerFactory<LearnNumberCubit>(() => LearnNumberCubit(getIt()));
+
+  // 10. Learn Famous Words
   getIt.registerLazySingleton<LearnWordsRepo>(() => LearnWordsRepo(getIt()));
-  // //LearnVideos
-  getIt.registerLazySingleton<LearnVideosCubit>(
-    () => LearnVideosCubit(getIt()),
-  );
+  getIt.registerFactory<LearnWordsCubit>(() => LearnWordsCubit(getIt()));
+
+  // 11. Learn Videos
   getIt.registerLazySingleton<LearnVideosRepo>(() => LearnVideosRepo(getIt()));
 
   getIt.registerLazySingleton<FireBaseService>(() => FireBaseService());
@@ -116,4 +130,16 @@ Future<void> setupGetIt() async {
   // getIt.registerFactory<HomeCubit>(
   //   () => HomeCubit(getIt())..getSpecialization(),
   // );
+
+  getIt.registerFactory<LearnVideosCubit>(() => LearnVideosCubit(getIt()));
+
+ // Schedule
+  getIt.registerLazySingleton<ScheduleRepo>(() => ScheduleRepo(getIt()));
+  getIt.registerFactory<ScheduleCubit>(() => ScheduleCubit(getIt()));
+
+// 1. تسجيل الـ Repository بتاع مسح الأدوية
+getIt.registerLazySingleton<DeleteMedicineRepo>(() => DeleteMedicineRepo(getIt()));
+
+// 2. تسجيل الـ Cubit بتاعه
+getIt.registerFactory<DeleteMedicineCubit>(() => DeleteMedicineCubit(getIt()));
 }

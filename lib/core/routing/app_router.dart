@@ -36,24 +36,23 @@ import 'package:sanad/feature/share_question/logic/get_post_logic/get_post_cubit
 import 'package:sanad/feature/share_question/ui/share_questions_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
+import 'package:sanad/feature/edit_profile/ui/edit_profile_screen.dart';
+import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
+
+import 'package:sanad/feature/profile/ui/profile_screen.dart';
+import 'package:sanad/feature/profile/logic/profile_cubit.dart';
 
 import '../../feature/convert_text_to_speech/ui/convert_text_to_speech_screen.dart';
 import '../../feature/onboarding/onboarding_screen.dart';
 
-// -----------------------------------------------------------------------------
-// الملف ده مسؤول إنه يربط اسم الـ Route بالصفحة اللي هنروح لها.
-// يعني لما ننادي بـ context.pushNamed(...) هو اللي بيحدد هنفتح أي Screen.
-//
-// ليه بنستخدمه؟
-// - عشان نخلي التنقّل Organized ومن مكان واحد.
-// - نقدر نضيف BlocProvider أو Dependencies حوالين كل صفحة بسهولة.
-//
-// ملاحظات:
-// - الصفحات لسه متعلّقة (comment) لحد ما تتظبط.
-// ---------------------------------
+import 'package:sanad/feature/medicine_schedule/ui/medicine_schedule.dart';
+import 'package:sanad/feature/medicine_schedule/logic/schedule_cubit.dart'; 
+import 'package:sanad/feature/add_medicine/ui/add_medicine_screen.dart';
+import 'package:sanad/feature/add_medicine/logic/add_medicine_cubit.dart';  
+import 'package:sanad/feature/delete_medicine/logic/delete_medicine_cubit.dart';
+
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
-    //هستخدمه عشان انقل من سكرين لسكرين
     switch (settings.name) {
       case Routes.onboardingScreen:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
@@ -71,6 +70,7 @@ class AppRouter {
 
       case Routes.homeVolunteer:
         return MaterialPageRoute(builder: (_) => HomeVolunteerScreen());
+
       case Routes.convertTextToSpeechScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -78,8 +78,10 @@ class AppRouter {
             child: ConvertTextToSpeechScreen(),
           ),
         );
+
       case Routes.homeDeafUser:
         return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
+
       case Routes.learnSignLangScreen:
         return MaterialPageRoute(builder: (_) => LearnSignLangScreen());
 
@@ -98,6 +100,7 @@ class AppRouter {
             child: LearnNumberScreen(),
           ),
         );
+
       case Routes.learnFamousWordsScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -177,6 +180,7 @@ class AppRouter {
       case Routes.chatDetailsScreen:
         final chatModel = settings.arguments as ChatModel;
 
+<<<<<<< HEAD
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: getIt<ChatCubit>()
@@ -185,6 +189,35 @@ class AppRouter {
             child: ChatDetailsScreen(chatModel: chatModel),
           ),
         );
+=======
+
+      case Routes.medicineSchedule:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<ScheduleCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<DeleteMedicineCubit>(), 
+              ),
+            ],
+            child: const MedicineScheduleScreen(),
+          ),
+        );
+
+     case Routes.addMedicine:
+  return MaterialPageRoute(
+    builder: (_) => MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<AddMedicineCubit>()),
+        BlocProvider.value(value: getIt<ScheduleCubit>()), 
+      ],
+      child: const AddMedicineScreen(),
+    ),
+  );
+
+>>>>>>> b1a48e37f90f21283b6688287de83a8346541197
       default:
         return null;
     }

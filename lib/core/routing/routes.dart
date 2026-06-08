@@ -36,6 +36,12 @@ class Routes {
   static const String chatsScreen = '/chatsScreen';
   static const String chatDetailsScreen = '/chatDetailsScreen';
   static const String postDetailsScreen = '/postDetailsScreen';
+  static const String medicineSchedule = '/medicineScheduleScreen';
+  static const String addMedicine = '/addMedicineScreen';
+  static const String deleteMedicine = '/deleteMedicineScreen';
+
+
+
 
 
 }
