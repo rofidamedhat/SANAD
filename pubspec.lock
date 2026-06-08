@@ -617,7 +617,11 @@ packages:
     source: hosted
     version: "0.2.2"
   intl:
+<<<<<<< HEAD
     dependency: transitive
+=======
+    dependency: "direct main"
+>>>>>>> 2541754da2b9be250ad1e2becc13c7426df56a1f
     description:
       name: intl
       sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"

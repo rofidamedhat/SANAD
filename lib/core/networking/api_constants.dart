@@ -22,9 +22,14 @@ class ApiConstants {
   static const String home = "specialization/index";
   static const String profile = "profile";
   static const String editProfile = "profile";
+<<<<<<< HEAD
   static const String addPost = "Posts";
   static const String getPost = "Posts";
   static const String deletePost = "Posts";
+=======
+  static const String addMedicine = "medications"; 
+  static const String medicineSchedule = "medications/day";
+>>>>>>> 2541754da2b9be250ad1e2becc13c7426df56a1f
 
   static const String translateText = "text-to-speech";
   static const String translateAudio = "speech/transcribe";

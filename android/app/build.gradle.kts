@@ -10,7 +10,11 @@ plugins {
 
 android {
     namespace = "com.example.sanad"
+<<<<<<< HEAD
     compileSdk = 36   
+=======
+    compileSdk = 36  
+>>>>>>> 2541754da2b9be250ad1e2becc13c7426df56a1f
     ndkVersion = "27.3.13750724"
     
 

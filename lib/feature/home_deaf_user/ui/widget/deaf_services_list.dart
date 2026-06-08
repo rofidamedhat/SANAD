@@ -46,7 +46,8 @@ class DeafServicesList extends StatelessWidget {
           title: 'جدول مواعيد \n العلاج ',
           icon: Icons.medical_information,
           iconColor: Colors.blue,
-          onTap: () {},
+          onTap: () {context.pushNamed(Routes.medicineSchedule);
+           },
           // imagePath: "assets/svgs/mid_cal.svg",
         ),
         ServiceCard(
