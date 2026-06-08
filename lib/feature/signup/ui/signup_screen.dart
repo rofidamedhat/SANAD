@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sanad/core/extensions/navigation.dart';
 import 'package:sanad/core/helper/spaces.dart';
+import 'package:sanad/core/routing/routes.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/core/widgets/app_text_button.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
@@ -42,6 +44,23 @@ class SignupScreen extends StatelessWidget {
               buttonWidth: 234.w,
               buttonHeight: 55.h,
               backgroundColor: AppColors.green69,
+            ),
+            verticalSpace(20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("لديك حساب بالفعل ؟  ",
+                  style: TextStyles.font20Black05Regular,
+                ),
+                GestureDetector(
+                  onTap: (){
+                    context.pushNamed(Routes.loginScreen);
+                  },
+                  child: Text("تسجيل الدخول",
+                    style: TextStyles.font20Orange62Bold,
+                  ),
+                ),
+              ],
             ),
             SignupButtonListen(),
           ],

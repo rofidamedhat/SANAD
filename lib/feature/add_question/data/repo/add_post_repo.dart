@@ -1,4 +1,4 @@
-import 'package:sanad/feature/add_question/data/model/add_post_response_body.dart';
+import 'package:sanad/feature/add_question/data/model/add_post_model/add_post_response_body.dart';
 
 import '../../../../core/networking/api_service.dart';
 

@@ -18,3 +18,19 @@ class GetPostSuccessfully extends GetPostState{
 
   GetPostSuccessfully({required this.getPostResponseBody});
 }
+
+
+// class DeletePostLoading extends GetPostState{}
+//
+// class DeletePostWithError extends GetPostState{
+//
+//   ApiErrorModel apiErrorModel;
+//   DeletePostWithError({required this.apiErrorModel});
+// }
+//
+// class DeletePostSuccessfully extends GetPostState{
+//
+//   DeletePostResponseBody deletePostResponseBody;
+//
+//   DeletePostSuccessfully({required this.deletePostResponseBody});
+// }

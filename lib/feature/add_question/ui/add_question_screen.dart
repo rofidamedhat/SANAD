@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/helper/strings.dart';
+<<<<<<< HEAD
+=======
+import 'package:sanad/core/widgets/app_text_button.dart';
+import 'package:sanad/feature/add_question/logic/add_post_logic/add_post_cubit.dart';
+>>>>>>> d8a51824af41532fe8e58c487ee37737f0267e76
 import 'package:sanad/feature/add_question/ui/widgets/add_question_app_bar.dart';
 import 'package:sanad/feature/add_question/ui/widgets/add_question_button.dart';
 import 'package:sanad/feature/add_question/ui/widgets/add_question_text_feild.dart';
@@ -63,7 +68,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                   verticalSpace(50),
                   AddQuestionButton(controller: controller),
                   verticalSpace(40),
-                  PublishButtonListen()
+                  PublishButtonListen(controller: controller,)
                 ],
               ),
             ),

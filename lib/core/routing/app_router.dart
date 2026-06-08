@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/routing/routes.dart';
-import 'package:sanad/feature/add_question/logic/add_post_cubit.dart';
+import 'package:sanad/feature/add_question/data/model/add_post_data_model/add_post_response_data.dart';
+import 'package:sanad/feature/add_question/logic/add_post_logic/add_post_cubit.dart';
 import 'package:sanad/feature/add_question/ui/add_question_screen.dart';
 import 'package:sanad/feature/chatting/data/model/chat_model.dart';
 import 'package:sanad/feature/chatting/logic/cubit/chat_cubit.dart';
@@ -29,6 +30,9 @@ import 'package:sanad/feature/onboarding/onboarding_details_screen.dart';
 import 'package:sanad/feature/profile/logic/profile_cubit.dart';
 import 'package:sanad/feature/profile/ui/profile_screen.dart';
 import 'package:sanad/feature/share_question/logic/get_post_cubit.dart';
+import 'package:sanad/feature/post_details/logic/post_details_cubit.dart';
+import 'package:sanad/feature/post_details/ui/post_details_screen.dart';
+import 'package:sanad/feature/share_question/logic/get_post_logic/get_post_cubit.dart';
 import 'package:sanad/feature/share_question/ui/share_questions_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
@@ -126,6 +130,15 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<AddPostCubit>(),
             child: AddQuestionScreen(),
+          ),
+        );
+
+      case Routes.postDetailsScreen:
+        final post = settings.arguments as AddPostResponseData;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<PostDetailsCubit>(),
+            child: PostDetailsScreen(addPostResponseData: post,),
           ),
         );
 

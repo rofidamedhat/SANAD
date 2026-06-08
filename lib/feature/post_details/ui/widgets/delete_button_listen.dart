@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sanad/core/constants.dart';
 import 'package:sanad/core/extensions/navigation.dart';
-import 'package:sanad/core/routing/routes.dart';
-import 'package:sanad/feature/add_question/logic/add_post_logic/add_post_cubit.dart';
+import 'package:sanad/feature/post_details/logic/post_details_cubit.dart';
 
+import '../../../../core/constants.dart';
 import '../../../../core/themeing/colors.dart';
 import '../../../../core/themeing/text_styles.dart';
 
-class PublishButtonListen extends StatefulWidget {
-  TextEditingController controller;
-   PublishButtonListen({super.key, required this.controller});
+class DeleteButtonListen extends StatelessWidget {
+  const DeleteButtonListen({super.key});
 
-  @override
-  State<PublishButtonListen> createState() => _PublishButtonListenState();
-}
-
-class _PublishButtonListenState extends State<PublishButtonListen> {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AddPostCubit,AddPostState>(
+    return BlocListener<PostDetailsCubit,PostDetailsState>(
         listener: (context,state){
-
-          if(state is AddPostLoading){
+          if(state is DeletePostLoading){
             showDialog(
               context: context,
               builder: (context) => Center(
@@ -32,29 +24,29 @@ class _PublishButtonListenState extends State<PublishButtonListen> {
               ),
             );
           }
-          else if(state is AddPostWithError){
+          else if(state is DeletePostWithError){
             setupErrorState(context, state.apiErrorModel.message!);
           }
-          else if(state is AddPostSuccessfully){
+          else if(state is DeletePostSuccessfully){
             context.pop();
             showDialog(
               context: context,
-              builder: (context) => AlertDialog(
+              builder: (dialogContext) => AlertDialog(
                 icon: const Icon(
                   Icons.check_circle_outline,
                   color: Colors.green,
                   size: 32,
                 ),
                 content: Text(
-                 state.addPostResponseBody.message,
+                  state.deletePostResponseBody.message,
                   style: TextStyles.font20Black05Regular,
                 ),
                 actions: [
                   TextButton(
                     onPressed: () {
-                      widget.controller.clear();
-                      context.pop();
-                      },
+                      dialogContext.pop();
+                      Navigator.of(context).pop(true);
+                    },
                     child: Text(
                       'حسنا',
                       style: TextStyles.font20Black05Regular,
