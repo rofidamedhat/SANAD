@@ -132,6 +132,36 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<DeletePostResponseBody> deletePost(
+    Map<String, dynamic> content,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(content);
+    final _options = _setStreamType<DeletePostResponseBody>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'Posts',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late DeletePostResponseBody _value;
+    try {
+      _value = DeletePostResponseBody.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<EditProfileResponseBody> editProfile(
     String token,
     String fullName,
