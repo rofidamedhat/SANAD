@@ -4,7 +4,13 @@ import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/routing/routes.dart';
 import 'package:sanad/feature/add_question/logic/add_post_cubit.dart';
 import 'package:sanad/feature/add_question/ui/add_question_screen.dart';
+import 'package:sanad/feature/chatting/data/model/chat_model.dart';
+import 'package:sanad/feature/chatting/logic/cubit/chat_cubit.dart';
+import 'package:sanad/feature/chatting/ui/chat_details_screen.dart';
+import 'package:sanad/feature/chatting/ui/chats_screen.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
+import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
+import 'package:sanad/feature/edit_profile/ui/edit_profile_screen.dart';
 import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
 import 'package:sanad/feature/learn_alphabet/logic/cubit/learn_alphabet_cubit.dart';
@@ -20,15 +26,12 @@ import 'package:sanad/feature/login/logic/login_cubit.dart';
 import 'package:sanad/feature/login/ui/login_screen.dart';
 import 'package:sanad/feature/navigations/navigation_screen.dart';
 import 'package:sanad/feature/onboarding/onboarding_details_screen.dart';
+import 'package:sanad/feature/profile/logic/profile_cubit.dart';
+import 'package:sanad/feature/profile/ui/profile_screen.dart';
 import 'package:sanad/feature/share_question/logic/get_post_cubit.dart';
 import 'package:sanad/feature/share_question/ui/share_questions_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
-import 'package:sanad/feature/edit_profile/ui/edit_profile_screen.dart';
-import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
-
-import 'package:sanad/feature/profile/ui/profile_screen.dart';
-import 'package:sanad/feature/profile/logic/profile_cubit.dart';
 
 import '../../feature/convert_text_to_speech/ui/convert_text_to_speech_screen.dart';
 import '../../feature/onboarding/onboarding_screen.dart';
@@ -149,7 +152,26 @@ class AppRouter {
             child: const EditProfileScreen(),
           ),
         );
+      case Routes.chatsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ChatCubit>(),
+              // ..getMyData()
+              // ..getUsersList(),
+            child: ChatsScreen(),
+          ),
+        );
+      case Routes.chatDetailsScreen:
+        final chatModel = settings.arguments as ChatModel;
 
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: getIt<ChatCubit>()
+              // ..getMyData()
+              ..getMessages(chatModel.chatId!),
+            child: ChatDetailsScreen(chatModel: chatModel),
+          ),
+        );
       default:
         return null;
     }

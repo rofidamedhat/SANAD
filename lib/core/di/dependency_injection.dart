@@ -2,6 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sanad/feature/add_question/data/repo/add_post_repo.dart';
 import 'package:sanad/feature/add_question/logic/add_post_cubit.dart';
+import 'package:sanad/feature/chatting/data/model/chat_model.dart';
+import 'package:sanad/feature/chatting/data/service/fb_services.dart';
+import 'package:sanad/feature/chatting/logic/cubit/chat_cubit.dart';
+import 'package:sanad/feature/chatting/ui/chat_details_screen.dart';
 import 'package:sanad/feature/convert_text_to_speech/data/repo/translate_text_repo.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/edit_profile/data/repo/edit_profile_repo.dart';
@@ -54,7 +58,7 @@ Future<void> setupGetIt() async {
 
   getIt.registerLazySingleton<AddPostRepo>(() => AddPostRepo(getIt()));
   getIt.registerFactory<AddPostCubit>(() => AddPostCubit(getIt()));
-//get post
+  //get post
   getIt.registerLazySingleton<GetPostRepo>(() => GetPostRepo(getIt()));
   getIt.registerFactory<GetPostCubit>(() => GetPostCubit(getIt()));
 
@@ -68,7 +72,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<ProfileRepository>(
     () => ProfileRepository(getIt()),
   );
-  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt(), getIt()));
 
   // Translate text
   getIt.registerLazySingleton<TranslateTextRepo>(
@@ -97,6 +101,13 @@ Future<void> setupGetIt() async {
     () => LearnVideosCubit(getIt()),
   );
   getIt.registerLazySingleton<LearnVideosRepo>(() => LearnVideosRepo(getIt()));
+
+  getIt.registerLazySingleton<FireBaseService>(() => FireBaseService());
+  getIt.registerLazySingleton<ChatCubit>(() => ChatCubit(getIt()));
+  getIt.registerFactory<ChatDetailsScreen>(
+    () => ChatDetailsScreen(chatModel: ChatModel()),
+  );
+
   // // home
   // getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   // getIt.registerFactory<HomeCubit>(

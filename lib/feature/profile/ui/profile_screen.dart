@@ -1,15 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sanad/core/helper/spaces.dart';
-
-import 'package:sanad/feature/profile/logic/profile_cubit.dart';
-import 'package:sanad/feature/profile/data/repo/profile_repo.dart';
-import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/di/dependency_injection.dart';
+import 'package:sanad/core/helper/spaces.dart';
+import 'package:sanad/core/themeing/colors.dart';
+import 'package:sanad/feature/profile/logic/profile_cubit.dart';
+
+import 'widget/profile_action_section.dart';
 import 'widget/profile_header.dart';
 import 'widget/profile_info_section.dart';
-import 'widget/profile_action_section.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

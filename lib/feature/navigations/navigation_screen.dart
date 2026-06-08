@@ -7,6 +7,7 @@ import 'package:sanad/core/constants.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
+import 'package:sanad/feature/chatting/ui/chats_screen.dart';
 import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
 import 'package:sanad/feature/home_volunteer/ui/home_volunteer_screen.dart';
 import 'package:sanad/feature/profile/ui/profile_screen.dart';
@@ -38,7 +39,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           index: selectedIndex,
           children: [
             isVolunteer ? HomeVolunteerScreen() : HomeDeafUserScreen(),
-            Center(child: Text('المحادثات')),
+            ChatsScreen(),
             const ProfileScreen(),
           ],
         ),

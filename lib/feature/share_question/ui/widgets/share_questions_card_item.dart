@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sanad/core/constants.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/feature/share_question/logic/get_post_cubit.dart';
 import 'package:sanad/feature/share_question/ui/widgets/share_questions_card_item_content.dart';

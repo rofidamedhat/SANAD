@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sanad/core/extensions/navigation.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/helper/strings.dart';
-import 'package:sanad/core/widgets/app_text_button.dart';
-import 'package:sanad/feature/add_question/logic/add_post_cubit.dart';
 import 'package:sanad/feature/add_question/ui/widgets/add_question_app_bar.dart';
 import 'package:sanad/feature/add_question/ui/widgets/add_question_button.dart';
 import 'package:sanad/feature/add_question/ui/widgets/add_question_text_feild.dart';
 import 'package:sanad/feature/add_question/ui/widgets/publish_button_listen.dart';
 
-import '../../../core/constants.dart';
 import '../../../core/themeing/colors.dart';
-import '../../../core/themeing/text_styles.dart';
 
 class AddQuestionScreen extends StatefulWidget {
   const AddQuestionScreen({super.key});
@@ -41,11 +35,11 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                   verticalSpace(40),
                   Center(
                     child: SizedBox(
+                      height: 150.h,
+                      width: 250.w,
                       child: Image.asset(addQuestionImage,
                       fit: BoxFit.cover,
                       ),
-                      height: 150.h,
-                      width: 250.w,
                     ),
                   ),
                   verticalSpace(35),

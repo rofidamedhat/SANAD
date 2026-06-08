@@ -1,5 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:sanad/core/helper/shared_pref_helper.dart';
 import 'package:sanad/core/networking/api_error_handler.dart';
 import 'package:sanad/core/networking/api_error_model.dart';
@@ -7,9 +11,6 @@ import 'package:sanad/core/networking/dio_factory.dart';
 import 'package:sanad/feature/signup/data/model/signup_request_body.dart';
 import 'package:sanad/feature/signup/data/model/signup_response_body.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
-
-import '../../../core/helper/shared_pref_helper.dart';
-import '../../../core/networking/dio_factory.dart';
 
 part 'signup_state.dart';
 
@@ -36,12 +37,17 @@ class SignupCubit extends Cubit<SignupState> {
           role: role,
         ),
       );
-      
 
       if (signupResponseBody!.isAuthenticated) {
+        String uId = JwtDecoder.decode(
+          signupResponseBody!.token!,
+        )['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+        log("user id $uId");
         await SharedPrefHelper.setData("token", signupResponseBody!.token!);
+        await SharedPrefHelper.setData("uId", uId);
         await SharedPrefHelper.setData("role", signupResponseBody!.role!);
         DioFactory.setTokenIntoHeaderAfterLogin(signupResponseBody!.token!);
+
         emit(SignupSuccessfully(signupResponseBody: signupResponseBody!));
       } else {
         print("Error from else ");

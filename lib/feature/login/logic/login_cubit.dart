@@ -1,5 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:sanad/core/helper/shared_pref_helper.dart';
 import 'package:sanad/core/networking/api_error_handler.dart';
 import 'package:sanad/core/networking/api_error_model.dart';
@@ -14,27 +18,35 @@ class LoginCubit extends Cubit<LoginState> {
   LoginRepo loginRepo;
   LoginCubit(this.loginRepo) : super(LoginInitial());
 
-  TextEditingController emailController=TextEditingController();
-  TextEditingController passwordController=TextEditingController();
- final  formKey=GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   LoginResponseBody? loginResponse;
 
-  void login(LoginRequestBody loginRequestBody)async{
-    emit( LoginLoading());
-    try{
-   loginResponse = await loginRepo.login(loginRequestBody);
-    if(loginResponse!.isAuthenticated==true){
-      await SharedPrefHelper.setData("token", loginResponse!.token!);
-      await SharedPrefHelper.setData("role", loginResponse!.role!);
-      DioFactory.setTokenIntoHeaderAfterLogin(loginResponse!.token!);
-      
-      emit(LoginSuccessfully(loginResponseBody: loginResponse!));
-    }
-    else{
-      print("Error from response ${loginResponse!.message}");
-      emit(LoginWithError(apiErrorMessage:ApiErrorHandler.handle(loginResponse)));
-    }
-    }catch(error,stackTrace){
+  void login(LoginRequestBody loginRequestBody) async {
+    emit(LoginLoading());
+    try {
+      loginResponse = await loginRepo.login(loginRequestBody);
+      if (loginResponse!.isAuthenticated == true) {
+        String uId = JwtDecoder.decode(
+          loginResponse!.token!,
+        )['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+        log("user id $uId");
+        await SharedPrefHelper.setData("token", loginResponse!.token!);
+        await SharedPrefHelper.setData("uId", uId);
+        await SharedPrefHelper.setData("role", loginResponse!.role!);
+        DioFactory.setTokenIntoHeaderAfterLogin(loginResponse!.token!);
+
+        emit(LoginSuccessfully(loginResponseBody: loginResponse!));
+      } else {
+        print("Error from response ${loginResponse!.message}");
+        emit(
+          LoginWithError(
+            apiErrorMessage: ApiErrorHandler.handle(loginResponse),
+          ),
+        );
+      }
+    } catch (error, stackTrace) {
       print("Error from cubit is $error");
       print(stackTrace);
       emit(LoginWithError(apiErrorMessage: ApiErrorHandler.handle(error)));
