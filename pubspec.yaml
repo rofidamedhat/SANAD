@@ -56,6 +56,11 @@ dependencies:
   http_parser: ^4.1.2
   shimmer: ^3.0.0
   url_launcher: ^6.3.2
+  chat_bubbles: ^1.9.0
+  firebase_core: ^4.7.0
+  firebase_auth: ^6.4.0
+  cloud_firestore: ^6.3.0
+  jwt_decoder: ^2.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

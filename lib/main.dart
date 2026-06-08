@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sanad/core/routing/app_router.dart';
+import 'package:sanad/firebase_options.dart';
 import 'package:sanad/sanad_app.dart';
 
 import 'core/constants.dart';
@@ -10,6 +12,7 @@ import 'core/helper/shared_pref_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   setupGetIt();
   await isCheckedLogged();
   runApp(SanadApp(appRouter: AppRouter()));
@@ -19,7 +22,7 @@ Future<void> isCheckedLogged() async {
   String? token = await SharedPrefHelper.getString("token");
   print("token is $token");
   if (token == null || token.isEmpty) {
-    isLoginUser = false;//isVolunteer stil false 
+    isLoginUser = false; //isVolunteer stil false
   } else {
     isVolunteerChecked();
     isLoginUser = true;
