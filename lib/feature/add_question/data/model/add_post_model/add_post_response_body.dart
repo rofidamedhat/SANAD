@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:sanad/feature/add_question/data/model/add_post_response_data.dart';
+import 'package:sanad/feature/add_question/data/model/add_post_data_model/add_post_response_data.dart';
 part 'add_post_response_body.g.dart';
 @JsonSerializable()
 class AddPostResponseBody{

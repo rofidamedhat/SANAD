@@ -8,8 +8,12 @@ class AddPostResponseData{
   final String profileImageUrl;
   final String createdAt;
   final String createdAtText;
+  final int id;
+  final String userId;
 
   AddPostResponseData({
+    required this.id,
+    required this.userId,
     required this.content,
     required this.userName,
     required this.profileImageUrl,

@@ -33,6 +33,7 @@ class Routes {
   static const String editprofile = '/editprofileScreen';
   static const String shareQuestionsScreen = '/shareQuestionsScreen';
   static const String addQuestionsScreen = '/addQuestionsScreen';
+  static const String postDetailsScreen = '/postDetailsScreen';
 
 
 }

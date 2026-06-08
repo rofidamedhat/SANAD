@@ -8,6 +8,8 @@ part of 'add_post_response_data.dart';
 
 AddPostResponseData _$AddPostResponseDataFromJson(Map<String, dynamic> json) =>
     AddPostResponseData(
+      id: (json['id'] as num).toInt(),
+      userId: json['userId'] as String,
       content: json['content'] as String,
       userName: json['userName'] as String,
       profileImageUrl: json['profileImageUrl'] as String,
@@ -23,4 +25,6 @@ Map<String, dynamic> _$AddPostResponseDataToJson(
   'profileImageUrl': instance.profileImageUrl,
   'createdAt': instance.createdAt,
   'createdAtText': instance.createdAtText,
+  'id': instance.id,
+  'userId': instance.userId,
 };

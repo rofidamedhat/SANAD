@@ -4,7 +4,7 @@ import 'package:sanad/core/extensions/navigation.dart';
 
 import '../../../../core/themeing/text_styles.dart';
 import '../../../../core/widgets/app_text_button.dart';
-import '../../logic/add_post_cubit.dart';
+import '../../logic/add_post_logic/add_post_cubit.dart';
 
 class AddQuestionButton extends StatefulWidget {
   TextEditingController controller;

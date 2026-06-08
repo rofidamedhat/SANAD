@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sanad/feature/add_question/data/repo/add_post_repo.dart';
-import 'package:sanad/feature/add_question/logic/add_post_cubit.dart';
+import 'package:sanad/feature/add_question/logic/add_post_logic/add_post_cubit.dart';
 import 'package:sanad/feature/convert_text_to_speech/data/repo/translate_text_repo.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/edit_profile/data/repo/edit_profile_repo.dart';
@@ -14,10 +14,12 @@ import 'package:sanad/feature/learn_numbers/data/repos/learn_number_repo.dart';
 import 'package:sanad/feature/learn_numbers/logic/cubit/learn_number_cubit.dart';
 import 'package:sanad/feature/learn_videos/data/repo/learn_videos_repo.dart';
 import 'package:sanad/feature/learn_videos/logic/cubit/learn_videos_cubit.dart';
+import 'package:sanad/feature/post_details/data/repo/delete_post_repo.dart';
+import 'package:sanad/feature/post_details/logic/post_details_cubit.dart';
 import 'package:sanad/feature/profile/data/repo/profile_repo.dart';
 import 'package:sanad/feature/profile/logic/profile_cubit.dart';
 import 'package:sanad/feature/share_question/data/repo/get_post_repo.dart';
-import 'package:sanad/feature/share_question/logic/get_post_cubit.dart';
+import 'package:sanad/feature/share_question/logic/get_post_logic/get_post_cubit.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 
@@ -58,6 +60,10 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<GetPostRepo>(() => GetPostRepo(getIt()));
   getIt.registerFactory<GetPostCubit>(() => GetPostCubit(getIt()));
 
+  //delete post
+  getIt.registerLazySingleton<DeletePostRepo>(() => DeletePostRepo(getIt()));
+  getIt.registerFactory<PostDetailsCubit>(() => PostDetailsCubit(getIt()));
+
   // // signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
@@ -71,12 +77,8 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
 
   // Translate text
-  getIt.registerLazySingleton<TranslateTextRepo>(
-    () => TranslateTextRepo(getIt()),
-  );
-  getIt.registerFactory<TranslateAudioAndTextCubit>(
-    () => TranslateAudioAndTextCubit(getIt()),
-  );
+  getIt.registerLazySingleton<TranslateTextRepo>(() => TranslateTextRepo(getIt()),);
+  getIt.registerFactory<TranslateAudioAndTextCubit>(() => TranslateAudioAndTextCubit(getIt()),);
   //LearnAlphabet
   getIt.registerLazySingleton<LearnAlphabetCubit>(
     () => LearnAlphabetCubit(getIt()),

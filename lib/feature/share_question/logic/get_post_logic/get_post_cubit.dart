@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:sanad/core/networking/api_error_handler.dart';
-import 'package:sanad/feature/share_question/data/model/get_post_response_body.dart';
+import 'package:sanad/feature/share_question/data/model/get_post_model/get_post_response_body.dart';
 import 'package:sanad/feature/share_question/data/repo/get_post_repo.dart';
 
-import '../../../core/networking/api_error_model.dart';
+import '../../../../core/networking/api_error_model.dart';
 
 part 'get_post_state.dart';
 
@@ -14,6 +14,7 @@ class GetPostCubit extends Cubit<GetPostState> {
 
   GetPostResponseBody? getPostResponseBody;
   bool isLoading=true;
+
 
   void getPost()async{
 
@@ -38,4 +39,6 @@ class GetPostCubit extends Cubit<GetPostState> {
       isLoading=false;
     }
   }
+
+
 }

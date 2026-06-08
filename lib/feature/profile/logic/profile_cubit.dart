@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:sanad/core/helper/shared_pref_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../feature/profile/data/model/profile_response_body.dart';
 import '../../../feature/profile/data/repo/profile_repo.dart';
@@ -56,6 +58,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     profileImageUrl = '';
 
     if (context.mounted) {
+    // await SharedPrefHelper.removeData("role");
       Navigator.of(
         context,
       ).pushNamedAndRemoveUntil("/loginScreen", (route) => false);

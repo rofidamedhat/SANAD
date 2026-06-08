@@ -1,4 +1,4 @@
-import 'package:sanad/feature/share_question/data/model/get_post_response_body.dart';
+import 'package:sanad/feature/share_question/data/model/get_post_model/get_post_response_body.dart';
 
 import '../../../../core/networking/api_service.dart';
 
@@ -12,4 +12,8 @@ class GetPostRepo{
     return await apiService.getPost();
   }
 
-}
+//   Future<DeletePostResponseBody>deletePost(Map<String,dynamic> content)async{
+//
+//     return await apiService.deletePost(content);
+//   }
+ }

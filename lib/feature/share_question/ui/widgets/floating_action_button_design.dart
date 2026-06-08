@@ -4,7 +4,7 @@ import 'package:sanad/core/extensions/navigation.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/themeing/colors.dart';
-import '../../logic/get_post_cubit.dart';
+import '../../logic/get_post_logic/get_post_cubit.dart';
 
 class FloatingActionButtonDesign extends StatelessWidget {
   const FloatingActionButtonDesign({super.key});
