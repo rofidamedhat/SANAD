@@ -26,6 +26,9 @@ class ApiConstants {
   static const String getPost = "Posts";
   static const String deletePost = "Posts";
 
+  static const String addMedicine = "medications"; 
+  static const String medicineSchedule = "medications/by-day";
+  static const String deleteMedicine = "medications"; 
   static const String translateText = "text-to-speech";
   static const String translateAudio = "speech/transcribe";
   static const String learingLeatters = "Letters";
