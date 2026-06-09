@@ -29,27 +29,19 @@ import 'package:sanad/feature/navigations/navigation_screen.dart';
 import 'package:sanad/feature/onboarding/onboarding_details_screen.dart';
 import 'package:sanad/feature/profile/logic/profile_cubit.dart';
 import 'package:sanad/feature/profile/ui/profile_screen.dart';
-import 'package:sanad/feature/share_question/logic/get_post_cubit.dart';
 import 'package:sanad/feature/post_details/logic/post_details_cubit.dart';
 import 'package:sanad/feature/post_details/ui/post_details_screen.dart';
 import 'package:sanad/feature/share_question/logic/get_post_logic/get_post_cubit.dart';
 import 'package:sanad/feature/share_question/ui/share_questions_screen.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
 import 'package:sanad/feature/signup/ui/signup_screen.dart';
-import 'package:sanad/feature/edit_profile/ui/edit_profile_screen.dart';
-import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
-
-import 'package:sanad/feature/profile/ui/profile_screen.dart';
-import 'package:sanad/feature/profile/logic/profile_cubit.dart';
-
+import 'package:sanad/feature/medicine_schedule/ui/medicine_schedule.dart';
+import 'package:sanad/feature/medicine_schedule/logic/schedule_cubit.dart';
+import 'package:sanad/feature/add_medicine/ui/add_medicine_screen.dart';
+import 'package:sanad/feature/add_medicine/logic/add_medicine_cubit.dart';
+import 'package:sanad/feature/delete_medicine/logic/delete_medicine_cubit.dart';
 import '../../feature/convert_text_to_speech/ui/convert_text_to_speech_screen.dart';
 import '../../feature/onboarding/onboarding_screen.dart';
-
-import 'package:sanad/feature/medicine_schedule/ui/medicine_schedule.dart';
-import 'package:sanad/feature/medicine_schedule/logic/schedule_cubit.dart'; 
-import 'package:sanad/feature/add_medicine/ui/add_medicine_screen.dart';
-import 'package:sanad/feature/add_medicine/logic/add_medicine_cubit.dart';  
-import 'package:sanad/feature/delete_medicine/logic/delete_medicine_cubit.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -68,8 +60,22 @@ class AppRouter {
           ),
         );
 
+      case Routes.loginScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: LoginScreen(),
+          ),
+        );
+
       case Routes.homeVolunteer:
         return MaterialPageRoute(builder: (_) => HomeVolunteerScreen());
+
+      case Routes.homeDeafUser:
+        return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
+
+      case Routes.navigationScreen:
+        return MaterialPageRoute(builder: (_) => NavigationScreen());
 
       case Routes.convertTextToSpeechScreen:
         return MaterialPageRoute(
@@ -78,9 +84,6 @@ class AppRouter {
             child: ConvertTextToSpeechScreen(),
           ),
         );
-
-      case Routes.homeDeafUser:
-        return MaterialPageRoute(builder: (_) => HomeDeafUserScreen());
 
       case Routes.learnSignLangScreen:
         return MaterialPageRoute(builder: (_) => LearnSignLangScreen());
@@ -117,9 +120,6 @@ class AppRouter {
           ),
         );
 
-      case Routes.navigationScreen:
-        return MaterialPageRoute(builder: (_) => NavigationScreen());
-
       case Routes.shareQuestionsScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -141,15 +141,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<PostDetailsCubit>(),
-            child: PostDetailsScreen(addPostResponseData: post,),
-          ),
-        );
-
-      case Routes.loginScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<LoginCubit>(),
-            child: LoginScreen(),
+            child: PostDetailsScreen(addPostResponseData: post),
           ),
         );
 
@@ -168,56 +160,46 @@ class AppRouter {
             child: const EditProfileScreen(),
           ),
         );
+
       case Routes.chatsScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<ChatCubit>(),
-              // ..getMyData()
-              // ..getUsersList(),
             child: ChatsScreen(),
           ),
         );
+
       case Routes.chatDetailsScreen:
         final chatModel = settings.arguments as ChatModel;
-
-<<<<<<< HEAD
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
-            value: getIt<ChatCubit>()
-              // ..getMyData()
-              ..getMessages(chatModel.chatId!),
+            value: getIt<ChatCubit>()..getMessages(chatModel.chatId!),
             child: ChatDetailsScreen(chatModel: chatModel),
           ),
         );
-=======
 
       case Routes.medicineSchedule:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (context) => getIt<ScheduleCubit>(),
-              ),
-              BlocProvider(
-                create: (context) => getIt<DeleteMedicineCubit>(), 
-              ),
+              BlocProvider(create: (context) => getIt<ScheduleCubit>()),
+              BlocProvider(create: (context) => getIt<DeleteMedicineCubit>()),
             ],
             child: const MedicineScheduleScreen(),
           ),
         );
 
-     case Routes.addMedicine:
-  return MaterialPageRoute(
-    builder: (_) => MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getIt<AddMedicineCubit>()),
-        BlocProvider.value(value: getIt<ScheduleCubit>()), 
-      ],
-      child: const AddMedicineScreen(),
-    ),
-  );
+      case Routes.addMedicine:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<AddMedicineCubit>()),
+              BlocProvider.value(value: getIt<ScheduleCubit>()),
+            ],
+            child: const AddMedicineScreen(),
+          ),
+        );
 
->>>>>>> b1a48e37f90f21283b6688287de83a8346541197
       default:
         return null;
     }

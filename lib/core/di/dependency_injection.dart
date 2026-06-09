@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sanad/feature/add_question/data/repo/add_post_repo.dart';
-import 'package:sanad/feature/add_question/logic/add_post_cubit.dart';
 import 'package:sanad/feature/chatting/data/model/chat_model.dart';
 import 'package:sanad/feature/chatting/data/service/fb_services.dart';
 import 'package:sanad/feature/chatting/logic/cubit/chat_cubit.dart';
@@ -27,10 +26,10 @@ import 'package:sanad/feature/share_question/data/repo/get_post_repo.dart';
 import 'package:sanad/feature/share_question/logic/get_post_logic/get_post_cubit.dart';
 import 'package:sanad/feature/signup/data/repo/signup_repo.dart';
 import 'package:sanad/feature/signup/logic/signup_cubit.dart';
-import 'package:sanad/feature/add_medicine/logic/add_medicine_cubit.dart'; 
-import 'package:sanad/feature/add_medicine/data/repo/add_medicine_repo.dart'; 
-import 'package:sanad/feature/medicine_schedule/logic/schedule_cubit.dart'; 
-import 'package:sanad/feature/medicine_schedule/data/repo/schedule_repo.dart'; 
+import 'package:sanad/feature/add_medicine/logic/add_medicine_cubit.dart';
+import 'package:sanad/feature/add_medicine/data/repo/add_medicine_repo.dart';
+import 'package:sanad/feature/medicine_schedule/logic/schedule_cubit.dart';
+import 'package:sanad/feature/medicine_schedule/data/repo/schedule_repo.dart';
 import 'package:sanad/feature/delete_medicine/data/repo/delete_medicine_repo.dart';
 import 'package:sanad/feature/delete_medicine/logic/delete_medicine_cubit.dart';
 import '../../feature/login/data/repos/login_repo.dart';
@@ -41,105 +40,86 @@ import '../networking/dio_factory.dart';
 final getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
-  // 1. Dio & ApiService (الأساس اللي الكل بيعتمد عليه)
+  // Dio & ApiService
   Dio dio = DioFactory.getDio();
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
 
-  // 2. Add Medicine Feature
-  getIt.registerLazySingleton<AddMedicineRepo>(() => AddMedicineRepo(getIt()));
-  getIt.registerFactory<AddMedicineCubit>(() => AddMedicineCubit(getIt()));
-
-
-  // 3. login
+  // Login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
 
-  //add Post
-
-  getIt.registerLazySingleton<AddPostRepo>(() => AddPostRepo(getIt()));
-  getIt.registerFactory<AddPostCubit>(() => AddPostCubit(getIt()));
-  //get post
-  getIt.registerLazySingleton<GetPostRepo>(() => GetPostRepo(getIt()));
-  getIt.registerFactory<GetPostCubit>(() => GetPostCubit(getIt()));
-
-  //delete post
-  getIt.registerLazySingleton<DeletePostRepo>(() => DeletePostRepo(getIt()));
-  getIt.registerFactory<PostDetailsCubit>(() => PostDetailsCubit(getIt()));
-
-  // // signup
-  // 4. signup
+  // Signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
 
-  // 5. edit profile
+  // Add Medicine
+  getIt.registerLazySingleton<AddMedicineRepo>(() => AddMedicineRepo(getIt()));
+  getIt.registerFactory<AddMedicineCubit>(() => AddMedicineCubit(getIt()));
+
+  // Medicine Schedule
+  getIt.registerLazySingleton<ScheduleRepo>(() => ScheduleRepo(getIt()));
+  getIt.registerFactory<ScheduleCubit>(() => ScheduleCubit(getIt()));
+
+  // Delete Medicine
+  getIt.registerLazySingleton<DeleteMedicineRepo>(
+    () => DeleteMedicineRepo(getIt()),
+  );
+  getIt.registerFactory<DeleteMedicineCubit>(
+    () => DeleteMedicineCubit(getIt()),
+  );
+
+  // Add Post
+  getIt.registerLazySingleton<AddPostRepo>(() => AddPostRepo(getIt()));
+  getIt.registerFactory<AddPostCubit>(() => AddPostCubit(getIt()));
+
+  // Get Post
+  getIt.registerLazySingleton<GetPostRepo>(() => GetPostRepo(getIt()));
+  getIt.registerFactory<GetPostCubit>(() => GetPostCubit(getIt()));
+
+  // Delete Post
+  getIt.registerLazySingleton<DeletePostRepo>(() => DeletePostRepo(getIt()));
+  getIt.registerFactory<PostDetailsCubit>(() => PostDetailsCubit(getIt()));
+
+  // Edit Profile
   getIt.registerLazySingleton<EditProfileRepo>(() => EditProfileRepo(getIt()));
   getIt.registerFactory<EditProfileCubit>(() => EditProfileCubit(getIt()));
-  getIt.registerFactory<EditProfileRepo>(() => EditProfileRepo(getIt()));
-  // profile
+
+  // Profile
   getIt.registerLazySingleton<ProfileRepository>(
     () => ProfileRepository(getIt()),
   );
   getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt(), getIt()));
 
-  // Translate text
-  getIt.registerLazySingleton<TranslateTextRepo>(() => TranslateTextRepo(getIt()),);
-  getIt.registerFactory<TranslateAudioAndTextCubit>(() => TranslateAudioAndTextCubit(getIt()),);
-  //LearnAlphabet
-  getIt.registerLazySingleton<LearnAlphabetCubit>(
-    () => LearnAlphabetCubit(getIt()),
+  // Translate Text / Audio
+  getIt.registerLazySingleton<TranslateTextRepo>(
+    () => TranslateTextRepo(getIt()),
   );
+  getIt.registerFactory<TranslateAudioAndTextCubit>(
+    () => TranslateAudioAndTextCubit(getIt()),
+  );
+
+  // Learn Alphabet
   getIt.registerLazySingleton<LearnAlphabetRepo>(
     () => LearnAlphabetRepo(getIt()),
   );
-  //LearnNumbers
-  getIt.registerLazySingleton<LearnNumberCubit>(
-    () => LearnNumberCubit(getIt()),
-  );
-
-  // 6. profile
-  getIt.registerLazySingleton<ProfileRepository>(() => ProfileRepository(getIt()));
-  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
-
-  // 7. Translate text
-  getIt.registerLazySingleton<TranslateTextRepo>(() => TranslateTextRepo(getIt()));
-  getIt.registerFactory<TranslateAudioAndTextCubit>(() => TranslateAudioAndTextCubit(getIt()));
-
-  // 8. Learn Alphabet
-  getIt.registerLazySingleton<LearnAlphabetRepo>(() => LearnAlphabetRepo(getIt()));
   getIt.registerFactory<LearnAlphabetCubit>(() => LearnAlphabetCubit(getIt()));
 
-  // 9. Learn Numbers
+  // Learn Numbers
   getIt.registerLazySingleton<LearnNumberRepo>(() => LearnNumberRepo(getIt()));
   getIt.registerFactory<LearnNumberCubit>(() => LearnNumberCubit(getIt()));
 
-  // 10. Learn Famous Words
+  // Learn Famous Words
   getIt.registerLazySingleton<LearnWordsRepo>(() => LearnWordsRepo(getIt()));
   getIt.registerFactory<LearnWordsCubit>(() => LearnWordsCubit(getIt()));
 
-  // 11. Learn Videos
+  // Learn Videos
   getIt.registerLazySingleton<LearnVideosRepo>(() => LearnVideosRepo(getIt()));
+  getIt.registerFactory<LearnVideosCubit>(() => LearnVideosCubit(getIt()));
 
+  // Firebase Chat
   getIt.registerLazySingleton<FireBaseService>(() => FireBaseService());
   getIt.registerLazySingleton<ChatCubit>(() => ChatCubit(getIt()));
   getIt.registerFactory<ChatDetailsScreen>(
     () => ChatDetailsScreen(chatModel: ChatModel()),
   );
-
-  // // home
-  // getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
-  // getIt.registerFactory<HomeCubit>(
-  //   () => HomeCubit(getIt())..getSpecialization(),
-  // );
-
-  getIt.registerFactory<LearnVideosCubit>(() => LearnVideosCubit(getIt()));
-
- // Schedule
-  getIt.registerLazySingleton<ScheduleRepo>(() => ScheduleRepo(getIt()));
-  getIt.registerFactory<ScheduleCubit>(() => ScheduleCubit(getIt()));
-
-// 1. تسجيل الـ Repository بتاع مسح الأدوية
-getIt.registerLazySingleton<DeleteMedicineRepo>(() => DeleteMedicineRepo(getIt()));
-
-// 2. تسجيل الـ Cubit بتاعه
-getIt.registerFactory<DeleteMedicineCubit>(() => DeleteMedicineCubit(getIt()));
 }
