@@ -19,9 +19,6 @@ import '../../feature/add_medicine/data/model/add_medicine_response_body.dart';
 import 'package:sanad/feature/medicine_schedule/data/model/medicine_schedule_response.dart';
 import 'package:sanad/feature/delete_medicine/data/model/delete_medicine_request.dart';
 import 'package:sanad/feature/delete_medicine/data/model/delete_medicine_response.dart';
-
-
-
 import 'api_constants.dart';
 
 part 'api_service.g.dart';
@@ -45,7 +42,9 @@ abstract class ApiService {
   Future<GetPostResponseBody> getPost();
 
   @DELETE(ApiConstants.deletePost)
-  Future<DeletePostResponseBody> deletePost(@Body() Map<String,dynamic> content);
+  Future<DeletePostResponseBody> deletePost(
+    @Body() Map<String, dynamic> content,
+  );
 
   @MultiPart()
   @PUT("profile")
@@ -63,12 +62,11 @@ abstract class ApiService {
   @POST(ApiConstants.translateAudio)
   @MultiPart()
   Future<AudioResponseBody> uploadAudio(
-      @Part(name: "File") MultipartFile audio,
-      );
+    @Part(name: "File") MultipartFile audio,
+  );
 
   @POST(ApiConstants.addPost)
-  Future<AddPostResponseBody> addPost(@Body() Map<String,dynamic> content);
-
+  Future<AddPostResponseBody> addPost(@Body() Map<String, dynamic> content);
 
   @GET(ApiConstants.learingLeatters)
   Future<LearnAlphabetModel> getLetters(
@@ -91,19 +89,18 @@ abstract class ApiService {
   @GET(ApiConstants.learingVideos)
   Future<LearnVideosModel> getVideos();
 
- @POST(ApiConstants.addMedicine)
+  @POST(ApiConstants.addMedicine)
   Future<AddMedicineResponse> addMedicine(
     @Body() AddMedicineRequestBody addMedicineRequestBody,
   );
 
- @GET(ApiConstants.medicineSchedule)
+  @GET(ApiConstants.medicineSchedule)
   Future<MedicineScheduleResponse> getMedicineSchedule(
-  @Query("day") String day
+    @Query("day") String day,
   );
 
-  @DELETE(ApiConstants.deleteMedicine) 
-Future<DeleteMedicineResponse> deleteMedicine({
-  @Body() required DeleteMedicineRequestBody body,
-});
-
+  @DELETE(ApiConstants.deleteMedicine)
+  Future<DeleteMedicineResponse> deleteMedicine(
+    @Body() DeleteMedicineRequestBody body,
+  );
 }
