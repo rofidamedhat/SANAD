@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/colors.dart';
 
-import '../../../../core/themeing/text_styles.dart';
+import '../themeing/text_styles.dart';
 
 class ResultTextCard extends StatelessWidget {
   final String text;
