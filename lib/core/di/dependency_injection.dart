@@ -8,6 +8,8 @@ import 'package:sanad/feature/chatting/ui/chat_details_screen.dart';
 import 'package:sanad/feature/add_question/logic/add_post_logic/add_post_cubit.dart';
 import 'package:sanad/feature/convert_text_to_speech/data/repo/translate_text_repo.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
+import 'package:sanad/feature/convert_video_to_text/data/repo/convert_video_repo.dart';
+import 'package:sanad/feature/convert_video_to_text/logic/convert_video_to_text_cubit.dart';
 import 'package:sanad/feature/edit_profile/data/repo/edit_profile_repo.dart';
 import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
 import 'package:sanad/feature/learn_alphabet/data/repos/learn_alphabet_repo.dart';
@@ -75,7 +77,9 @@ Future<void> setupGetIt() async {
   // Get Post
   getIt.registerLazySingleton<GetPostRepo>(() => GetPostRepo(getIt()));
   getIt.registerFactory<GetPostCubit>(() => GetPostCubit(getIt()));
-
+  //convert video
+  getIt.registerLazySingleton<ConvertVideoRepo>(() => ConvertVideoRepo(getIt()));
+  getIt.registerFactory<ConvertVideoToTextCubit>(() => ConvertVideoToTextCubit(getIt()));
   // Delete Post
   getIt.registerLazySingleton<DeletePostRepo>(() => DeletePostRepo(getIt()));
   getIt.registerFactory<PostDetailsCubit>(() => PostDetailsCubit(getIt()));

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
+import 'package:sanad/feature/convert_video_to_text/logic/convert_video_to_text_cubit.dart';
 
 class RecordVideoButton extends StatelessWidget {
   const RecordVideoButton({super.key});
@@ -9,7 +11,9 @@ class RecordVideoButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
-      onPressed: (){},//_recordVideoWithCamera, // الفانكشن بتاعة فتح الكاميرا فوراً
+      onPressed: (){
+        context.read<ConvertVideoToTextCubit>().recordVideoInsideApp();
+      }, // الفانكشن بتاعة فتح الكاميرا فوراً
       icon: const Icon(Icons.videocam_rounded, size: 25),
       label:  Text(
         "تسجيل فيديو",
