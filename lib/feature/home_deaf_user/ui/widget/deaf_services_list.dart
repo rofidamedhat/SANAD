@@ -40,15 +40,14 @@ class DeafServicesList extends StatelessWidget {
           icon: Icons.video_file_outlined,
           iconColor: Colors.blue,
           onTap: () {},
-          // imagePath: 'assets/svgs/text_to_vid.svg',
         ),
         ServiceCard(
           title: 'جدول مواعيد \n العلاج ',
           icon: Icons.medical_information,
           iconColor: Colors.blue,
-          onTap: () {context.pushNamed(Routes.medicineSchedule);
-           },
-          // imagePath: "assets/svgs/mid_cal.svg",
+          onTap: () {
+            context.pushNamed(Routes.medicineSchedule);
+          },
         ),
         ServiceCard(
           title: 'مشاركة الاسئلة',
@@ -58,13 +57,7 @@ class DeafServicesList extends StatelessWidget {
             context.pushNamed(Routes.shareQuestionsScreen);
           },
         ),
-
-        // ServiceCard(
-        //   title: 'المحادثة الجماعية',
-        //   icon: Icons.chat_bubble_outline,
-        //   iconColor: Colors.blue,
-        //   onTap: () {},
-        // ),
+     
       ],
     );
   }
