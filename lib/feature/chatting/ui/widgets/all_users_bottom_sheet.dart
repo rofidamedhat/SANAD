@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sanad/core/helper/spaces.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
-import 'package:sanad/feature/chatting/data/model/chat_model.dart';
 import 'package:sanad/feature/chatting/data/model/fb_user_model.dart';
 import 'package:sanad/feature/chatting/logic/cubit/chat_cubit.dart';
 import 'package:sanad/feature/chatting/ui/widgets/image_widget.dart';
@@ -37,12 +36,10 @@ class AllUsersBottomSheet extends StatelessWidget {
             child: BlocBuilder<ChatCubit, ChatState>(
               builder: (context, state) {
                 var cubit = context.read<ChatCubit>();
-                List<ChatModel> recentChats = (state is RecentChatsLoaded)
-                    ? state.recentChats
-                    : [];
-                List<FbUserModel> filteredUsers = cubit.getUsersNotChattedWith(
-                  recentChats,
-                );
+
+                List<FbUserModel> filteredUsers = cubit
+                    .getUsersNotChattedWith();
+
                 if (filteredUsers.isEmpty) {
                   return Center(
                     child: Text(
@@ -85,7 +82,7 @@ class AllUsersBottomSheet extends StatelessWidget {
   }
 
   Widget _buildUserTypeTag(String? type) {
-    bool isVolunteer = type == 'volunteer';
+    bool isVolunteer = type == 'Volunteer';
     return Row(
       children: [
         Icon(

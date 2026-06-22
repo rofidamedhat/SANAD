@@ -759,6 +759,16 @@ packages:
       sha256: ef5cd5f907157eb7aa87d1704504b5a6386d2cbff88a3c2b3344477bab323ee9
       url: "https://pub.dev"
     source: hosted
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
+  lean_builder:
+    dependency: transitive
+    description:
+      name: lean_builder
+      sha256: ef5cd5f907157eb7aa87d1704504b5a6386d2cbff88a3c2b3344477bab323ee9
+      url: "https://pub.dev"
+    source: hosted
     version: "0.1.2"
   lints:
     dependency: transitive

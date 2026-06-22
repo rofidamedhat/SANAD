@@ -73,7 +73,6 @@ class _EditProfileViewState extends State<_EditProfileView> {
         listener: (context, state) {
           if (state is EditProfileSuccess) {
             context.read<ProfileCubit>().loadProfile();
-
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text(

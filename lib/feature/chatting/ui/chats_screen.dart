@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sanad/core/constants.dart';
 import 'package:sanad/core/di/dependency_injection.dart';
 import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/feature/chatting/logic/cubit/chat_cubit.dart';
@@ -22,11 +23,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
   @override
   void initState() {
     super.initState();
-    if (_chatCubit.currentUser == null) {
+    _chatCubit.getMyData();
+    _chatCubit.getUsersList();
+    _chatCubit.getRecentChats();
+    if (isEditProfile) {
       _chatCubit.getMyData();
-    }
-    if (_chatCubit.allUsers.isEmpty) {
-      _chatCubit.getUsersList();
     }
   }
 

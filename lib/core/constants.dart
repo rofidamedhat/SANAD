@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sanad/core/themeing/text_styles.dart';
 import 'package:sanad/core/extensions/navigation.dart';
+import 'package:sanad/core/themeing/text_styles.dart';
 bool isLoginUser = false;
 bool isVolunteer=false;
+bool isEditProfile =false;
+
 // class SharedPrefKeys {
 //   static const String userToken = 'userToken';
 // }
