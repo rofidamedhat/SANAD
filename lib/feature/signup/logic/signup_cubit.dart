@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:sanad/core/helper/shared_pref_helper.dart';
@@ -47,7 +48,7 @@ class SignupCubit extends Cubit<SignupState> {
         await SharedPrefHelper.setData("uId", uId);
         await SharedPrefHelper.setData("role", signupResponseBody!.role!);
         DioFactory.setTokenIntoHeaderAfterLogin(signupResponseBody!.token!);
-
+        await FirebaseMessaging.instance.subscribeToTopic("all_users");
         emit(SignupSuccessfully(signupResponseBody: signupResponseBody!));
       } else {
         print("Error from else ");
