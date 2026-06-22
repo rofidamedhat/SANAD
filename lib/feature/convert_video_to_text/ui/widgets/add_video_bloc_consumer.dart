@@ -30,7 +30,7 @@ class AddVideoBlocConsumer extends StatelessWidget {
           context.read<ConvertVideoToTextCubit>().initializeVideo(
             state.videoPath,
           );
-        } else if (state is VideoPickError) {
+        } else if (state is VideoPickError || state is ConvertVideoToTextInitial) {
           context.pop(); // قفل الـ dialog لو حصل أيرور
         }
       },

@@ -42,6 +42,7 @@ class DeafServicesList extends StatelessWidget {
          
           onTap: () {
             context.pushNamed(Routes.convertVideoToTextScreen);
+
           },
           // imagePath: 'assets/svgs/text_to_vid.svg',
         ),
