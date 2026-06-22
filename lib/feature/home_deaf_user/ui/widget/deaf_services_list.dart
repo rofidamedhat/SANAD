@@ -39,7 +39,11 @@ class DeafServicesList extends StatelessWidget {
           title: ' تحويل الفيديو \n ل نص',
           icon: Icons.video_file_outlined,
           iconColor: Colors.blue,
-          onTap: () {},
+         
+          onTap: () {
+            context.pushNamed(Routes.convertVideoToTextScreen);
+          },
+          // imagePath: 'assets/svgs/text_to_vid.svg',
         ),
         ServiceCard(
           title: 'جدول مواعيد \n العلاج ',

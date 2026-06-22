@@ -7,6 +7,7 @@ import 'package:sanad/sanad_app.dart';
 import 'package:sanad/core/services/notification_service.dart'; 
 import 'core/constants.dart';
 import 'core/di/dependency_injection.dart';
+import 'core/helper/notification_service.dart';
 import 'core/helper/shared_pref_helper.dart';
 import 'package:intl/date_symbol_data_local.dart'; 
 import 'package:permission_handler/permission_handler.dart';
@@ -23,6 +24,8 @@ if (alarmStatus.isDenied || alarmStatus.isPermanentlyDenied) {
   openAppSettings(); 
 }
 
+  // await NotificationService.requestPermission();
+  // await NotificationService.setupNotifications();
   await initializeDateFormatting('ar', null);
 
   setupGetIt();

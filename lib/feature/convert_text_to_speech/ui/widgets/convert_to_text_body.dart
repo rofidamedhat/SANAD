@@ -11,7 +11,7 @@ import 'package:sanad/core/helper/strings.dart';
 import 'package:sanad/core/themeing/colors.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/convert_text_to_speech/ui/widgets/record_button_listen.dart';
-import 'package:sanad/feature/convert_text_to_speech/ui/widgets/result_text_card.dart';
+import 'package:sanad/core/widgets/result_text_card.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
