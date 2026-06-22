@@ -39,6 +39,7 @@ class DeafServicesList extends StatelessWidget {
           title: ' تحويل الفيديو \n ل نص',
           icon: Icons.video_file_outlined,
           iconColor: Colors.blue,
+         
           onTap: () {
             context.pushNamed(Routes.convertVideoToTextScreen);
           },
@@ -48,9 +49,9 @@ class DeafServicesList extends StatelessWidget {
           title: 'جدول مواعيد \n العلاج ',
           icon: Icons.medical_information,
           iconColor: Colors.blue,
-          onTap: () {context.pushNamed(Routes.medicineSchedule);
-           },
-          // imagePath: "assets/svgs/mid_cal.svg",
+          onTap: () {
+            context.pushNamed(Routes.medicineSchedule);
+          },
         ),
         ServiceCard(
           title: 'مشاركة الاسئلة',
@@ -60,13 +61,7 @@ class DeafServicesList extends StatelessWidget {
             context.pushNamed(Routes.shareQuestionsScreen);
           },
         ),
-
-        // ServiceCard(
-        //   title: 'المحادثة الجماعية',
-        //   icon: Icons.chat_bubble_outline,
-        //   iconColor: Colors.blue,
-        //   onTap: () {},
-        // ),
+     
       ],
     );
   }
