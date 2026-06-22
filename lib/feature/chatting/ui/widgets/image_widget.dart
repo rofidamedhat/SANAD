@@ -21,7 +21,7 @@ class ImageWidget extends StatelessWidget {
                 imageUrl != "null" &&
                 imageUrl != "default")
             ? Image.network(
-                "https://sanadapllication2025api.premiumasp.net${imageUrl ?? ''}",
+              imageUrl!,
                 width: 40,
                 height: 40,
                 fit: BoxFit.cover,

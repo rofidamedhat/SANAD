@@ -40,7 +40,6 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
               builder: (context, state) {
                 var cubit = context.read<ChatCubit>();
                 var messages = cubit.messagesList;
-             
                 if (cubit.messagesList.isEmpty) {
                   return const Center(child: Text("ابدأ المحادثة الآن.."));
                 }

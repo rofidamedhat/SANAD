@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sanad/feature/chatting/data/model/chat_model.dart';
 import 'package:sanad/feature/chatting/data/model/fb_user_model.dart';
 import 'package:sanad/feature/chatting/data/model/message_model.dart';
 
@@ -95,16 +94,5 @@ class FireBaseService {
     }
   }
 
-  Stream<List<ChatModel>> getRecentChatsStream(String myId) {
-    return _firestore
-        .collection('chats')
-        .where('uIds', arrayContains: myId)
-        .snapshots()
-        .map((snapshot) {
-          log("عدد الشاتات اللي رجعت من الفايربيز: ${snapshot.docs.length}"); // 👈 ضيفي السطر ده
-          return snapshot.docs.map((doc) {
-            return ChatModel.fromJson(doc.data());
-          }).toList();
-        });
-  }
+
 }

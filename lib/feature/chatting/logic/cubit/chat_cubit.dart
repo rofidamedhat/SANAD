@@ -21,19 +21,19 @@ class ChatCubit extends Cubit<ChatState> {
   List<MessageModel> messagesList = [];
 
   StreamSubscription? _recentChatsSubscription;
+  StreamSubscription? _usersSubscription;
 
   Future<void> getMyData() async {
     print(
       "🕵️‍♂️ WHO CALLED getMyData ? StackTrace: ${StackTrace.current.toString().split('\n')[1]}",
     );
-
     emit(ChatLoading());
     try {
       String? myId = await SharedPrefHelper.getString("uId");
       if (myId != null) {
         currentUser = await _fireBaseService.getCurrentUserData(myId);
-
         if (currentUser != null) {
+          getUsersList();
           getRecentChats();
           emit(GetMyDataSuccessState());
         } else {
@@ -56,11 +56,18 @@ class ChatCubit extends Cubit<ChatState> {
     try {
       String? myId = await SharedPrefHelper.getString("uId");
       if (myId != null) {
-        _fireBaseService.getAllUsers(myId).listen((usersList) {
+        _usersSubscription?.cancel();
+
+        _usersSubscription = _fireBaseService.getAllUsers(myId).listen((
+          usersList,
+        ) {
           if (isClosed) return;
           allUsers = usersList;
           emit(UsersLoaded(users: allUsers));
         });
+        if (recentChats.isNotEmpty) {
+          getRecentChats();
+        }
       } else {
         emit(ChatError(message: "User ID not found in storage"));
       }
@@ -97,55 +104,61 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   void getRecentChats() {
+    print(
+      "🕵️‍♂️ WHO CALLED getRecentChats ? StackTrace: ${StackTrace.current.toString().split('\n')[1]}",
+    );
     if (currentUser?.uId == null) return;
 
     _recentChatsSubscription?.cancel();
 
-    _recentChatsSubscription = _fireBaseService
-        .getRecentChatsStream(currentUser!.uId)
-        .listen((chats) {
+    _recentChatsSubscription = FirebaseFirestore.instance
+        .collection('chats')
+        .where('uIds', arrayContains: currentUser?.uId)
+        .snapshots()
+        .listen((event) {
           if (isClosed) return;
 
-          List<ChatModel> processedChats = chats.map((chat) {
-            log("معالجة الشات: ${chat.chatId} - المستخدمين فيه: ${chat.uIds}");
-            String otherUserId = chat.uIds!.firstWhere(
-              (id) => id != currentUser!.uId,
-              orElse: () => "",
-            );
-            log("الطرف التاني في الشات هو: $otherUserId");
-            try {
-              var otherUser = allUsers.firstWhere(
-                (user) => user.uId == otherUserId,
+          recentChats.clear();
+
+          for (var doc in event.docs) {
+            var chat = ChatModel.fromJson(doc.data());
+            if (chat.receiverId == currentUser?.uId) {
+              String otherUserId = chat.uIds!.firstWhere(
+                (id) => id != currentUser?.uId,
+                orElse: () => "",
               );
-              return chat.copyWith(
-                receiverName: otherUser.name,
-                receiverImage: otherUser.image,
-                receiverId: otherUser.uId,
-              );
-            } catch (e) {
-              log("Error in mapping: $e - UserID: $otherUserId");
-              return chat;
+              try {
+                var otherUser = allUsers.firstWhere(
+                  (user) => user.uId == otherUserId,
+                );
+                chat = chat.copyWith(
+                  receiverName: otherUser.name,
+                  receiverImage: otherUser.image,
+                  receiverId: otherUser.uId,
+                );
+              } catch (e) {
+                log("الشخص التاني مش موجود في قائمة allUsers");
+              }
             }
-          }).toList();
-          processedChats.sort(
+            recentChats.add(chat);
+          }
+          recentChats.sort(
             (a, b) => (b.lastTime ?? "").compareTo(a.lastTime ?? ""),
           );
-          log("عدد الشاتات المعالجة: ${processedChats.length}");
-          for (var chat in processedChats) {
-            log("الشات: ${chat.chatId} | الاسم: ${chat.receiverName}");
-          }
-          emit(RecentChatsLoaded(recentChats: processedChats));
+          emit(RecentChatsLoaded(recentChats: List.from(recentChats)));
         });
   }
 
-  List<FbUserModel> getUsersNotChattedWith(List<ChatModel> recentChats) {
-    List<String> chattedUserIds = recentChats.map((chat) {
-      return chat.uIds!.firstWhere((id) => id != currentUser!.uId);
-    }).toList();
-
-    return allUsers
-        .where((user) => !chattedUserIds.contains(user.uId))
+  List<FbUserModel> getUsersNotChattedWith() {
+    print(
+      "🕵️‍♂️ WHO CALLED getUsersNotChattedWith ? StackTrace: ${StackTrace.current.toString().split('\n')[1]}",
+    );
+    List<String?> chattedUserIds = recentChats
+        .map((chat) => chat.receiverId)
         .toList();
+    return allUsers.where((user) {
+      return !chattedUserIds.contains(user.uId);
+    }).toList();
   }
 
   Future<void> sendMessage({
@@ -173,86 +186,36 @@ class ChatCubit extends Cubit<ChatState> {
     }
   }
 
-  void getMessages(String chatId) {
-    print(
-      "🕵️‍♂️ WHO CALLED getMessages ? StackTrace: ${StackTrace.current.toString().split('\n')[1]}",
-    );
-    _fireBaseService.getMessages(chatId).listen((messages) {
-      if (isClosed) return;
+    void getMessages(String chatId) {
+      print(
+        "🕵️‍♂️ WHO CALLED getMessages ? StackTrace: ${StackTrace.current.toString().split('\n')[1]}",
+      );
+      _fireBaseService.getMessages(chatId).listen((messages) {
+        if (isClosed) return;
 
-      messagesList = messages;
-      log("Messages Updated: ${messagesList.length} messages");
+        messagesList = messages;
+        if (messages.isNotEmpty) {
+        var lastMsg = messages.first; // لأننا مرتبينهم descending
+        
+        int index = recentChats.indexWhere((c) => c.chatId == chatId);
+        if (index != -1) {
+          recentChats[index] = recentChats[index].copyWith(
+            lastMessage: lastMsg.text,
+            lastTime: lastMsg.dateTime,
+          );
+          emit(RecentChatsLoaded(recentChats: List.from(recentChats)));
+        }
+      }
+        log("Messages Updated: ${messagesList.length} messages");
 
-      emit(GetMessagesSuccessState());
-    });
-  }
+        emit(GetMessagesSuccessState());
+      });
+    }
 
   @override
   Future<void> close() {
     _recentChatsSubscription?.cancel();
+    _usersSubscription?.cancel();
     return super.close();
   }
 }
-
-//الكود القيديم الي ف get recent chat
-    // void getRecentChatss() {
-  //   print(
-  //     "🕵️‍♂️ WHO CALLED getRecentChats ? StackTrace: ${StackTrace.current.toString().split('\n')[1]}",
-  //   );
-  //   if (currentUser?.uId == null) return;
-
-  //   // 👈 لو فيه مستمع قديم شغال، اقفله فوراً قبل ما تفتح جديد
-  //   _recentChatsSubscription?.cancel();
-
-  //   _recentChatsSubscription = FirebaseFirestore.instance
-  //       .collection('chats')
-  //       .where('uIds', arrayContains: currentUser?.uId)
-  //       .snapshots()
-  //       .listen((event) {
-  //         if (isClosed) return;
-
-  //         recentChats.clear();
-
-  //         for (var doc in event.docs) {
-  //           var chat = ChatModel.fromJson(doc.data());
-  //           if (chat.receiverId == currentUser?.uId) {
-  //             String otherUserId = chat.uIds!.firstWhere(
-  //               (id) => id != currentUser?.uId,
-  //               orElse: () => "",
-  //             );
-  //             try {
-  //               var otherUser = allUsers.firstWhere(
-  //                 (user) => user.uId == otherUserId,
-  //               );
-  //               chat = chat.copyWith(
-  //                 receiverName: otherUser.name,
-  //                 receiverImage: otherUser.image,
-  //                 receiverId: otherUser.uId,
-  //               );
-  //             } catch (e) {
-  //               log("الشخص التاني مش موجود في قائمة allUsers");
-  //             }
-  //           }
-
-  //           recentChats.add(chat);
-  //         }
-
-  //         // ترتيب الشاتات بأمان مع الـ Null
-  //         recentChats.sort(
-  //           (a, b) => (b.lastTime ?? "").compareTo(a.lastTime ?? ""),
-  //         );
-  //         emit(RecentChatsLoaded(recentChats: List.from(recentChats)));
-  //       });
-  // }
-
-  // List<FbUserModel> getUsersNotChattedWith() {
-  //   print(
-  //     "🕵️‍♂️ WHO CALLED getUsersNotChattedWith ? StackTrace: ${StackTrace.current.toString().split('\n')[1]}",
-  //   );
-  //   List<String?> chattedUserIds = recentChats
-  //       .map((chat) => chat.receiverId)
-  //       .toList();
-  //   return allUsers.where((user) {
-  //     return !chattedUserIds.contains(user.uId);
-  //   }).toList();
-  // }

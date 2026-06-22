@@ -10,7 +10,6 @@ class ChatRowWidget extends StatelessWidget {
   final ChatModel item;
   @override
   Widget build(BuildContext context) {
-    // log("  للمحادث مع: ${item.receiverName} (معرف المحادثة: ${item.chatId})  ");
     return ListTile(
       onTap: () => context.pushNamed(Routes.chatDetailsScreen, arguments: item),
       contentPadding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
@@ -25,7 +24,6 @@ class ChatRowWidget extends StatelessWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-
       trailing: Text(
         _formatChatTime(item.lastTime),
         style: const TextStyle(color: Colors.grey, fontSize: 12),

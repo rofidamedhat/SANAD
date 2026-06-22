@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:sanad/core/helper/shared_pref_helper.dart';
 import 'package:sanad/feature/chatting/data/service/fb_services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../feature/profile/data/model/profile_response_body.dart';
 import '../../../feature/profile/data/repo/profile_repo.dart';
@@ -39,10 +38,11 @@ class ProfileCubit extends Cubit<ProfileState> {
           name: name,
           email: email,
           role: role,
-          image: profileImageUrl,
+          image:
+              "https://sanadapllication2025api.premiumasp.net$profileImageUrl",
         );
       }
-      //
+
       emit(ProfileLoaded());
     } catch (e) {
       debugPrint("Profile Error: ${e.toString()}");
@@ -72,7 +72,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     profileImageUrl = '';
 
     if (context.mounted) {
-    // await SharedPrefHelper.removeData("role");
+      // await SharedPrefHelper.removeData("role");
       Navigator.of(
         context,
       ).pushNamedAndRemoveUntil("/loginScreen", (route) => false);

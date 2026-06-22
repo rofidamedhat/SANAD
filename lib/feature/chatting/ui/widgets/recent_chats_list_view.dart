@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sanad/feature/chatting/data/model/chat_model.dart';
 import 'package:sanad/feature/chatting/logic/cubit/chat_cubit.dart';
 import 'package:sanad/feature/chatting/ui/widgets/chat_row_widget.dart';
 
@@ -12,19 +11,19 @@ class RecentChatsListView extends StatelessWidget {
     return Expanded(
       child: BlocBuilder<ChatCubit, ChatState>(
         builder: (context, state) {
-          List<ChatModel> chatList = [];
+          var cubit = context.read<ChatCubit>();
+
           if (state is ChatLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (state is RecentChatsLoaded) {
-            chatList = state.recentChats;
-          }
-          if (chatList.isEmpty) {
+
+          if (cubit.recentChats.isEmpty) {
             return const Center(child: Text("ابدأ المحادثة الآن"));
           }
+
           return ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            itemCount: chatList.length,
+            itemCount: cubit.recentChats.length,
             separatorBuilder: (context, index) => const Divider(
               height: 1,
               indent: 15,
@@ -32,7 +31,8 @@ class RecentChatsListView extends StatelessWidget {
               color: Color(0xFFE0E0E0),
             ),
             itemBuilder: (context, index) {
-              return ChatRowWidget(item: chatList[index]);
+              var chat = cubit.recentChats[index];
+              return ChatRowWidget(item: chat);
             },
           );
         },
@@ -40,3 +40,4 @@ class RecentChatsListView extends StatelessWidget {
     );
   }
 }
+

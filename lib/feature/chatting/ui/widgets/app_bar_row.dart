@@ -16,6 +16,7 @@ class AppBarRow extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+         
           Row(
             children: [
               cubit.currentUser == null
