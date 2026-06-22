@@ -34,6 +34,7 @@ final ImagePicker picker = ImagePicker();
         isRecord=true;
       } else {
         isRecord=false;
+        emit(ConvertVideoToTextInitial());
         print("المستخدم كنسل التصوير");
       }
     }catch(error,stackTrace){
@@ -58,6 +59,7 @@ final ImagePicker picker = ImagePicker();
        emit(VideoPickSuccess(video.path));
      } else {
        isSelect=false;
+       emit(ConvertVideoToTextInitial());
        print("المستخدم كنسل الاختيار");
      }
    }catch(error,stackTrace){

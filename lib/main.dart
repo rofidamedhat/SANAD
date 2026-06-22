@@ -24,8 +24,8 @@ if (alarmStatus.isDenied || alarmStatus.isPermanentlyDenied) {
   openAppSettings(); 
 }
 
-  // await NotificationService.requestPermission();
-  // await NotificationService.setupNotifications();
+  await NotificationPostService.requestPermission();
+  await NotificationPostService.setupNotifications();
   await initializeDateFormatting('ar', null);
 
   setupGetIt();
