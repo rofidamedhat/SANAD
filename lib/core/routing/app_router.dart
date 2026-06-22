@@ -13,6 +13,8 @@ import 'package:sanad/feature/chatting/ui/chat_details_screen.dart';
 import 'package:sanad/feature/chatting/ui/chats_screen.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
 import 'package:sanad/feature/delete_medicine/logic/delete_medicine_cubit.dart';
+import 'package:sanad/feature/convert_video_to_text/logic/convert_video_to_text_cubit.dart';
+import 'package:sanad/feature/convert_video_to_text/ui/convert_video_to_text_screen.dart';
 import 'package:sanad/feature/edit_profile/logic/edit_profile_cubit.dart';
 import 'package:sanad/feature/edit_profile/ui/edit_profile_screen.dart';
 import 'package:sanad/feature/home_deaf_user/ui/home_deaf_user_screen.dart';
@@ -88,7 +90,11 @@ class AppRouter {
 
       case Routes.learnSignLangScreen:
         return MaterialPageRoute(builder: (_) => LearnSignLangScreen());
-
+      case Routes.convertVideoToTextScreen:
+        return MaterialPageRoute(builder: (_) => BlocProvider(
+  create: (context) => getIt<ConvertVideoToTextCubit>(),
+  child: ConvertVideoToTextScreen(),
+));
       case Routes.learnAlphabetScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(

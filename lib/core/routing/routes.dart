@@ -39,6 +39,7 @@ class Routes {
   static const String medicineSchedule = '/medicineScheduleScreen';
   static const String addMedicine = '/addMedicineScreen';
   static const String deleteMedicine = '/deleteMedicineScreen';
+  static const String convertVideoToTextScreen = '/convertVideoToTextScreen';
 
 
 

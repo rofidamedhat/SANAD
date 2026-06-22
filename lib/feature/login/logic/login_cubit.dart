@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:sanad/core/helper/shared_pref_helper.dart';
@@ -36,7 +37,7 @@ class LoginCubit extends Cubit<LoginState> {
         await SharedPrefHelper.setData("uId", uId);
         await SharedPrefHelper.setData("role", loginResponse!.role!);
         DioFactory.setTokenIntoHeaderAfterLogin(loginResponse!.token!);
-
+        await FirebaseMessaging.instance.subscribeToTopic("all_users");
         emit(LoginSuccessfully(loginResponseBody: loginResponse!));
       } else {
         print("Error from response ${loginResponse!.message}");

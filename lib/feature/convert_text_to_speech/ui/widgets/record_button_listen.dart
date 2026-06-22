@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sanad/core/extensions/navigation.dart';
 import 'package:sanad/feature/convert_text_to_speech/logic/translate_audio_and_text_cubit.dart';
-import 'package:sanad/feature/convert_text_to_speech/ui/widgets/result_text_card.dart';
+import 'package:sanad/core/widgets/result_text_card.dart';
 
 import '../../../../core/constants.dart';
 import '../../../../core/themeing/colors.dart';
