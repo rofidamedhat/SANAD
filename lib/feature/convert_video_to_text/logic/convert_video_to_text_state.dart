@@ -12,6 +12,20 @@ class VideoPickSuccess extends ConvertVideoToTextState {
   VideoPickSuccess(this.videoPath);
 }
 class VideoPickError extends ConvertVideoToTextState {
-  final String message;
-  VideoPickError(this.message);
+  String message;
+  VideoPickError({required this.message});
+}
+
+class TranslateVideoLoading extends ConvertVideoToTextState{}
+class TranslateVideoWithError extends ConvertVideoToTextState{
+
+  ApiErrorModel apiErrorModel;
+  TranslateVideoWithError({required this.apiErrorModel});
+}
+
+class TranslateVideoSuccessfully extends ConvertVideoToTextState{
+
+  TranslateVideoResponseBody translateVideoResponseBody;
+
+  TranslateVideoSuccessfully({required this.translateVideoResponseBody});
 }

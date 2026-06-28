@@ -10,6 +10,7 @@ import 'package:sanad/core/widgets/result_text_card.dart';
 import 'package:sanad/feature/convert_video_to_text/ui/widgets/add_video_bloc_consumer.dart';
 import 'package:sanad/feature/convert_video_to_text/ui/widgets/build_up_load_video.dart';
 import 'package:sanad/feature/convert_video_to_text/ui/widgets/build_up_show_video.dart';
+import 'package:sanad/feature/convert_video_to_text/ui/widgets/translate_button_listen.dart';
 import 'package:sanad/feature/convert_video_to_text/ui/widgets/translate_video_to_text_app_bar.dart';
 import 'package:sanad/feature/convert_video_to_text/ui/widgets/video_condition_item.dart';
 
@@ -51,17 +52,20 @@ class _ConvertVideoToTextScreenState extends State<ConvertVideoToTextScreen> {
                 icon: Icons.front_hand_outlined,
               ),
               verticalSpace(20),
-              ResultTextCard(text: ""),
+             // ResultTextCard(text: ""),
               verticalSpace(10),
               Center(
                 child: AppTextButton(
                   buttonText: "تحويل الفيديو",
                   textStyle: TextStyles.font20WhiteMedium,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<ConvertVideoToTextCubit>().translateVideo();
+                  },
                   buttonWidth: 200,
                   borderRadius: 25,
                 ),
               ),
+              TranslateButtonListen()
             ],
           ),
         ),
