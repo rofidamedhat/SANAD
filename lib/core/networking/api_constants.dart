@@ -35,6 +35,7 @@ class ApiConstants {
   static const String learingNumbers = "Numbers";
   static const String learingWords = "Words";
   static const String learingVideos = "Videos";
+  static const String translateVideos = "Ai/translate";
 }
 
 class ApiErrors {

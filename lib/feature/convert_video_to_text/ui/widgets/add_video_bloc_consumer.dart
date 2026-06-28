@@ -35,6 +35,7 @@ class AddVideoBlocConsumer extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        final cubit = context.read<ConvertVideoToTextCubit>();
         return Container(
           width: double.infinity,
           height: 250,

@@ -44,7 +44,7 @@ dependencies:
   get_it: ^9.1.0
   json_serializable: ^6.11.2
   build_runner: ^2.10.4
-  retrofit: ^4.9.1
+  retrofit: 4.9.1
   retrofit_generator: ^10.0.2
   flutter_svg: ^2.2.0
   image_picker: ^1.2.1

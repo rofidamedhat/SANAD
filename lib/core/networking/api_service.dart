@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sanad/feature/add_question/data/model/add_post_model/add_post_response_body.dart';
 import 'package:sanad/feature/convert_text_to_speech/data/model/audio_response_body.dart';
+import 'package:sanad/feature/convert_video_to_text/data/model/translate_video_response_body.dart';
 import 'package:sanad/feature/learn_alphabet/data/models/learn_alphabet_model.dart';
 import 'package:sanad/feature/learn_famous_words/data/models/learn_words_model.dart';
 import 'package:sanad/feature/learn_numbers/data/models/learn_numbers_model.dart';
@@ -64,6 +67,12 @@ abstract class ApiService {
   Future<AudioResponseBody> uploadAudio(
     @Part(name: "File") MultipartFile audio,
   );
+//translate video
+  @POST(ApiConstants.translateVideos)
+  @MultiPart()
+  Future<TranslateVideoResponseBody> uploadVideo(
+      @Part(name: "Video") MultipartFile videoFile,
+      );
 
   @POST(ApiConstants.addPost)
   Future<AddPostResponseBody> addPost(@Body() Map<String, dynamic> content);
